@@ -1,0 +1,10 @@
+{
+  "extends": "@polpo/typescript-config/react-library",
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": "src"
+  }
+}

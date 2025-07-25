@@ -1,0 +1,33 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint --max-warnings 0",
+    "lint:fix": "next lint --max-warnings 0 --fix",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@polpo/tailwind-config": "workspace:*",
+    "polpo": "workspace:*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "next": "^15.4.4"
+  },
+  "devDependencies": {
+    "@polpo/eslint-config": "workspace:*",
+    "@polpo/typescript-config": "workspace:*",
+    "typescript": "^5.8.2",
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
+    "@tailwindcss/postcss": "^4.1.11",
+    "tailwindcss": "^4.1.11",
+    "eslint": "^9.31.0",
+    "eslint-config-next": "^15.4.4"
+  }
+}

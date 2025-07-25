@@ -1,0 +1,39 @@
+{
+  "name": "@polpo/eslint-config",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./base.config.js",
+    "./base": "./base.config.js",
+    "./next": "./next.config.js",
+    "./react": "./react.config.js",
+    "./storybook": "./storybook.config.js"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@next/eslint-plugin-next": "^14.2.30",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-storybook": "^9.0.17",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript-eslint": "^8.37.0"
+  }
+}

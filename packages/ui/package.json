@@ -1,0 +1,66 @@
+{
+  "name": "polpo",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "license": "MIT",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": null,
+    "./styles": "./dist/styles.css",
+    "./components": {
+      "development": "./src/components/index.ts",
+      "default": {
+        "module": "./dist/components.js",
+        "types": "./dist/components.d.ts",
+        "main": "./dist/components.cjs"
+      }
+    },
+    "./hooks": {
+      "development": "./src/hooks/index.ts",
+      "default": {
+        "module": "./dist/hooks.js",
+        "types": "./dist/hooks.d.ts",
+        "main": "./dist/hooks.cjs"
+      }
+    },
+    "./helpers": {
+      "development": "./src/helpers/index.ts",
+      "default": {
+        "module": "./dist/helpers.js",
+        "types": "./dist/helpers.d.ts",
+        "main": "./dist/helpers.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "dev:styles": "tailwindcss -i ./src/globals.css -o ./dist/styles.css --watch",
+    "build:styles": "tailwindcss -i ./src/globals.css -o ./dist/styles.css",
+    "lint": "eslint src --ext ts,tsx,json --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint src --ext ts,tsx,json --report-unused-disable-directives --max-warnings 0 --fix",
+    "check-types": "tsc --noEmit",
+    "dev:code": "tsup --watch",
+    "build:code": "tsup"
+  },
+  "devDependencies": {
+    "@polpo/eslint-config": "workspace:*",
+    "@polpo/tailwind-config": "workspace:*",
+    "@polpo/typescript-config": "workspace:*",
+    "@tailwindcss/cli": "^4.1.11",
+    "@types/node": "^22.15.3",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.1",
+    "eslint": "^9.31.0",
+    "tsup": "^8.5.0",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Nodejs",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "allowJs": false,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
+  }
+}

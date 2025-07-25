@@ -1,0 +1,11 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "dependsOn": ["polpo#build"]
+    },
+    "dev": {
+      "with": ["polpo#dev"]
+    }
+  }
+}

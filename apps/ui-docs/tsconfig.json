@@ -1,0 +1,15 @@
+{
+  "extends": "@polpo/typescript-config/vite",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": "."
+  },
+  "include": [
+    "vite.config.ts",
+    "**/vite-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
+}

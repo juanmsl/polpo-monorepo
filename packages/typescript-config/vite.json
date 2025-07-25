@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Vite",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": false,
+    "incremental": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "noEmit": true,
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": false,
+    "allowSyntheticDefaultImports": true
+  }
+}
