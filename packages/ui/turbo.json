@@ -2,24 +2,10 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": ["build:styles", "build:code"]
-    },
-    "build:styles": {
-      "outputs": ["dist/**"]
+      "dependsOn": ["build:code"]
     },
     "build:code": {
       "outputs": ["dist/**"]
-    },
-    "dev": {
-      "with": ["dev:styles", "dev:code"]
-    },
-    "dev:styles": {
-      "cache": false,
-      "persistent": true
-    },
-    "dev:code": {
-      "cache": false,
-      "persistent": true
     }
   }
 }

@@ -30,7 +30,7 @@ export class MoviesAdapter extends HttpClient implements MoviesPort {
 
   async listMovies({ category, ...params }: ListMoviesParams): Promise<ListMoviesResponse> {
     const { data } = await this.call<ListMoviesResponse>({
-      url: `/movie/${category}`,
+      path: `/movie/${category}`,
       method: 'GET',
       params: params,
     });
@@ -40,7 +40,7 @@ export class MoviesAdapter extends HttpClient implements MoviesPort {
 
   async getMovieDetails({ movieId }: GetMovieDetailsParams): Promise<GetMovieDetailsResponse> {
     const { data } = await this.call<GetMovieDetailsResponse>({
-      url: `/movie/${movieId}`,
+      path: `/movie/${movieId}`,
       method: 'GET',
     });
 
@@ -49,7 +49,7 @@ export class MoviesAdapter extends HttpClient implements MoviesPort {
 
   async listGenres(): Promise<ListGenreResponse> {
     const { data } = await this.call<ListGenreResponse>({
-      url: '/genre/movie/list',
+      path: '/genre/movie/list',
       method: 'GET',
     });
 
@@ -58,7 +58,7 @@ export class MoviesAdapter extends HttpClient implements MoviesPort {
 
   async searchQuery(params: SearchQueryParams): Promise<SearchQueryResponse> {
     const { data } = await this.call<SearchQueryResponse>({
-      url: '/search/movie',
+      path: '/search/movie',
       method: 'GET',
       params: params,
     });

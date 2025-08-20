@@ -1,30 +1,68 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
-
+import { getURL } from './get-url';
 import { HttpClientError } from './http-client-error';
 
-export interface HttpClientParams extends CreateAxiosDefaults {}
+export type HttpClientParams = object | URLSearchParams | string;
+
+export interface HttpClientCommonConfig {
+  headers?: HeadersInit;
+  referrer?: string;
+  referrerPolicy?: ReferrerPolicy;
+  mode?: RequestMode;
+  cache?: RequestCache;
+  credentials?: RequestCredentials;
+  integrity?: string;
+  keepalive?: boolean;
+  priority?: RequestPriority;
+  redirect?: RequestRedirect;
+}
+
+export interface HttpClientConfig extends HttpClientCommonConfig {
+  baseURL?: string;
+}
+
+export interface HttpClientRequestConfig extends HttpClientCommonConfig {
+  url?: string;
+  path?: string;
+  method?: string;
+  body?: BodyInit;
+  data?: object;
+  signal?: AbortSignal;
+  params?: HttpClientParams;
+  window?: null;
+}
 
 export interface HttpClientResponse<T> {
   data: T;
   status: number;
-  headers: AxiosResponse['headers'];
+  headers: HeadersInit;
 }
 
-export interface HttpClientRequestConfig extends AxiosRequestConfig {}
-
 export class HttpClient {
-  private http: AxiosInstance;
+  private readonly httpConfig: HttpClientConfig;
 
-  constructor(config: HttpClientParams) {
-    this.http = axios.create(config);
+  constructor(config: HttpClientConfig = {}) {
+    this.httpConfig = config;
   }
 
-  async call<T>(config: HttpClientRequestConfig): Promise<HttpClientResponse<T>> {
+  async call<T>({ path, url, params, data, ...config }: HttpClientRequestConfig): Promise<HttpClientResponse<T>> {
     try {
-      const response = await this.http.request<T>(config);
+      const { baseURL, ...httpConfig } = this.httpConfig;
+      const buildURL = getURL({ url, baseURL, path, params });
+      const response = await fetch(buildURL, {
+        method: 'GET',
+        body: data ? JSON.stringify(data) : '',
+        ...httpConfig,
+        ...config,
+      });
+
+      if (!response.ok) {
+        throw new HttpClientError(`Response status: ${response.status}`);
+      }
+
+      const responseJson: T = await response.json();
 
       return {
-        data: response.data,
+        data: responseJson,
         status: response.status,
         headers: response.headers,
       };

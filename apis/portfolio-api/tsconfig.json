@@ -1,0 +1,11 @@
+{
+  "extends": "@polpo/typescript-config/nodejs",
+  "include": ["src", "**/*.ts"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": "src",
+    "moduleResolution": "bundler",
+  },
+}

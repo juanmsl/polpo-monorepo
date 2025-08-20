@@ -1,3 +1,4 @@
 packages:
+  - "apis/*"
   - "apps/*"
   - "packages/*"

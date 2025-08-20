@@ -1,2 +1,2 @@
 @import "@polpo/tailwind-config/styles";
-@import "polpo/styles";
+@source "../node_modules/polpo/src";
