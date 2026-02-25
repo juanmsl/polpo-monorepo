@@ -18,6 +18,7 @@ export const useInputHandlers = <T extends InputTypes>({
   const handleFocus = useCallback(
     (e: React.FocusEvent<T>) => {
       setIsFocus(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       onFocus && onFocus(e);
     },
     [onFocus],
@@ -26,6 +27,7 @@ export const useInputHandlers = <T extends InputTypes>({
   const handleBlur = useCallback(
     (e: React.FocusEvent<T>) => {
       setIsFocus(false);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       onBlur && onBlur(e);
     },
     [onBlur],
@@ -33,6 +35,7 @@ export const useInputHandlers = <T extends InputTypes>({
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<T>) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       onChange && onChange(e);
     },
     [onChange],

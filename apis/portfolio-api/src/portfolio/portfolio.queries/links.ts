@@ -1,9 +1,9 @@
-import { QueryCollection } from './content-full.entity';
+import { QueryCollection } from './cms';
 
-export type LinkEntity = {
+export interface LinkEntity {
   url: string;
   label: string;
   icon: string;
-};
+}
 
 export type LinkCollection = QueryCollection<LinkEntity>;

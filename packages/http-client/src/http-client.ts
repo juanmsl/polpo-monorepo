@@ -1,4 +1,5 @@
-import { getURL } from './get-url';
+import { getResponseErrorMessage } from './get-response-error-message';
+import { getURL, GetUrlParams } from './get-url';
 import { HttpClientError } from './http-client-error';
 
 export type HttpClientParams = object | URLSearchParams | string;
@@ -16,58 +17,162 @@ export interface HttpClientCommonConfig {
   redirect?: RequestRedirect;
 }
 
-export interface HttpClientConfig extends HttpClientCommonConfig {
-  baseURL?: string;
+export const RequestState = {
+  RESOLVED: 'RESOLVED',
+  REJECTED: 'REJECTED',
+} as const;
+
+export interface LoggerParams {
+  apiName: string;
+  buildURL: URL;
+  request: RequestInit;
+  urlParams: GetUrlParams;
+  state: (typeof RequestState)[keyof typeof RequestState];
+  response: HttpClientResponse<unknown> | null;
 }
 
-export interface HttpClientRequestConfig extends HttpClientCommonConfig {
+export type Logger = (params: LoggerParams) => Promise<void>;
+
+export interface HttpClientConfig extends HttpClientCommonConfig {
+  apiName: string;
+  baseURL?: string;
+  getHeaders?: () => Promise<HeadersInit>;
+  getLogger?: (() => Logger) | undefined;
+}
+
+export interface HttpClientRequestConfig<T extends object> extends HttpClientCommonConfig {
   url?: string;
   path?: string;
-  method?: string;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   body?: BodyInit;
-  data?: object;
   signal?: AbortSignal;
   params?: HttpClientParams;
   window?: null;
+  disableCache?: boolean;
+  data?: T;
 }
 
-export interface HttpClientResponse<T> {
+export interface HttpClientSuccessResponse<T> {
   data: T;
   status: number;
-  headers: HeadersInit;
+  error: null;
+}
+
+export interface HttpClientErrorResponse {
+  data: null;
+  status: number;
+  error: string;
+}
+
+export type HttpClientResponse<Response> = HttpClientSuccessResponse<Response> | HttpClientErrorResponse;
+
+export function getHttpClientErrorResponse(error: Error): HttpClientErrorResponse {
+  if (error instanceof HttpClientError) {
+    return {
+      data: null,
+      error: error.message,
+      status: error.status,
+    };
+  }
+
+  return {
+    data: null,
+    error: error.message,
+    status: 500,
+  };
 }
 
 export class HttpClient {
   private readonly httpConfig: HttpClientConfig;
 
-  constructor(config: HttpClientConfig = {}) {
+  constructor(protected config: HttpClientConfig) {
     this.httpConfig = config;
   }
 
-  async call<T>({ path, url, params, data, ...config }: HttpClientRequestConfig): Promise<HttpClientResponse<T>> {
+  protected async onRequest(requestInit: RequestInit): Promise<RequestInit> {
+    let headers = requestInit.headers || {};
+
+    if (this.httpConfig.getHeaders) {
+      const newHeaders = await this.httpConfig.getHeaders();
+      headers = { ...headers, ...newHeaders };
+    }
+
+    return {
+      ...requestInit,
+      headers,
+    };
+  }
+
+  private async getRequestParams<Payload extends object = object>(_config: HttpClientRequestConfig<Payload>) {
+    const { path, url, params, disableCache, data: requestData, ...config } = _config;
+    const { baseURL, apiName, getLogger, ...httpConfig } = this.httpConfig;
+    const urlParams: GetUrlParams = { url, baseURL, path, params };
+    const buildURL = getURL(urlParams);
+
+    const request = await this.onRequest({
+      method: 'GET',
+      cache: !disableCache || config.method === 'GET' ? 'force-cache' : 'no-store',
+      body: requestData ? JSON.stringify(requestData) : null,
+      ...httpConfig,
+      ...config,
+      headers: {
+        ...httpConfig.headers,
+        ...config.headers,
+      },
+    });
+
+    return { buildURL, request, urlParams, apiName, getLogger };
+  }
+
+  private async log<Response, Payload extends object = object>(
+    config: HttpClientRequestConfig<Payload>,
+    state: LoggerParams['state'],
+    response: HttpClientResponse<Response>,
+  ) {
+    const { apiName, urlParams, buildURL, request, getLogger } = await this.getRequestParams<Payload>(config);
+
+    if (getLogger) {
+      await getLogger()({ apiName, buildURL, urlParams, request, state, response });
+    }
+  }
+
+  private async callOrThrow<Response, Payload extends object = object>(
+    config: HttpClientRequestConfig<Payload>,
+  ): Promise<HttpClientSuccessResponse<Response>> {
+    const { apiName, buildURL, request } = await this.getRequestParams<Payload>(config);
+
+    const response = await fetch(buildURL, request);
+
+    if (!response.ok) {
+      const message = await getResponseErrorMessage(
+        response,
+        `[${apiName}]: There was a problem fetching [${config.method ?? 'GET'}] - ${buildURL}`,
+      );
+      throw new HttpClientError(response.status, message);
+    }
+
+    const data = (await response.json()) as Response;
+
+    return {
+      data,
+      status: response.status,
+      error: null,
+    };
+  }
+
+  protected async call<Response, Payload extends object = object>(
+    config: HttpClientRequestConfig<Payload>,
+  ): Promise<HttpClientResponse<Response>> {
     try {
-      const { baseURL, ...httpConfig } = this.httpConfig;
-      const buildURL = getURL({ url, baseURL, path, params });
-      const response = await fetch(buildURL, {
-        method: 'GET',
-        body: data ? JSON.stringify(data) : '',
-        ...httpConfig,
-        ...config,
-      });
+      const response = await this.callOrThrow<Response, Payload>(config);
+      await this.log(config, RequestState.RESOLVED, response);
 
-      if (!response.ok) {
-        throw new HttpClientError(`Response status: ${response.status}`);
-      }
+      return response;
+    } catch (error: unknown) {
+      const errorResponse = getHttpClientErrorResponse(error as Error);
+      await this.log(config, RequestState.REJECTED, errorResponse);
 
-      const responseJson: T = await response.json();
-
-      return {
-        data: responseJson,
-        status: response.status,
-        headers: response.headers,
-      };
-    } catch (error) {
-      throw new HttpClientError(error);
+      return errorResponse;
     }
   }
 }
