@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 
 import eslint from '@eslint/js';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import eslintConfigPrettierFlat from 'eslint-config-prettier/flat';
 import importPlugin from 'eslint-plugin-import';
 import preferArrow from 'eslint-plugin-prefer-arrow';
@@ -9,10 +9,32 @@ import eslintPluginPrettier from 'eslint-plugin-prettier';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 const project = resolve(process.cwd(), 'tsconfig.json');
 
+export const prettierConfig  = {
+  printWidth: 120,
+  singleQuote: true,
+  useTabs: false,
+  tabWidth: 2,
+  semi: true,
+  arrowParens: 'avoid',
+  trailingComma: 'all',
+  jsxSingleQuote: true,
+  endOfLine: 'auto',
+};
+
 export default defineConfig([
+  globalIgnores([
+    '**/dist/**', '**/.next/**', '**/node_modules/**', '*.d.ts'
+  ]),
+  {
+    linterOptions: {
+      reportUnusedInlineConfigs: "error",
+      reportUnusedDisableDirectives: "error",
+    },
+  },
   eslint.configs.recommended,
   typescriptEslint.configs.recommended,
   eslintPluginPrettierRecommended,
@@ -24,6 +46,7 @@ export default defineConfig([
       'prefer-arrow': preferArrow,
       prettier: eslintPluginPrettier,
       '@typescript-eslint': typescriptEslint.plugin,
+      'unused-imports': unusedImports,
     },
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     languageOptions: {
@@ -43,7 +66,6 @@ export default defineConfig([
         },
       },
     },
-    ignores: ['dist', '!**/*', '**/node_modules/**', '*.d.ts'],
     rules: {
       '@typescript-eslint/array-type': ['error', { default: 'generic' }],
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
@@ -124,21 +146,11 @@ export default defineConfig([
       ],
       'prefer-arrow-callback': ['error'],
       'prefer-arrow/prefer-arrow-functions': 'off',
-      'prettier/prettier': [
-        'error',
-        {
-          printWidth: 120,
-          singleQuote: true,
-          useTabs: false,
-          tabWidth: 2,
-          semi: true,
-          arrowParens: 'avoid',
-          trailingComma: 'all',
-          jsxSingleQuote: true,
-        },
-      ],
+      'prettier/prettier': ['error', prettierConfig],
       quotes: ['error', 'single'],
       semi: 'error',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'off',
       yoda: 'error',
     },
   },

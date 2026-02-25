@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
-    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint": "eslint .",
     "preview": "vite preview",
     "vite": "vite",
     "build-vite": "tsc -b && vite build"

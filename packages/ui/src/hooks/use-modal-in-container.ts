@@ -1,14 +1,14 @@
 import { RefObject, useCallback, useLayoutEffect, useRef } from 'react';
 
-import { useEventListener } from './use-event-listener';
-import { useResizeObserver } from './use-resize-observer';
-
 import {
   getModalPositionRelativeToContainer,
   getModalPositionRelativeToScreen,
   PositionContainer,
   PositionObject,
-} from '@polpo/helpers';
+} from '../helpers';
+
+import { useEventListener } from './use-event-listener';
+import { useResizeObserver } from './use-resize-observer';
 
 const convertDOMRectToPosition = (rect: DOMRectReadOnly): PositionObject => ({
   x: rect.x,

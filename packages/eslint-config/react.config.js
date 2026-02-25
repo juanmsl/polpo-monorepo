@@ -1,5 +1,5 @@
 import { defineConfig } from 'eslint/config';
-import baseConfig from './base.config.js';
+import baseConfig, { prettierConfig } from "./base.config.js";
 import pluginReact from "eslint-plugin-react";
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -46,6 +46,13 @@ export default defineConfig([
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          ...prettierConfig,
+          plugins: []
+        },
+      ],
     },
   }
 ]);

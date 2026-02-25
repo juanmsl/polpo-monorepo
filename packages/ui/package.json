@@ -23,8 +23,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint src --ext ts,tsx,json --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint src --ext ts,tsx,json --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint": "eslint src",
     "check-types": "tsc --noEmit",
     "dev:code": "tsup --watch",
     "build:code": "tsup"

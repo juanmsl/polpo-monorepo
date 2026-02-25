@@ -1,7 +1,7 @@
 import { HttpClientParams } from './http-client';
 import { HttpClientError } from './http-client-error';
 
-interface GetUrlParams {
+export interface GetUrlParams {
   url: string | undefined;
   baseURL: string | undefined;
   path: string | undefined;
@@ -29,22 +29,20 @@ export function buildURL({ url, baseURL, path }: BuildUrlParams): URL {
   if (url !== '') {
     try {
       return new URL(url);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
-      throw new HttpClientError(`Invalid URL received for the request [url=${url}]`);
+    } catch (error) {
+      throw new HttpClientError(400, `Invalid URL received for the request [url=${url}]`, error);
     }
   }
 
   if (baseURL + path !== '') {
     try {
       return new URL(baseURL + path);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
-      throw new HttpClientError(`Invalid URL received for the request [baseURL=${baseURL}, path=${path}]`);
+    } catch (error) {
+      throw new HttpClientError(400, `Invalid URL received for the request [baseURL=${baseURL}, path=${path}]`, error);
     }
   }
 
-  throw new HttpClientError('Empty URL received for the request');
+  throw new HttpClientError(400, 'Empty URL received for the request');
 }
 
 interface GetSearchParams {
@@ -55,9 +53,8 @@ function getSearchParams({ params }: GetSearchParams): URLSearchParams {
   if (typeof params === 'string') {
     try {
       return new URLSearchParams(params);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (_) {
-      throw new HttpClientError(`Invalid query string params [params=${params}]`);
+    } catch (error) {
+      throw new HttpClientError(400, `Invalid query string params [params=${params}]`, error);
     }
   }
 
