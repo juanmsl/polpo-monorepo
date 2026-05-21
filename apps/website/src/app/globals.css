@@ -10,7 +10,7 @@ body {
     background-attachment: fixed;
 }
 
-.calculator-header {
+.calculator {
     display: grid;
     padding: 10em 2.5em 2.5em;
     gap: 2em;
@@ -79,6 +79,15 @@ body {
 
 .table-container {
     grid-area: table;
+    border-radius: 2em !important;
+    border: 0;
+    max-height: 600px;
+    overflow: auto;
+
+    .table-background {
+        background: hsl(from var(--white) h s l / 50%);
+        backdrop-filter: blur(1px);
+    }
 }
 
 .credit-bar {
@@ -87,6 +96,7 @@ body {
     position: relative;
     height: 10px;
     border-radius: 1em;
+    overflow: hidden;
 
     &::before {
         content: '';

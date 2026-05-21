@@ -1,6 +1,6 @@
 {
   "name": "polpo",
-  "version": "0.0.0",
+  "version": "0.1.8",
   "sideEffects": false,
   "license": "MIT",
   "type": "module",
@@ -10,11 +10,10 @@
   "exports": {
     ".": null,
     "./components": "./src/components/index.ts",
-    "./helpers": "./src/helpers/index.ts",
     "./hooks": "./src/hooks/index.ts",
     "./layouts": "./src/layouts/index.ts",
     "./types": "./src/types/index.ts",
-    "./old": {
+    "./helpers": {
       "development": "./src/helpers/index.ts",
       "default": {
         "module": "./dist/helpers.js",
@@ -23,6 +22,12 @@
       }
     }
   },
+  "repository": {
+    "type": "git",
+    "directory": "packages/ui",
+    "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
+  },
+  "website": "https://ui.juanmsl.com/",
   "scripts": {
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
