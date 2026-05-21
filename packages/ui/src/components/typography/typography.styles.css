@@ -1,0 +1,137 @@
+
+.typography {
+    margin: 0;
+    padding: 0.5em 0 0.4em;
+
+    &.primary {
+        color: var(--primary-500);
+    }
+
+    &.secondary {
+        color: var(--secondary-500);
+    }
+
+    &.tertiary {
+        color: var(--tertiary-500);
+    }
+
+    &.active {
+        color: var(--active-500);
+    }
+
+    &.alert {
+        color: var(--alert-500);
+    }
+
+    &.warning {
+        color: var(--warning-500);
+    }
+
+    &.info {
+        color: var(--info-500);
+    }
+
+    &.recommended-width {
+        max-width: 70ch;
+    }
+
+    &.code-family {
+        font-family: monospace;
+    }
+
+    &.no-padding {
+        padding: 0;
+    }
+
+    &.nowrap {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &.nowrap-max-lines {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+
+    &.nowrap-max-lines-2 {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+
+    &.nowrap-max-lines-3 {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+
+    &.nowrap-max-lines-4 {
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+    }
+
+    &.nowrap-max-lines-5 {
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+    }
+
+    &.hero {
+        font-size: var(--typography-size-hero);
+        line-height: var(--typography-line-height-header);
+        font-weight: 700;
+    }
+
+    &.header1 {
+        font-size: var(--typography-size-header1);
+        line-height: var(--typography-line-height-header);
+        font-weight: 700;
+    }
+
+    &.header2 {
+        font-size: var(--typography-size-header2);
+        line-height: var(--typography-line-height-header);
+        font-weight: 700;
+    }
+
+    &.header3 {
+        font-size: var(--typography-size-header3);
+        line-height: var(--typography-line-height-header);
+        font-weight: 700;
+    }
+
+    &.header4 {
+        font-size: var(--typography-size-header4);
+        line-height: var(--typography-line-height-header);
+        font-weight: 700;
+    }
+
+    &.body {
+        font-size: var(--typography-size-body);
+        line-height: var(--typography-line-height-common);
+        font-weight: 400;
+    }
+
+    &.label {
+        font-size: var(--typography-size-label);
+        line-height: var(--typography-line-height-common);
+        font-weight: 400;
+    }
+
+    &.small {
+        font-size: var(--typography-size-small);
+        line-height: var(--typography-line-height-common);
+        font-weight: 400;
+    }
+
+    &.bold {
+        font-weight: 700;
+    }
+
+    &.regular {
+        font-weight: 400;
+    }
+
+    &.light {
+        font-weight: 300;
+    }
+}

@@ -3,7 +3,7 @@ import { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 function useEventListener<EventName extends keyof MediaQueryListEventMap>(
   eventName: EventName,
   callback: (event: MediaQueryListEventMap[EventName]) => void,
-  element: RefObject<MediaQueryList> | undefined,
+  element: RefObject<MediaQueryList | null> | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void;
 
@@ -17,14 +17,14 @@ function useEventListener<EventName extends keyof WindowEventMap>(
 function useEventListener<EventName extends keyof HTMLElementEventMap, ElementRef extends HTMLElement = HTMLDivElement>(
   eventName: EventName,
   callback: (event: HTMLElementEventMap[EventName]) => void,
-  element: RefObject<ElementRef> | undefined,
+  element: RefObject<ElementRef | null> | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void;
 
 function useEventListener<EventName extends keyof DocumentEventMap>(
   eventName: EventName,
   callback: (event: DocumentEventMap[EventName]) => void,
-  element: RefObject<Document> | undefined,
+  element: RefObject<Document | null> | undefined,
   options?: boolean | AddEventListenerOptions,
 ): void;
 
@@ -44,7 +44,7 @@ function useEventListener<
       | DocumentEventMap[DocumentEventName]
       | Event,
   ) => void,
-  element?: RefObject<ElementRef> | undefined,
+  element?: RefObject<ElementRef | null> | undefined,
   options?: boolean | AddEventListenerOptions,
 ) {
   const callbackRef = useRef<EventListener>(callback);

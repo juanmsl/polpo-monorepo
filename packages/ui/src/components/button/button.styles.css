@@ -1,0 +1,315 @@
+.button {
+    --button-blur: 2px;
+
+    --color: var(--neutral-800);
+    --solid-background: var(--neutral-900);
+    --solid-text: var(--neutral-50);
+    --solid-hover-background: var(--neutral-800);
+    --solid-active-background: var(--neutral-900);
+    --flat-background: hsl(from var(--neutral-100) h s l / 80%);
+    --flat-hover-background: var(--neutral-50);
+    --flat-active-background: var(--neutral-100);
+    --outlined-hover-background: hsl(from var(--neutral-100) h s l / 20%);
+    --outlined-active-background: hsl(from var(--neutral-100) h s l / 50%);
+    --text-hover-background: hsl(from var(--neutral-100) h s l / 20%);
+    --text-active-background: hsl(from var(--neutral-100) h s l / 50%);
+    --shadow-color: hsl(from var(--neutral-800) h s l / 20%);
+    --focus-background: hsl(from var(--neutral-100) h s l / 20%);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625em 2.1875em;
+    gap: 0.625em;
+    width: auto;
+    border-radius: 0.5em;
+    font-weight: bold;
+    font-size: var(--typography-size-label);
+    cursor: pointer;
+    outline: none;
+    transition: all 150ms ease;
+    user-select: none;
+
+    &.icon {
+        padding: 0.625em;
+    }
+
+    &.full {
+        width: 100%;
+    }
+
+    &.no-wrap {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &.size-small {
+        font-size: var(--typography-size-small);
+    }
+
+    &.size-regular {
+        font-size: var(--typography-size-label);
+    }
+
+    &.size-large {
+        font-size: var(--typography-size-body);
+    }
+
+    &.radius-none {
+        border-radius: 0;
+    }
+
+    &.radius-small {
+        border-radius: 0.25em;
+    }
+
+    &.radius-medium {
+        border-radius: 0.5em;
+    }
+
+    &.radius-large {
+        border-radius: 1em;
+    }
+
+    &.radius-full {
+        border-radius: 100rem;
+    }
+
+    &:not(:disabled) {
+        &:hover,
+        &:active,
+        &:focus-visible {
+            backdrop-filter: blur(var(--button-blur));
+        }
+
+        &:hover {
+            transform: scale(1.01);
+            box-shadow: 0 1.4em 0.5em -1em hsl(from var(--black) h s l / 20%),
+            0 0.7em 1em -0.5em hsl(from var(--black) h s l / 20%);
+        }
+
+        &:active {
+            transform: scale(0.98);
+            box-shadow: 0 0.3em 0.4em -0.2em hsl(from var(--black) h s l / 20%),
+            0 0.2em 0.8em -0.1em hsl(from var(--black) h s l / 20%);
+        }
+    }
+
+    /*----------------------------------------------------------------------------------------------*/
+
+    color: var(--color);
+
+    .ripple-effect {
+        background: var(--color);
+    }
+
+    &.solid {
+        background: var(--solid-background);
+        color: var(--solid-text);
+        backdrop-filter: blur(var(--button-blur));
+
+        .ripple-effect {
+            background: var(--solid-text);
+        }
+
+        &:focus-visible {
+            box-shadow: 0 0 0 0.3125em var(--shadow-color);
+            background: var(--solid-background);
+        }
+
+        &:hover {
+            background: var(--solid-hover-background);
+        }
+
+        &:active {
+            background: var(--solid-active-background);
+        }
+    }
+
+    &.flat {
+        background: var(--flat-background);
+        backdrop-filter: blur(var(--button-blur));
+
+        &:hover {
+            background: var(--flat-hover-background);
+        }
+
+        &:active {
+            background: var(--flat-active-background);
+        }
+    }
+
+    &.outlined {
+        background: transparent;
+        border: 1px solid;
+
+        &:hover {
+            background: var(--outlined-hover-background);
+        }
+
+        &:active {
+            background: var(--outlined-active-background);
+        }
+    }
+
+    &.text {
+        background: transparent;
+
+        &:hover {
+            background: var(--text-hover-background);
+        }
+
+        &:active {
+            background: var(--text-active-background);
+        }
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 0.3125em var(--shadow-color);
+        background: var(--focus-background);
+    }
+
+    /*----------------------------------------------------------------------------------------------*/
+
+    &.primary {
+        --color: var(--primary-500);
+        --solid-background: var(--primary-500);
+        --solid-text: var(--primary-50);
+        --solid-hover-background: var(--primary-400);
+        --solid-active-background: var(--primary-600);
+        --flat-background: hsl(from var(--primary-100) h s l / 80%);
+        --flat-hover-background: var(--primary-50);
+        --flat-active-background: var(--primary-100);
+        --outlined-hover-background: hsl(from var(--primary-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--primary-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--primary-100) h s l / 20%);
+        --text-active-background: hsl(from var(--primary-100) h s l / 50%);
+        --shadow-color: hsl(from var(--primary-500) h s l / 20%);
+        --focus-background: hsl(from var(--primary-100) h s l / 20%);
+    }
+
+    &.secondary {
+        --color: var(--secondary-500);
+        --solid-background: var(--secondary-500);
+        --solid-text: var(--secondary-50);
+        --solid-hover-background: var(--secondary-400);
+        --solid-active-background: var(--secondary-600);
+        --flat-background: hsl(from var(--secondary-100) h s l / 80%);
+        --flat-hover-background: var(--secondary-50);
+        --flat-active-background: var(--secondary-100);
+        --outlined-hover-background: hsl(from var(--secondary-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--secondary-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--secondary-100) h s l / 20%);
+        --text-active-background: hsl(from var(--secondary-100) h s l / 50%);
+        --shadow-color: hsl(from var(--secondary-500) h s l / 20%);
+        --focus-background: hsl(from var(--secondary-100) h s l / 20%);
+    }
+
+    &.tertiary {
+        --color: var(--tertiary-500);
+        --solid-background: var(--tertiary-500);
+        --solid-text: var(--tertiary-50);
+        --solid-hover-background: var(--tertiary-400);
+        --solid-active-background: var(--tertiary-600);
+        --flat-background: hsl(from var(--tertiary-100) h s l / 80%);
+        --flat-hover-background: var(--tertiary-50);
+        --flat-active-background: var(--tertiary-100);
+        --outlined-hover-background: hsl(from var(--tertiary-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--tertiary-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--tertiary-100) h s l / 20%);
+        --text-active-background: hsl(from var(--tertiary-100) h s l / 50%);
+        --shadow-color: hsl(from var(--tertiary-500) h s l / 20%);
+        --focus-background: hsl(from var(--tertiary-100) h s l / 20%);
+    }
+
+    &.active {
+        --color: var(--active-500);
+        --solid-background: var(--active-500);
+        --solid-text: var(--active-50);
+        --solid-hover-background: var(--active-400);
+        --solid-active-background: var(--active-600);
+        --flat-background: hsl(from var(--active-100) h s l / 80%);
+        --flat-hover-background: var(--active-50);
+        --flat-active-background: var(--active-100);
+        --outlined-hover-background: hsl(from var(--active-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--active-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--active-100) h s l / 20%);
+        --text-active-background: hsl(from var(--active-100) h s l / 50%);
+        --shadow-color: hsl(from var(--active-500) h s l / 20%);
+        --focus-background: hsl(from var(--active-100) h s l / 20%);
+    }
+
+    &.warning {
+        --color: var(--warning-500);
+        --solid-background: var(--warning-500);
+        --solid-text: var(--warning-50);
+        --solid-hover-background: var(--warning-400);
+        --solid-active-background: var(--warning-600);
+        --flat-background: hsl(from var(--warning-100) h s l / 80%);
+        --flat-hover-background: var(--warning-50);
+        --flat-active-background: var(--warning-100);
+        --outlined-hover-background: hsl(from var(--warning-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--warning-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--warning-100) h s l / 20%);
+        --text-active-background: hsl(from var(--warning-100) h s l / 50%);
+        --shadow-color: hsl(from var(--warning-500) h s l / 20%);
+        --focus-background: hsl(from var(--warning-100) h s l / 20%);
+    }
+
+    &.alert {
+        --color: var(--alert-500);
+        --solid-background: var(--alert-500);
+        --solid-text: var(--alert-50);
+        --solid-hover-background: var(--alert-400);
+        --solid-active-background: var(--alert-600);
+        --flat-background: hsl(from var(--alert-100) h s l / 80%);
+        --flat-hover-background: var(--alert-50);
+        --flat-active-background: var(--alert-100);
+        --outlined-hover-background: hsl(from var(--alert-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--alert-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--alert-100) h s l / 20%);
+        --text-active-background: hsl(from var(--alert-100) h s l / 50%);
+        --shadow-color: hsl(from var(--alert-500) h s l / 20%);
+        --focus-background: hsl(from var(--alert-100) h s l / 20%);
+    }
+
+    &.info {
+        --color: var(--info-500);
+        --solid-background: var(--info-500);
+        --solid-text: var(--info-50);
+        --solid-hover-background: var(--info-400);
+        --solid-active-background: var(--info-600);
+        --flat-background: hsl(from var(--info-100) h s l / 80%);
+        --flat-hover-background: var(--info-50);
+        --flat-active-background: var(--info-100);
+        --outlined-hover-background: hsl(from var(--info-100) h s l / 20%);
+        --outlined-active-background: hsl(from var(--info-100) h s l / 50%);
+        --text-hover-background: hsl(from var(--info-100) h s l / 20%);
+        --text-active-background: hsl(from var(--info-100) h s l / 50%);
+        --shadow-color: hsl(from var(--info-500) h s l / 20%);
+        --focus-background: hsl(from var(--info-100) h s l / 20%);
+    }
+
+    &:disabled {
+        color: var(--neutral-200);
+        pointer-events: none;
+    }
+
+    &.solid:disabled {
+        background: var(--neutral-200);
+        color: var(--neutral-50);
+    }
+
+    &.flat:disabled {
+        background: hsl(from var(--neutral-50) h s l / 80%);
+    }
+
+    &.outlined:disabled,
+    &.text:disabled {
+        background: transparent;
+    }
+
+
+}

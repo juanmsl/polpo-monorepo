@@ -19,7 +19,7 @@ export const useGeolocation = (): UseGeolocationReturn => {
   const [data, setData] = useState<GeolocationData | null>(null);
   const [error, setError] = useState<GeolocationError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const watchIdRef = useRef<number | null>(null);
+  const watchIdRef = useRef<number>(null);
 
   useEffect(() => {
     if (!navigator.geolocation) {

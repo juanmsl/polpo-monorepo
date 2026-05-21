@@ -1,0 +1,92 @@
+.input-slider {
+    display: grid;
+    grid-template-columns: 1fr 50px;
+    align-items: center;
+    gap: 10px;
+
+    .slider {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: grid;
+        align-items: center;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 1em;
+            background: var(--primary-500);
+            box-shadow: 0 0 0 0 var(--neutral-500);
+            margin-top: -8px;
+            transition: all 300ms ease;
+            cursor: pointer;
+        }
+
+        &::-webkit-slider-runnable-track {
+            height: 4px;
+            border-radius: 1em;
+            background: hsl(from var(--primary-200) h s l / 50%);
+            transition: all 300ms ease;
+        }
+
+        &:focus,
+        &:hover {
+            &::-webkit-slider-thumb {
+                background: var(--primary-500);
+                box-shadow: 0 0 0 6px hsl(from var(--primary-500) h s l / 50%);
+                cursor: grab;
+            }
+        }
+
+        &:active {
+            &::-webkit-slider-thumb {
+                box-shadow: 0 0 0 12px hsl(from var(--primary-500) h s l / 31%);
+                cursor: grabbing;
+            }
+        }
+
+        &:focus {
+            &::-webkit-slider-runnable-track {
+                background: var(--primary-300);
+            }
+        }
+    }
+
+    &:has(.slider-number:focus) .slider::-webkit-slider-thumb,
+    &:has(.slider-number:hover) .slider::-webkit-slider-thumb {
+        background: var(--primary-500);
+        box-shadow: 0 0 0 6px hsl(from var(--primary-500) h s l / 31%);
+    }
+
+    .slider-number {
+        transition: all 300ms ease;
+        border: 1px solid;
+        border-radius: 5px;
+        text-align: center;
+        font-size: var(--typography-size-label);
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        padding: 4px 8px;
+        font-weight: bold;
+        color: inherit;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
+
+    &.is-focus {
+        .slider-number {
+            color: var(--primary-500);
+        }
+    }
+}

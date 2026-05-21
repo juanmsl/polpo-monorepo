@@ -1,10 +1,10 @@
-import { Poppins } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
 import './globals.css';
 
 import type { Metadata } from 'next';
 
-const font = Poppins({
+const font = Montserrat({
   weight: ['400', '700'],
   subsets: ['latin'],
 });

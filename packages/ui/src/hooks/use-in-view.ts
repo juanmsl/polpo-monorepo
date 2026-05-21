@@ -4,7 +4,7 @@ import { useIntersectionObserver } from './use-intersection-observer';
 
 export const useInView = (initOptions: IntersectionObserverInit = {}) => {
   const [inView, setInView] = useState(false);
-  const ref = useRef<Element>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useIntersectionObserver(
     ref,

@@ -1,0 +1,115 @@
+.radio {
+    border-radius: 50%;
+    background: var(--background-paper);
+    transition: all 300ms ease;
+    width: 1em;
+    height: 1em;
+    outline: 2px solid;
+    display: flex;
+    position: relative;
+    padding: 2px;
+
+    .radio-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    &.size-small {
+        font-size: 1em;
+    }
+
+    &.size-regular {
+        font-size: 1.2em;
+    }
+
+    &.size-large {
+        font-size: 1.4em;
+    }
+}
+
+.radio-fill {
+    transition: all 200ms ease-out;
+    border-radius: inherit;
+    margin: auto;
+    width: 0;
+    height: 0;
+}
+
+.radio-container {
+    --color: var(--neutral-800);
+
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: fit-content;
+
+    .radio-label {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .radio {
+        color: var(--color);
+
+        &.is-checked {
+            .radio-fill {
+                width: 100%;
+                height: 100%;
+                background: var(--color);
+            }
+        }
+    }
+
+    .radio:hover,
+    &:has(.radio-label:hover) .radio {
+        box-shadow: 0 0 0 0.4em hsl(from var(--color) h s l / 50%);
+
+        .radio-fill {
+            width: 20%;
+            height: 20%;
+            background: hsl(from var(--color) h s l / 50%);
+        }
+
+        &:is(.is-checked) {
+            .radio-fill {
+                width: 80%;
+                height: 80%;
+                background: var(--color);
+            }
+        }
+    }
+
+    &.color-primary {
+        --color: var(--primary-500);
+    }
+
+    &.color-secondary {
+        --color: var(--secondary-500);
+    }
+
+    &.color-tertiary {
+        --color: var(--tertiary-500);
+    }
+
+    &.color-active {
+        --color: var(--active-500);
+    }
+
+    &.color-warning {
+        --color: var(--warning-500);
+    }
+
+    &.color-alert {
+        --color: var(--alert-500);
+    }
+
+    &.color-info {
+        --color: var(--info-500);
+    }
+}

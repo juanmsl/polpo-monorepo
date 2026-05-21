@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useReducer } from 'react';
+import { useCallback, useMemo, useReducer } from 'react';
 
 import { useSafeDispatch } from './use-safe-dispatch';
 
@@ -49,7 +49,7 @@ export const useAsync = <T>(
   setError: (error: Error) => void;
   run: (promise: Promise<T>) => void;
 } => {
-  const [asyncState, unsafeDispatch] = useReducer<React.Reducer<AsyncState<T>, AsyncAction<T>>>(asyncReducer, {
+  const [asyncState, unsafeDispatch] = useReducer<AsyncState<T>, [AsyncAction<T>]>(asyncReducer, {
     status: 'idle',
     data: null,
     error: null,

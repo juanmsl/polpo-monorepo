@@ -1,9 +1,12 @@
+'use client';
+
 export * from './use-async';
 export * from './use-classnames';
 export * from './use-click-outside';
 export * from './use-constant';
 export * from './use-cookie';
 export * from './use-debounce';
+export * from './use-debounce-state';
 export * from './use-dimensions';
 export * from './use-dom-container';
 export * from './use-event-listener';

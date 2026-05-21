@@ -26,8 +26,8 @@ export type UseModalInContainerParams<
   windowOffset?: number;
   offset?: number;
   position?: `${PositionContainer}`;
-  modalRef: RefObject<Modal>;
-  containerRef?: RefObject<Container>;
+  modalRef: RefObject<Modal | null>;
+  containerRef?: RefObject<Container | null>;
   isOpen: boolean;
 };
 
@@ -45,7 +45,7 @@ export const useModalInContainer = <
   const containerTemporalRef = useRef<Container>(null);
 
   const getPosition = useCallback(
-    (modalRef: RefObject<Modal>, containerRef: RefObject<Container>) => {
+    (modalRef: RefObject<Modal | null>, containerRef: RefObject<Container | null>) => {
       const modal = modalRef.current?.getClientRects()[0];
       const container = containerRef.current?.getClientRects()[0];
 

@@ -1,0 +1,99 @@
+.menu-modal {
+    border-radius: 0.5em;
+    border: 1px solid var(--border);
+    background: var(--background);
+    box-shadow: 0 0 25px var(--background-paper);
+    user-select: none;
+    position: relative;
+    overflow-y: auto;
+
+    .menu-content {
+        display: grid;
+        gap: 0.2em;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        align-content: start;
+        height: 100%;
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .divider {
+        margin: 0.4em 0;
+        color: var(--border);
+    }
+}
+
+.menu-label {
+    background: var(--background);
+    color: var(--foreground);
+    font-weight: lighter;
+    padding: 0.5em 1.2em;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.menu-option {
+    padding: 0.2em 1em;
+    border-radius: 0.3em;
+    transition: all 300ms ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    outline: 0;
+    margin: 0 0.2em;
+    position: relative;
+
+    .ripple-effect {
+        background: hsl(from var(--foreground) h s l / 31%);
+    }
+
+    &:first-child {
+        margin-top: 5px;
+    }
+
+    .option-icon {
+        margin-right: 0.5em;
+    }
+
+    .menu-checkbox {
+        width: 100%;
+    }
+
+    &.is-disabled {
+        opacity: 0.4;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    &:focus,
+    &:hover {
+        background: hsl(from var(--background-paper) h s l / 25%);
+    }
+
+    &.is-selected {
+        background: var(--background-paper);
+
+        &:focus,
+        &:hover {
+            background: hsl(from var(--background-paper) h s l / 75%);
+        }
+    }
+}
+
+.menu-group {
+    position: relative;
+
+    .menu-group-content {
+        display: grid;
+        gap: 0.2em;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        align-content: start;
+        position: relative;
+    }
+}

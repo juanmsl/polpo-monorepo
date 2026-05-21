@@ -1,0 +1,162 @@
+.tab {
+    cursor: pointer;
+    user-select: none;
+    transition: all 300ms ease;
+}
+
+.tab-list {
+    --color: var(--neutral-900);
+    --color-contrast: var(--neutral-50);
+    --inner-radius: 0;
+    --outer-radius: 0;
+
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1em;
+    align-items: center;
+    position: relative;
+    font-size: var(--typography-size-label);
+    border-radius: var(--outer-radius);
+
+    .tab, .tabs-selector {
+        border-radius: var(--inner-radius);
+    }
+
+    &.size-small {
+        font-size: var(--typography-size-small);
+    }
+
+    &.size-medium {
+        font-size: var(--typography-size-label);
+    }
+
+    &.size-large {
+        font-size: var(--typography-size-body);
+    }
+
+    .tabs-selector {
+        position: absolute;
+        background: var(--color);
+        color: var(--color-contrast);
+        border-radius: 1.5em;
+
+        &.active {
+            transition: all 300ms ease;
+        }
+    }
+
+    .tab {
+        border-radius: 1.5em;
+        padding: 0.5em 1em;
+        z-index: 1;
+        text-align: center;
+
+        &.is-open {
+            color: var(--color-contrast);
+        }
+
+        &:not(.is-open):hover {
+            color: var(--neutral-900);
+        }
+    }
+
+    &.radius-none {
+        --outer-radius: 0;
+        --inner-radius:  0;
+    }
+
+    &.radius-small {
+        --outer-radius: 0.5em;
+        --inner-radius:  0.5em;
+    }
+
+    &.radius-medium {
+        --outer-radius: 1em;
+        --inner-radius:  0.8em;
+    }
+
+    &.radius-large {
+        --outer-radius: 1.5em;
+        --inner-radius:  1.3em;
+    }
+
+    &.radius-full {
+        --outer-radius: 1.8em;
+        --inner-radius:  1.6em;
+    }
+
+    &.vertical-direction {
+        grid-auto-flow: row;
+        align-items: unset;
+        align-content: start;
+    }
+
+    &.variant-solid {
+        background: var(--background-paper);
+        color: var(--foreground);
+        padding: 0.5em;
+    }
+
+    &.variant-ghost {
+        border: 1px solid var(--color);
+        padding: 0.5em;
+    }
+
+    &.variant-flat {
+    }
+
+    &.variant-line {
+        border-radius: 0;
+
+        &:not(.vertical-direction) {
+            border-bottom: 2px solid var(--border);
+        }
+
+        .tabs-selector {
+            border-radius: 0;
+        }
+
+        .tab {
+            border-radius: 0;
+
+            &.is-open {
+                color: var(--color);
+            }
+        }
+    }
+
+    &.color-primary {
+        --color: var(--primary-500);
+        --color-contrast: var(--primary-50);
+    }
+
+    &.color-secondary {
+        --color: var(--secondary-500);
+        --color-contrast: var(--secondary-50);
+    }
+
+    &.color-tertiary {
+        --color: var(--tertiary-500);
+        --color-contrast: var(--tertiary-50);
+    }
+
+    &.color-active {
+        --color: var(--active-500);
+        --color-contrast: var(--active-50);
+    }
+
+    &.color-warning {
+        --color: var(--warning-500);
+        --color-contrast: var(--warning-50);
+    }
+
+    &.color-alert {
+        --color: var(--alert-500);
+        --color-contrast: var(--alert-50);
+    }
+
+    &.color-info {
+        --color: var(--info-500);
+        --color-contrast: var(--info-50);
+    }
+}

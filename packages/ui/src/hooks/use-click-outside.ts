@@ -2,12 +2,12 @@ import { RefObject } from 'react';
 
 import { useEventListener } from './use-event-listener';
 
-const checkIsOutside = (ref: RefObject<HTMLElement>, target: Node) => {
+const checkIsOutside = (ref: RefObject<HTMLElement | null>, target: Node) => {
   return ref.current && !ref.current.contains(target);
 };
 
 export const useClickOutside = <T extends HTMLElement>(
-  ref: RefObject<T> | Array<RefObject<T>>,
+  ref: RefObject<T | null> | Array<RefObject<T | null>>,
   callback: () => void,
 ) => {
   useEventListener('keydown', e => {

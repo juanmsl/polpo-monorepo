@@ -1,0 +1,163 @@
+.switch-container {
+    --width: attr(data-width);
+    --dot-size: attr(data-dot-size);
+    --dot-hover-size: attr(data-dot-hover-size);
+    --padding: attr(data-padding);
+    --color: var(--neutral-500);
+    --color-dark: var(--neutral-800);
+    --color-contrast: var(--neutral-50);
+
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    width: fit-content;
+
+    .switch {
+        width: calc(var(--width) + var(--padding) * 2);
+        border-radius: 100em;
+        background: var(--background-paper);
+        padding: var(--padding);
+        transition: all 300ms ease;
+        position: relative;
+
+        .switch-dot {
+            width: var(--dot-size);
+            height: var(--dot-size);
+            border-radius: 100em;
+            background: var(--color);
+            display: block;
+            transition: all 300ms ease;
+            margin-left: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .switch-icon {
+            cursor: pointer;
+            display: block;
+        }
+
+        .switch-internal-left-icon,
+        .switch-internal-right-icon {
+            width: var(--dot-size);
+            height: var(--dot-size);
+            position: absolute;
+            top: var(--padding);
+            display: grid;
+            place-content: center;
+            color: var(--color-contrast);
+            transition: all 300ms ease;
+        }
+
+        .switch-internal-left-icon {
+            left: var(--padding);
+        }
+
+        .switch-internal-right-icon {
+            right: var(--padding);
+        }
+
+        &.is-checked {
+            background: var(--color);
+
+            .switch-dot {
+                margin-left: calc(var(--width) - var(--dot-size));
+                background: color-mix(in hsl, var(--color), var(--color-contrast) 75%);
+            }
+        }
+
+        &:not(.is-readonly):has(input:disabled) {
+            background: var(--background-disabled);
+
+            .switch-dot {
+                background: var(--foreground-disabled);
+            }
+
+            .switch-internal-left-icon,
+            .switch-internal-right-icon {
+                color: var(--foreground-disabled);
+            }
+
+            &.is-checked {
+                background: var(--color-dark);
+            }
+        }
+
+        .switch-checkbox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 3;
+        }
+    }
+
+    .switch-label {
+        cursor: pointer;
+        user-select: none;
+        padding: 0 0.5em;
+    }
+
+    .switch:not(:has(.is-readonly, input:disabled)):hover .switch-dot,
+    &:has(.switch-icon:hover) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot,
+    &:has(.switch-label:hover) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot {
+        box-shadow: 0 0 0 calc(0.3 * var(--dot-size)) color-mix(in hsl, var(--color) 50%, var(--color-contrast));
+    }
+
+    .switch:not(:has(.is-readonly, input:disabled)):active .switch-dot,
+    &:has(.switch-icon:active) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot,
+    &:has(.switch-label:active) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot {
+        width: var(--dot-hover-size);
+    }
+
+    .switch:not(:has(.is-readonly, input:disabled)).is-checked:active .switch-dot,
+    &:has(.switch-icon:active) .switch:not(:has(.is-readonly, input:disabled)).is-checked .switch-dot,
+    &:has(.switch-label:active) .switch:not(:has(.is-readonly, input:disabled)).is-checked .switch-dot {
+        margin-left: calc(var(--width) - var(--dot-hover-size));
+    }
+
+    &.color-primary {
+        --color: var(--primary-500);
+        --color-dark: var(--primary-700);
+        --color-contrast: var(--primary-50);
+    }
+
+    &.color-secondary {
+        --color: var(--secondary-500);
+        --color-dark: var(--secondary-700);
+        --color-contrast: var(--secondary-50);
+    }
+
+    &.color-tertiary {
+        --color: var(--tertiary-500);
+        --color-dark: var(--tertiary-700);
+        --color-contrast: var(--tertiary-50);
+    }
+
+    &.color-active {
+        --color: var(--active-500);
+        --color-dark: var(--active-700);
+        --color-contrast: var(--active-50);
+    }
+
+    &.color-warning {
+        --color: var(--warning-500);
+        --color-dark: var(--warning-700);
+        --color-contrast: var(--warning-50);
+    }
+
+    &.color-alert {
+        --color: var(--alert-500);
+        --color-dark: var(--alert-700);
+        --color-contrast: var(--alert-50);
+    }
+
+    &.color-info {
+        --color: var(--info-500);
+        --color-dark: var(--info-700);
+        --color-contrast: var(--info-50);
+    }
+}
