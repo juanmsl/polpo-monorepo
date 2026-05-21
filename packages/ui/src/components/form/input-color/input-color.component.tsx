@@ -49,12 +49,12 @@ export const InputColor = ({
     onBlur: e => {
       setInputColor();
 
-      if (onBlur) onBlur(e);
+      if (onBlur) onBlur(e as React.FocusEvent<HTMLInputElement>);
     },
     onFocus: e => {
       setInputColor();
 
-      if (onFocus) onFocus(e);
+      if (onFocus) onFocus(e as React.FocusEvent<HTMLInputElement>);
     },
   });
 
