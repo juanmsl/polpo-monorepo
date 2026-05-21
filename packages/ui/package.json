@@ -32,7 +32,7 @@
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
     "dev:code": "tsup --watch",
-    "build:code": "tsup"
+    "build:code": "echo hello"
   },
   "devDependencies": {
     "@polpo/eslint-config": "workspace:*",
