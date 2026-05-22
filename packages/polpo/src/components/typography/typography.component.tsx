@@ -1,4 +1,4 @@
-import { createElement, useMemo } from 'react';
+import React, { createElement, useMemo } from 'react';
 
 import { useClassNames } from '../../hooks';
 
@@ -23,7 +23,8 @@ export type TypographyProps = React.HTMLAttributes<HTMLElement | HTMLLabelElemen
   family?: 'primary' | 'code';
   recommendedWidth?: boolean;
   color?: `${TypographyColors}`;
-  ref?: React.Ref<HTMLElement>;
+  ref?: React.RefObject<HTMLElement>;
+  style?: React.CSSProperties;
 };
 
 export const Typography = ({
