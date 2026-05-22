@@ -4,6 +4,8 @@ export default defineConfig({
   entry: {
     components: './src/components/index.ts',
     hooks: './src/hooks/index.ts',
+    layouts: './src/layouts/index.ts',
+    types: './src/types/index.ts',
     helpers: './src/helpers/index.ts',
   },
   outDir: './dist',

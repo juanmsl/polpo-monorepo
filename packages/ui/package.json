@@ -7,6 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "types": "./src/components/index.ts",
   "exports": {
     ".": null,
     "./components": {
