@@ -2,3 +2,9 @@ packages:
   - "apis/*"
   - "apps/*"
   - "packages/*"
+
+overrides:
+  "@types/node": "22.15.3"
+  "@types/react": "19.1.0"
+  react-icons: "5.4.0"
+  react: "19.1.0"
