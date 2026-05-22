@@ -1,7 +1,9 @@
 {
   "name": "polpo",
   "version": "0.1.8",
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "license": "MIT",
   "type": "module",
   "publishConfig": {
