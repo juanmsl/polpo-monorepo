@@ -26,7 +26,7 @@ export const ExtraPaymentForm = ({ onChange, monthlyFee, monthlyPayment, extraPa
           value={addAdditionalPayment}
           setValue={v => {
             setAddAdditionalPayment(v);
-            onChange('monthlyPayment', v ? getSuggestedPayment(monthlyFee, 1) : 0);
+            onChange('monthlyPayment', 0);
           }}
           color='primary'
           leftLabel='No'
@@ -96,12 +96,12 @@ export const ExtraPaymentForm = ({ onChange, monthlyFee, monthlyPayment, extraPa
               </Button>
             </Grid>
           </Grid>
-          <Grid flow='column' gtc='180px auto 180px auto 180px' gap='4em' jc='center' pi='center'>
+          <Grid flow='column' gap='2em' jc='center' pi='center'>
             <Metric label='Cuota mensual' value={MoneyFormat(monthlyFee)} />
             <FaPlus />
             <Metric label='Abono' value={MoneyFormat(extraPayment)} />
             <FaEquals />
-            <Metric label='Cuota + Abono' value={MoneyFormat(monthlyFee + extraPayment)} />
+            <Metric label='Pago mensual' value={MoneyFormat(monthlyFee + extraPayment)} />
           </Grid>
         </Grid>
       </SlideCard>

@@ -9,10 +9,38 @@
   },
   "exports": {
     ".": null,
-    "./components": "./src/components/index.ts",
-    "./hooks": "./src/hooks/index.ts",
-    "./layouts": "./src/layouts/index.ts",
-    "./types": "./src/types/index.ts",
+    "./components": {
+      "development": "./src/components/index.ts",
+      "default": {
+        "module": "./dist/components.js",
+        "types": "./dist/components.d.ts",
+        "main": "./dist/components.cjs"
+      }
+    },
+    "./hooks": {
+      "development": "./src/hooks/index.ts",
+      "default": {
+        "module": "./dist/hooks.js",
+        "types": "./dist/hooks.d.ts",
+        "main": "./dist/hooks.cjs"
+      }
+    },
+    "./layouts": {
+      "development": "./src/layouts/index.ts",
+      "default": {
+        "module": "./dist/layouts.js",
+        "types": "./dist/layouts.d.ts",
+        "main": "./dist/layouts.cjs"
+      }
+    },
+    "./types": {
+      "development": "./src/types/index.ts",
+      "default": {
+        "module": "./dist/types.js",
+        "types": "./dist/types.d.ts",
+        "main": "./dist/types.cjs"
+      }
+    },
     "./helpers": {
       "development": "./src/helpers/index.ts",
       "default": {

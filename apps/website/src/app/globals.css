@@ -8,6 +8,8 @@ body {
     background-image: radial-gradient(var(--primary-500) 1px, var(--background-paper) 1px),
     radial-gradient(var(--primary-500) 1px, var(--background-paper) 1px);
     background-attachment: fixed;
+    overscroll-behavior: none;
+
 }
 
 .calculator {
