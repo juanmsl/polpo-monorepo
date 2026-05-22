@@ -15,7 +15,7 @@
         color: var(--secondary-50);
         align-items: center;
 
-        &--icon {
+        .input-file--box--icon {
             width: 32px;
             height: 32px;
             border-radius: 5px;
@@ -52,7 +52,7 @@
         border: 1px solid;
         border-radius: 5px;
 
-        &--content {
+        .input-file--files--content {
             display: grid;
         }
     }
@@ -69,7 +69,7 @@
         align-items: center;
         gap: 0.5em;
 
-        &--delete {
+        .total-info--delete {
             display: grid;
             place-content: center;
             height: 100%;

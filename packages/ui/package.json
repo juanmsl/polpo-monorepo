@@ -11,40 +11,40 @@
   "exports": {
     ".": null,
     "./components": {
-      "development": "./src/components/index.ts",
-      "default": {
+      "production": {
         "module": "./dist/components.js",
         "types": "./dist/components.d.ts",
         "main": "./dist/components.cjs"
-      }
+      },
+      "default": "./src/components/index.ts"
     },
     "./hooks": {
-      "development": "./src/hooks/index.ts",
-      "default": {
+      "import": "./src/hooks/index.ts",
+      "production": {
         "module": "./dist/hooks.js",
         "types": "./dist/hooks.d.ts",
         "main": "./dist/hooks.cjs"
       }
     },
     "./layouts": {
-      "development": "./src/layouts/index.ts",
-      "default": {
+      "import": "./src/layouts/index.ts",
+      "production": {
         "module": "./dist/layouts.js",
         "types": "./dist/layouts.d.ts",
         "main": "./dist/layouts.cjs"
       }
     },
     "./types": {
-      "development": "./src/types/index.ts",
-      "default": {
+      "import": "./src/types/index.ts",
+      "production": {
         "module": "./dist/types.js",
         "types": "./dist/types.d.ts",
         "main": "./dist/types.cjs"
       }
     },
     "./helpers": {
-      "development": "./src/helpers/index.ts",
-      "default": {
+      "import": "./src/helpers/index.ts",
+      "production": {
         "module": "./dist/helpers.js",
         "types": "./dist/helpers.d.ts",
         "main": "./dist/helpers.cjs"
@@ -61,7 +61,7 @@
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
     "dev:code": "tsup --watch",
-    "build:code": "echo hello"
+    "build:code": "tsup"
   },
   "devDependencies": {
     "@polpo/eslint-config": "workspace:*",

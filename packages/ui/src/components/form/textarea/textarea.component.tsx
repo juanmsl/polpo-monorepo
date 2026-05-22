@@ -39,7 +39,7 @@ export const Textarea = ({
   ...fieldProps
 }: UnControlledComponentProps<TextareaProps, string>) => {
   const id = useMemo(() => crypto.randomUUID(), []);
-  const { handlers, isFocus } = useInputHandlers({
+  const { handlers, isFocus } = useInputHandlers<HTMLTextAreaElement>({
     onBlur: onBlur,
     onChange: e => setValue(e.target.value),
     onFocus: onFocus,
