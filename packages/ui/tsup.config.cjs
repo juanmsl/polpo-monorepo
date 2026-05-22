@@ -18,6 +18,7 @@ export default defineConfig({
   banner: {
     js: '"use client";',
   },
+  injectStyle: true,
   clean: true,
   splitting: false,
   esbuildTarget: 'es2020',
