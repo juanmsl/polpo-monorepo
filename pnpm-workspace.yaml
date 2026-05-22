@@ -1,10 +1,21 @@
 packages:
-  - "apis/*"
-  - "apps/*"
-  - "packages/*"
+  - apis/*
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  '@tailwindcss/oxide': false
+  esbuild: false
+  sharp: false
+  unrs-resolver: false
+
+ignoredBuiltDependencies:
+  - sharp
 
 overrides:
-  "@types/node": "22.15.3"
-  "@types/react": "19.1.0"
-  react-icons: "5.4.0"
-  react: "19.1.0"
+  '@types/node': 22.15.3
+  '@types/react': 19.1.0
+  '@types/react-dom': 19.1.0
+  react: 19.1.0
+  react-dom: 19.1.0
+  react-icons: 5.4.0

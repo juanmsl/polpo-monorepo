@@ -14,8 +14,8 @@
     "husky": "9.0.11",
     "turbo": "^2.9.14"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@11.2.2",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   }
 }

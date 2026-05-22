@@ -73,16 +73,16 @@
     "@polpo/eslint-config": "workspace:*",
     "@polpo/tailwind-config": "workspace:*",
     "@polpo/typescript-config": "workspace:*",
-    "@types/node": "^22.15.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.0",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
     "eslint": "^9.31.0",
     "tsup": "^8.5.0",
     "typescript": "5.8.2"
   },
   "peerDependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "*",
+    "react-dom": "*",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },
@@ -92,7 +92,7 @@
     "color": "^5.0.3",
     "react-colorful": "^5.7.0",
     "react-hook-form": "7.75.0",
-    "react-icons": "5.4.0",
+    "react-icons": "*",
     "use-eye-dropper": "^1.7.2"
   }
 }
