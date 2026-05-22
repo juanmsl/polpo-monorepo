@@ -27,6 +27,9 @@ export default defineConfig({
     react: 'React',
     'react-dom': 'ReactDOM',
   },
+  loader: {
+    '.css': 'local-css',
+  },
   esbuildOptions: options => {
     options.packages = 'external';
   },

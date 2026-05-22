@@ -10,6 +10,10 @@
   "types": "./src/components/index.ts",
   "exports": {
     ".": null,
+    "./styles": {
+      "production": "./dist/components.css",
+      "default": "./src/components/index.ts"
+    },
     "./components": {
       "production": {
         "module": "./dist/components.js",
