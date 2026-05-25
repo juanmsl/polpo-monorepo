@@ -63,7 +63,6 @@
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
     "build": "pnpm clean && tsup",
-    "postbuild": "cat dist/*.css > dist/index.css",
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
