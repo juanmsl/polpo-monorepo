@@ -1,8 +1,11 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 if (process.env.NODE_ENV === 'production') {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require('polpo/styles');
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  dynamic(() => import('polpo/styles'), { ssr: false });
 }
 
 export default function ProdOnlyCSS() {
