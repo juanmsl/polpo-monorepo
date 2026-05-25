@@ -1,5 +1,5 @@
 import { Montserrat } from 'next/font/google';
-import 'polpo/styles';
+import 'polpo/styles.css';
 
 import './globals.css';
 

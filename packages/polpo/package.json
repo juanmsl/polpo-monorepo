@@ -12,7 +12,7 @@
   "types": "./src/components/index.ts",
   "exports": {
     ".": null,
-    "./styles": "./dist/all/index.css",
+    "./styles.css": "./dist/all/index.css",
     "./components": {
       "production": {
         "module": "./dist/components.js",
