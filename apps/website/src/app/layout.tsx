@@ -1,6 +1,6 @@
 import { Montserrat } from 'next/font/google';
+import 'polpo/styles';
 
-import ProdOnlyCSS from './ProdOnlyCSS';
 import './globals.css';
 
 import type { Metadata } from 'next';
@@ -24,10 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning>
-      <body className={`${font.className} antialiased`}>
-        <ProdOnlyCSS />
-        {children}
-      </body>
+      <body className={`${font.className} antialiased`}>{children}</body>
     </html>
   );
 }
