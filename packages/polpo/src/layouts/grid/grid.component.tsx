@@ -1,5 +1,7 @@
 import React, { createElement } from 'react';
 
+import './grid.styles.css';
+
 type GridProps = React.HTMLAttributes<HTMLDivElement> & {
   tag?: React.HTMLElementType;
   children?: React.ReactNode;

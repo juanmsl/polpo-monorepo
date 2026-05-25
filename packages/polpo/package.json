@@ -12,10 +12,7 @@
   "types": "./src/components/index.ts",
   "exports": {
     ".": null,
-    "./styles": {
-      "production": "./dist/components.css",
-      "default": "./src/components/index.ts"
-    },
+    "./styles": "./dist/all/index.css",
     "./components": {
       "production": {
         "module": "./dist/components.js",
@@ -67,7 +64,8 @@
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
     "dev:code": "tsup --watch",
-    "build:code": "tsup"
+    "build:code": "pnpm clean && tsup",
+    "clean": "rm -rf ./dist"
   },
   "devDependencies": {
     "@polpo/eslint-config": "workspace:*",

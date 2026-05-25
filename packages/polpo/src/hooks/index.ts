@@ -1,5 +1,3 @@
-'use client';
-
 export * from './use-async';
 export * from './use-classnames';
 export * from './use-click-outside';
