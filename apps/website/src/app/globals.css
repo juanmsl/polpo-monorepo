@@ -1,5 +1,5 @@
 @import "@polpo/tailwind-config/styles";
-@import "polpo/styles.css";
+@import "polpo/styles";
 
 body {
     background-size: 40px 40px;

@@ -9,10 +9,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "types": "./src/components/index.ts",
   "exports": {
     ".": null,
-    "./styles.css": "./dist/all/index.css",
+    "./styles": "./dist/index.css",
     "./components": {
       "production": {
         "module": "./dist/components.js",
@@ -22,36 +21,36 @@
       "default": "./src/components/index.ts"
     },
     "./hooks": {
-      "import": "./src/hooks/index.ts",
       "production": {
         "module": "./dist/hooks.js",
         "types": "./dist/hooks.d.ts",
         "main": "./dist/hooks.cjs"
-      }
+      },
+      "default": "./src/hooks/index.ts"
     },
     "./layouts": {
-      "import": "./src/layouts/index.ts",
       "production": {
         "module": "./dist/layouts.js",
         "types": "./dist/layouts.d.ts",
         "main": "./dist/layouts.cjs"
-      }
+      },
+      "default": "./src/layouts/index.ts"
     },
     "./types": {
-      "import": "./src/types/index.ts",
       "production": {
         "module": "./dist/types.js",
         "types": "./dist/types.d.ts",
         "main": "./dist/types.cjs"
-      }
+      },
+      "default": "./src/types/index.ts"
     },
     "./helpers": {
-      "import": "./src/helpers/index.ts",
       "production": {
         "module": "./dist/helpers.js",
         "types": "./dist/helpers.d.ts",
         "main": "./dist/helpers.cjs"
-      }
+      },
+      "default": "./src/helpers/index.ts"
     }
   },
   "repository": {
@@ -63,8 +62,8 @@
   "scripts": {
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
-    "dev:code": "tsup --watch",
-    "build:code": "pnpm clean && tsup",
+    "build": "pnpm clean && tsup",
+    "postbuild": "cat dist/*.css > dist/index.css",
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
