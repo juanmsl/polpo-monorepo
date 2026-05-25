@@ -26,12 +26,13 @@ export default defineConfig([
     },
     clean: false,
     splitting: false,
-    esbuildTarget: 'es2020',
+    esbuildTarget: 'esnext',
     external: ['react', 'react-dom'],
     globals: {
       react: 'React',
       'react-dom': 'ReactDOM',
     },
+    injectStyles: true,
     loader: {
       '.css': 'local-css',
     },
