@@ -21,7 +21,7 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@polpo/eslint-config": "workspace:*",
+    "polpo-eslint-config": "workspace:*",
     "@polpo/typescript-config": "workspace:*",
     "typescript": "^5.8.2",
     "@types/node": "*",

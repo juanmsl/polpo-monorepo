@@ -66,7 +66,7 @@
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
-    "@polpo/eslint-config": "workspace:*",
+    "polpo-eslint-config": "workspace:*",
     "@polpo/tailwind-config": "workspace:*",
     "@polpo/typescript-config": "workspace:*",
     "@types/node": "*",

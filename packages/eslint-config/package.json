@@ -1,5 +1,5 @@
 {
-  "name": "@polpo/eslint-config",
+  "name": "polpo-eslint-config",
   "version": "1.0.0",
   "type": "module",
   "exports": {
