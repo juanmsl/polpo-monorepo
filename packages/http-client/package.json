@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "polpo-eslint-config": "workspace:*",
-    "@polpo/typescript-config": "workspace:*",
+    "polpo-typescript-config": "workspace:*",
     "@types/node": "*",
     "eslint": "^9.31.0",
     "typescript": "^4.9.4"
