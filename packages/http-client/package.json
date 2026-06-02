@@ -1,17 +1,39 @@
 {
   "name": "polpo-http-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "type": "module",
   "files": ["dist"],
   "exports": {
     ".": {
-      "production": {
-        "module": "./dist/index.js",
-        "types": "./dist/index.d.ts",
-        "main": "./dist/index.cjs"
+      "development": {
+        "types": "./src/index.ts",
+        "import": "./src/index.ts"
       },
-      "default": "./src/index.ts"
+      "types": {
+        "import": "./src/index.ts",
+        "require": "./src/index.ts"
+      },
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": {
+          "import": "./dist/index.d.ts",
+          "require": "./dist/index.d.cts"
+        },
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs",
+        "default": "./dist/index.js"
+      }
     }
   },
   "scripts": {
