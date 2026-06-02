@@ -1,5 +1,5 @@
 {
-  "extends": "@polpo/typescript-config/vite",
+  "extends": "polpo-typescript-config/vite",
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "dist",

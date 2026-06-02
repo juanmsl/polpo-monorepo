@@ -12,7 +12,7 @@ export default defineConfig([
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'react': pluginReact,
+      react: pluginReact,
     },
     settings: {
       react: {
@@ -27,32 +27,29 @@ export default defineConfig([
       },
       globals: {
         ...globals.serviceworker,
+        ...globals.browser,
         React: true,
         JSX: true,
-      }
+      },
     },
     rules: {
       'react/destructuring-assignment': ['error', 'always'],
       'react/jsx-fragments': ['error', 'syntax'],
-      "react/jsx-no-target-blank": ['error', {
-        "allowReferrer": true,
-      }],
+      'react/jsx-no-target-blank': [
+        'error',
+        {
+          allowReferrer: true,
+        },
+      ],
       'react/jsx-no-useless-fragment': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/function-component-definition': [
-        'error',
+        'off',
         { namedComponents: 'arrow-function', unnamedComponents: 'arrow-function' },
       ],
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'error',
-      'prettier/prettier': [
-        'error',
-        {
-          ...prettierConfig,
-          plugins: []
-        },
-      ],
     },
-  }
+  },
 ]);

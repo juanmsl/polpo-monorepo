@@ -1,5 +1,6 @@
-import { HttpClientParams } from './http-client';
-import { HttpClientError } from './http-client-error';
+import { HttpClientError } from './http-client.error';
+
+import type { HttpClientParams } from './http-client.types';
 
 export interface GetUrlParams {
   url: string | undefined;
@@ -66,7 +67,9 @@ function getSearchParams({ params }: GetSearchParams): URLSearchParams {
     const searchParams = new URLSearchParams();
 
     for (const [key, value] of Object.entries(params)) {
-      searchParams.append(key, `${value}`);
+      if (value !== undefined && value !== null) {
+        searchParams.append(key, `${value}`);
+      }
     }
 
     return searchParams;

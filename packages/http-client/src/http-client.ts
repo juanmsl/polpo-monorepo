@@ -1,115 +1,55 @@
-import { getResponseErrorMessage } from './get-response-error-message';
-import { getURL, GetUrlParams } from './get-url';
-import { HttpClientError } from './http-client-error';
-
-export type HttpClientParams = object | URLSearchParams | string;
-
-export interface HttpClientCommonConfig {
-  headers?: HeadersInit;
-  referrer?: string;
-  referrerPolicy?: ReferrerPolicy;
-  mode?: RequestMode;
-  cache?: RequestCache;
-  credentials?: RequestCredentials;
-  integrity?: string;
-  keepalive?: boolean;
-  priority?: RequestPriority;
-  redirect?: RequestRedirect;
-}
-
-export const RequestState = {
-  RESOLVED: 'RESOLVED',
-  REJECTED: 'REJECTED',
-} as const;
-
-export interface LoggerParams {
-  apiName: string;
-  buildURL: URL;
-  request: RequestInit;
-  urlParams: GetUrlParams;
-  state: (typeof RequestState)[keyof typeof RequestState];
-  response: HttpClientResponse<unknown> | null;
-}
-
-export type Logger = (params: LoggerParams) => Promise<void>;
-
-export interface HttpClientConfig extends HttpClientCommonConfig {
-  apiName: string;
-  baseURL?: string;
-  getHeaders?: () => Promise<HeadersInit>;
-  getLogger?: (() => Logger) | undefined;
-}
-
-export interface HttpClientRequestConfig<T extends object> extends HttpClientCommonConfig {
-  url?: string;
-  path?: string;
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  body?: BodyInit;
-  signal?: AbortSignal;
-  params?: HttpClientParams;
-  window?: null;
-  disableCache?: boolean;
-  data?: T;
-}
-
-export interface HttpClientSuccessResponse<T> {
-  data: T;
-  status: number;
-  error: null;
-}
-
-export interface HttpClientErrorResponse {
-  data: null;
-  status: number;
-  error: string;
-}
-
-export type HttpClientResponse<Response> = HttpClientSuccessResponse<Response> | HttpClientErrorResponse;
-
-export function getHttpClientErrorResponse(error: Error): HttpClientErrorResponse {
-  if (error instanceof HttpClientError) {
-    return {
-      data: null,
-      error: error.message,
-      status: error.status,
-    };
-  }
-
-  return {
-    data: null,
-    error: error.message,
-    status: 500,
-  };
-}
+import {
+  getResponseErrorMessage,
+  getDefaultResponseError,
+  mapErrorToHttpClientErrorResponse,
+  HttpClientError,
+} from './http-client.error';
+import {
+  type HttpClientConfig,
+  type HttpClientRequestConfig,
+  type HttpClientResponse,
+  type HttpClientSuccessResponse,
+  type LoggerParams,
+  type OnErrorCallback,
+  type OnRequestCallback,
+  type RequestParams,
+  RequestState,
+} from './http-client.types';
+import { getURL, type GetUrlParams } from './http-client.url-helpers';
 
 export class HttpClient {
   private readonly httpConfig: HttpClientConfig;
+  private onErrorInterceptor: OnErrorCallback | undefined = undefined;
+  private onRequestInterceptors: Array<OnRequestCallback> = [];
 
   constructor(protected config: HttpClientConfig) {
     this.httpConfig = config;
   }
 
-  protected async onRequest(requestInit: RequestInit): Promise<RequestInit> {
-    let headers = requestInit.headers || {};
-
-    if (this.httpConfig.getHeaders) {
-      const newHeaders = await this.httpConfig.getHeaders();
-      headers = { ...headers, ...newHeaders };
-    }
-
-    return {
-      ...requestInit,
-      headers,
-    };
+  public setOnErrorInterceptor(interceptor: OnErrorCallback) {
+    this.onErrorInterceptor = interceptor;
   }
 
-  private async getRequestParams<Payload extends object = object>(_config: HttpClientRequestConfig<Payload>) {
-    const { path, url, params, disableCache, data: requestData, ...config } = _config;
-    const { baseURL, apiName, getLogger, ...httpConfig } = this.httpConfig;
+  public addOnRequestInterceptor(interceptor: OnRequestCallback) {
+    this.onRequestInterceptors.push(interceptor);
+  }
+
+  private async getRequestParams<Data extends object = object>(
+    _config: HttpClientRequestConfig<Data>,
+  ): Promise<RequestParams> {
+    const { path, url, params, disableCache, data: requestData, retries: _, ...config } = _config;
+    const {
+      baseURL,
+      apiName,
+      getLogger,
+      getHeaders,
+      getResponseError = getDefaultResponseError,
+      ...httpConfig
+    } = this.httpConfig;
     const urlParams: GetUrlParams = { url, baseURL, path, params };
     const buildURL = getURL(urlParams);
 
-    const request = await this.onRequest({
+    let request: RequestInit = {
       method: 'GET',
       cache: !disableCache || config.method === 'GET' ? 'force-cache' : 'no-store',
       body: requestData ? JSON.stringify(requestData) : null,
@@ -118,37 +58,51 @@ export class HttpClient {
       headers: {
         ...httpConfig.headers,
         ...config.headers,
+        ...(getHeaders ? await getHeaders() : {}),
       },
-    });
+    };
 
-    return { buildURL, request, urlParams, apiName, getLogger };
+    for (const interceptor of this.onRequestInterceptors) {
+      request = await interceptor(request);
+    }
+
+    return { buildURL, request, urlParams, apiName, getLogger, getResponseError };
   }
 
-  private async log<Response, Payload extends object = object>(
-    config: HttpClientRequestConfig<Payload>,
+  private async log<Response>(
+    { apiName, urlParams, buildURL, request, getLogger }: RequestParams,
     state: LoggerParams['state'],
     response: HttpClientResponse<Response>,
   ) {
-    const { apiName, urlParams, buildURL, request, getLogger } = await this.getRequestParams<Payload>(config);
-
     if (getLogger) {
-      await getLogger()({ apiName, buildURL, urlParams, request, state, response });
+      const logger = getLogger();
+      await logger({ apiName, buildURL, urlParams, request, state, response });
     }
   }
 
-  private async callOrThrow<Response, Payload extends object = object>(
-    config: HttpClientRequestConfig<Payload>,
-  ): Promise<HttpClientSuccessResponse<Response>> {
-    const { apiName, buildURL, request } = await this.getRequestParams<Payload>(config);
-
+  private async callOrThrow<Response>({
+    apiName,
+    buildURL,
+    request,
+    getResponseError,
+  }: RequestParams): Promise<HttpClientSuccessResponse<Response>> {
     const response = await fetch(buildURL, request);
 
     if (!response.ok) {
       const message = await getResponseErrorMessage(
         response,
-        `[${apiName}]: There was a problem fetching [${config.method ?? 'GET'}] - ${buildURL}`,
+        `[${apiName}]: There was a problem fetching [${request.method}] - ${buildURL}`,
       );
-      throw new HttpClientError(response.status, message);
+
+      throw await getResponseError(response, message);
+    }
+
+    if (response.status === 204 || response.status === 202) {
+      return {
+        data: null as Response,
+        status: response.status,
+        error: null,
+      };
     }
 
     const data = (await response.json()) as Response;
@@ -160,17 +114,36 @@ export class HttpClient {
     };
   }
 
-  protected async call<Response, Payload extends object = object>(
-    config: HttpClientRequestConfig<Payload>,
-  ): Promise<HttpClientResponse<Response>> {
-    try {
-      const response = await this.callOrThrow<Response, Payload>(config);
-      await this.log(config, RequestState.RESOLVED, response);
+  public async call<Response = void, Data extends object = object>(
+    config: HttpClientRequestConfig<Data>,
+  ): Promise<HttpClientResponse<Response>>;
 
-      return response;
+  public async call<Response = void, Data extends object = object, NewResponse = Response>(
+    config: HttpClientRequestConfig<Data>,
+    mapData: (data: Response) => NewResponse,
+  ): Promise<HttpClientResponse<NewResponse>>;
+
+  public async call<Response = void, Data extends object = object, NewResponse = Response>(
+    config: HttpClientRequestConfig<Data>,
+    mapData?: (data: Response) => NewResponse,
+  ): Promise<HttpClientResponse<Response | NewResponse>> {
+    const requestParams = await this.getRequestParams(config);
+
+    try {
+      const response = await this.callOrThrow<Response>(requestParams);
+      await this.log(requestParams, RequestState.RESOLVED, response);
+
+      return {
+        ...response,
+        data: mapData ? mapData(response.data) : response.data,
+      };
     } catch (error: unknown) {
-      const errorResponse = getHttpClientErrorResponse(error as Error);
-      await this.log(config, RequestState.REJECTED, errorResponse);
+      const errorResponse = mapErrorToHttpClientErrorResponse(error as HttpClientError);
+      await this.log(requestParams, RequestState.REJECTED, errorResponse);
+
+      if (this.onErrorInterceptor) {
+        return this.onErrorInterceptor<Response, NewResponse>(config, errorResponse);
+      }
 
       return errorResponse;
     }

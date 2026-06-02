@@ -1,4 +1,4 @@
-import { HttpClient } from '@polpo/http-client';
+import { HttpClient } from 'polpo-http-client';
 
 import {
   AssetQueryResponse,

@@ -1,4 +1,4 @@
-import EslintConfig from '@polpo/eslint-config/base';
+import EslintConfig from 'polpo-eslint-config/base';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([

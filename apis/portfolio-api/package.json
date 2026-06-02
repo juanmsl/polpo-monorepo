@@ -11,13 +11,13 @@
     "lint": "eslint src"
   },
   "devDependencies": {
-    "@polpo/eslint-config": "workspace:*",
-    "@polpo/typescript-config": "workspace:*",
+    "polpo-eslint-config": "workspace:*",
+    "polpo-typescript-config": "workspace:*",
     "@types/node": "*",
     "eslint": "^9.31.0",
     "typescript": "~5.8.3"
   },
   "dependencies": {
-    "@polpo/http-client": "workspace:*"
+    "polpo-http-client": "workspace:*"
   }
 }

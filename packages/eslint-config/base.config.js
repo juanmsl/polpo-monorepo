@@ -26,13 +26,11 @@ export const prettierConfig  = {
 };
 
 export default defineConfig([
-  globalIgnores([
-    '**/dist/**', '**/.next/**', '**/node_modules/**', '*.d.ts'
-  ]),
+  globalIgnores(['**/dist/**', '**/.next/**', '**/node_modules/**', '*.d.ts']),
   {
     linterOptions: {
-      reportUnusedInlineConfigs: "error",
-      reportUnusedDisableDirectives: "error",
+      reportUnusedInlineConfigs: 'error',
+      reportUnusedDisableDirectives: 'error',
     },
   },
   eslint.configs.recommended,
@@ -62,6 +60,7 @@ export default defineConfig([
     settings: {
       'import/resolver': {
         typescript: {
+          alwaysTryTypes: true,
           project,
         },
       },
