@@ -26,6 +26,9 @@ coverage
 out/
 build
 dist
+*.tgz
+*.zip
+*.tar
 
 
 # Debug

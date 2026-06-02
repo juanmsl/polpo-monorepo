@@ -3,7 +3,7 @@
   "display": "Nodejs",
   "extends": "./base.json",
   "compilerOptions": {
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "allowJs": false,
     "sourceMap": true,
     "noImplicitAny": true,

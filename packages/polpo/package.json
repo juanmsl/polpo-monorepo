@@ -9,6 +9,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": ["dist"],
   "exports": {
     ".": null,
     "./styles": "./dist/index.css",
@@ -70,11 +71,11 @@
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "eslint": "^9.31.0",
+    "eslint": "*",
     "polpo-eslint-config": "workspace:*",
     "polpo-typescript-config": "workspace:*",
-    "tsup": "^8.5.1",
-    "typescript": "5.8.2"
+    "tsup": "*",
+    "typescript": "*"
   },
   "peerDependencies": {
     "react": "*",

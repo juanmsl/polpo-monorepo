@@ -2,7 +2,6 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig([
   {
-    globalName: 'polpo',
     entry: {
       components: './src/components/index.ts',
       hooks: './src/hooks/index.ts',
@@ -15,7 +14,7 @@ export default defineConfig([
     bundle: true,
     minify: true,
     sourcemap: true,
-    target: 'node20',
+    target: 'node24',
     format: ['cjs', 'esm'],
     banner: {
       js: '"use client";',
@@ -23,7 +22,7 @@ export default defineConfig([
     injectStyle: true,
     clean: true,
     splitting: false,
-    esbuildTarget: 'es2020',
+    esbuildTarget: 'esnext',
     external: ['react', 'react-dom'],
     globals: {
       react: 'React',

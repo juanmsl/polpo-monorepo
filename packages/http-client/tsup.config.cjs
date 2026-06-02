@@ -8,11 +8,11 @@ export default defineConfig([
     bundle: true,
     minify: true,
     sourcemap: true,
-    target: 'node20',
+    target: 'node24',
     format: ['cjs', 'esm'],
     clean: true,
     splitting: false,
-    esbuildTarget: 'es2020',
+    esbuildTarget: 'esnext',
     esbuildOptions: options => {
       options.packages = 'external';
     },
