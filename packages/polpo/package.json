@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/ui",
+    "directory": "packages/polpo",
     "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
   },
   "website": "https://ui.juanmsl.com/",
@@ -66,14 +66,14 @@
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
-    "polpo-eslint-config": "workspace:*",
     "@polpo/tailwind-config": "workspace:*",
-    "polpo-typescript-config": "workspace:*",
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
     "eslint": "^9.31.0",
-    "tsup": "^8.5.0",
+    "polpo-eslint-config": "workspace:*",
+    "polpo-typescript-config": "workspace:*",
+    "tsup": "^8.5.1",
     "typescript": "5.8.2"
   },
   "peerDependencies": {
