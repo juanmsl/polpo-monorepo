@@ -25,7 +25,7 @@ importers:
 
   apis/movies-api:
     dependencies:
-      '@polpo/http-client':
+      'polpo-http-client':
         specifier: workspace:*
         version: link:../../packages/http-client
     devDependencies:
@@ -47,7 +47,7 @@ importers:
 
   apis/portfolio-api:
     dependencies:
-      '@polpo/http-client':
+      'polpo-http-client':
         specifier: workspace:*
         version: link:../../packages/http-client
     devDependencies:
