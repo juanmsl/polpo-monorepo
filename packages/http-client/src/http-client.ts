@@ -18,13 +18,10 @@ import {
 import { getURL, type GetUrlParams } from './http-client.url-helpers';
 
 export class HttpClient {
-  private readonly httpConfig: HttpClientConfig;
   private onErrorInterceptor: OnErrorCallback | undefined = undefined;
   private onRequestInterceptors: Array<OnRequestCallback> = [];
 
-  constructor(protected config: HttpClientConfig) {
-    this.httpConfig = config;
-  }
+  constructor(private readonly httpConfig: HttpClientConfig) {}
 
   public setOnErrorInterceptor(interceptor: OnErrorCallback) {
     this.onErrorInterceptor = interceptor;
@@ -69,10 +66,10 @@ export class HttpClient {
     return { buildURL, request, urlParams, apiName, getLogger, getResponseError };
   }
 
-  private async log<Response>(
+  private async log(
     { apiName, urlParams, buildURL, request, getLogger }: RequestParams,
     state: LoggerParams['state'],
-    response: HttpClientResponse<Response>,
+    response: HttpClientResponse<unknown>,
   ) {
     if (getLogger) {
       const logger = getLogger();
@@ -90,7 +87,7 @@ export class HttpClient {
 
     if (!response.ok) {
       const message = await getResponseErrorMessage(
-        response,
+        response.clone(),
         `[${apiName}]: There was a problem fetching [${request.method}] - ${buildURL}`,
       );
 
@@ -100,7 +97,9 @@ export class HttpClient {
     if (response.status === 204 || response.status === 202) {
       return {
         data: null as Response,
+        errorData: null,
         status: response.status,
+        errorMessage: null,
         error: null,
       };
     }
@@ -109,24 +108,26 @@ export class HttpClient {
 
     return {
       data,
+      errorData: null,
       status: response.status,
+      errorMessage: null,
       error: null,
     };
   }
 
-  public async call<Response = void, Data extends object = object>(
+  public async call<Response = void, Data extends object = object, ErrorResponse = unknown>(
     config: HttpClientRequestConfig<Data>,
-  ): Promise<HttpClientResponse<Response>>;
+  ): Promise<HttpClientResponse<Response, ErrorResponse>>;
 
-  public async call<Response = void, Data extends object = object, NewResponse = Response>(
+  public async call<Response = void, Data extends object = object, NewResponse = Response, ErrorResponse = unknown>(
     config: HttpClientRequestConfig<Data>,
     mapData: (data: Response) => NewResponse,
-  ): Promise<HttpClientResponse<NewResponse>>;
+  ): Promise<HttpClientResponse<NewResponse, ErrorResponse>>;
 
-  public async call<Response = void, Data extends object = object, NewResponse = Response>(
+  public async call<Response = void, Data extends object = object, NewResponse = Response, ErrorResponse = unknown>(
     config: HttpClientRequestConfig<Data>,
     mapData?: (data: Response) => NewResponse,
-  ): Promise<HttpClientResponse<Response | NewResponse>> {
+  ): Promise<HttpClientResponse<Response | NewResponse, ErrorResponse>> {
     const requestParams = await this.getRequestParams(config);
 
     try {
@@ -138,11 +139,11 @@ export class HttpClient {
         data: mapData ? mapData(response.data) : response.data,
       };
     } catch (error: unknown) {
-      const errorResponse = mapErrorToHttpClientErrorResponse(error as HttpClientError);
+      const errorResponse = mapErrorToHttpClientErrorResponse<ErrorResponse>(error as HttpClientError<ErrorResponse>);
       await this.log(requestParams, RequestState.REJECTED, errorResponse);
 
       if (this.onErrorInterceptor) {
-        return this.onErrorInterceptor<Response, NewResponse>(config, errorResponse);
+        return this.onErrorInterceptor<Response, NewResponse, ErrorResponse>(requestParams.request, errorResponse);
       }
 
       return errorResponse;

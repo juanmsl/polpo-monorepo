@@ -26,12 +26,19 @@ interface BuildUrlParams {
   path: string;
 }
 
-export function buildURL({ url, baseURL, path }: BuildUrlParams): URL {
+export function buildURL(buildUrlParams: BuildUrlParams): URL {
+  const { url, baseURL, path } = buildUrlParams;
+
   if (url !== '') {
     try {
       return new URL(url);
     } catch (error) {
-      throw new HttpClientError(400, `Invalid URL received for the request [url=${url}]`, error);
+      throw new HttpClientError<BuildUrlParams>(
+        buildUrlParams,
+        400,
+        `Invalid URL received for the request [url=${url}]`,
+        error,
+      );
     }
   }
 
@@ -39,23 +46,35 @@ export function buildURL({ url, baseURL, path }: BuildUrlParams): URL {
     try {
       return new URL(baseURL + path);
     } catch (error) {
-      throw new HttpClientError(400, `Invalid URL received for the request [baseURL=${baseURL}, path=${path}]`, error);
+      throw new HttpClientError<BuildUrlParams>(
+        buildUrlParams,
+        400,
+        `Invalid URL received for the request [baseURL=${baseURL}, path=${path}]`,
+        error,
+      );
     }
   }
 
-  throw new HttpClientError(400, 'Empty URL received for the request');
+  throw new HttpClientError<BuildUrlParams>(buildUrlParams, 400, 'Empty URL received for the request');
 }
 
 interface GetSearchParams {
   params: HttpClientParams;
 }
 
-function getSearchParams({ params }: GetSearchParams): URLSearchParams {
+function getSearchParams(searchParams: GetSearchParams): URLSearchParams {
+  const { params } = searchParams;
+
   if (typeof params === 'string') {
     try {
       return new URLSearchParams(params);
     } catch (error) {
-      throw new HttpClientError(400, `Invalid query string params [params=${params}]`, error);
+      throw new HttpClientError<GetSearchParams>(
+        searchParams,
+        400,
+        `Invalid query string params [params=${params}]`,
+        error,
+      );
     }
   }
 
