@@ -1,6 +1,6 @@
 {
   "name": "polpo-http-client",
-  "version": "1.0.2",
+  "version": "1.0.10",
   "license": "MIT",
   "type": "module",
   "files": ["dist"],

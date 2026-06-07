@@ -33,7 +33,7 @@ export interface LoggerParams {
 
 export type Logger = (params: LoggerParams) => Promise<void>;
 
-export type GetResponseErrorFunction = (response: Response, message: string) => Promise<HttpClientError>;
+export type GetResponseErrorFunction = (response: Response, message: string) => Promise<HttpClientError<unknown>>;
 
 export interface HttpClientConfig extends HttpClientCommonConfig {
   apiName: string;
@@ -65,21 +65,27 @@ export interface RequestParams extends Pick<HttpClientConfig, 'apiName' | 'getLo
 
 export interface HttpClientSuccessResponse<Response> {
   data: Response;
+  errorData: null;
   status: number;
+  errorMessage: null;
   error: null;
 }
 
-export interface HttpClientErrorResponse {
+export interface HttpClientErrorResponse<ErrorResponse = unknown> {
   data: null;
+  errorData: ErrorResponse;
   status: number;
-  error: string;
+  errorMessage: string;
+  error: Error;
 }
 
-export type HttpClientResponse<Response> = HttpClientSuccessResponse<Response> | HttpClientErrorResponse;
+export type HttpClientResponse<Response, ErrorResponse = unknown> =
+  | HttpClientSuccessResponse<Response>
+  | HttpClientErrorResponse<ErrorResponse>;
 
 export type OnRequestCallback = (requestInit: RequestInit) => Promise<RequestInit>;
 
-export type OnErrorCallback = <Response = void, NewResponse = Response>(
-  config: HttpClientRequestConfig<object>,
-  response: HttpClientErrorResponse,
-) => Promise<HttpClientResponse<Response | NewResponse>>;
+export type OnErrorCallback = <Response = void, NewResponse = Response, ErrorResponse = unknown>(
+  request: RequestInit,
+  response: HttpClientErrorResponse<ErrorResponse>,
+) => Promise<HttpClientResponse<Response | NewResponse, ErrorResponse>>;

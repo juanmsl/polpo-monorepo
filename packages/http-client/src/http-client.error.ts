@@ -1,7 +1,8 @@
 import type { HttpClientErrorResponse } from './http-client.types';
 
-export class HttpClientError extends Error {
+export class HttpClientError<Body> extends Error {
   constructor(
+    readonly body: Body,
     readonly status: number,
     readonly message: string = '[HttpClientError]: Unexpected error occurred',
     readonly error?: unknown,
@@ -37,16 +38,22 @@ export async function getResponseErrorMessage(response: Response, defaultMessage
   return defaultMessage;
 }
 
-export async function getDefaultResponseError(response: Response, message: string) {
-  return new HttpClientError(response.status, message);
+export async function getDefaultResponseError<ErrorResponse>(response: Response, message: string) {
+  const body = (await response.json()) as ErrorResponse;
+
+  return new HttpClientError<ErrorResponse>(body, response.status, message);
 }
 
-export function mapErrorToHttpClientErrorResponse(error: HttpClientError): HttpClientErrorResponse {
+export function mapErrorToHttpClientErrorResponse<ErrorResponse>(
+  error: HttpClientError<ErrorResponse>,
+): HttpClientErrorResponse<ErrorResponse> {
   const { status = 500, message = '' } = error;
 
   return {
     data: null,
-    error: message,
+    errorData: error.body,
+    errorMessage: message,
+    error,
     status: status,
   };
 }
