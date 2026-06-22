@@ -39,7 +39,7 @@ export interface HttpClientConfig extends HttpClientCommonConfig {
   apiName: string;
   baseURL?: string;
   getHeaders?: () => Promise<HeadersInit>;
-  getLogger?: (() => Logger) | undefined;
+  logger?: Logger | undefined;
   getResponseError?: GetResponseErrorFunction;
 }
 
@@ -56,7 +56,7 @@ export interface HttpClientRequestConfig<Data extends object> extends HttpClient
   retries?: number;
 }
 
-export interface RequestParams extends Pick<HttpClientConfig, 'apiName' | 'getLogger'> {
+export interface RequestParams extends Pick<HttpClientConfig, 'apiName' | 'logger'> {
   buildURL: URL;
   request: RequestInit;
   urlParams: GetUrlParams;

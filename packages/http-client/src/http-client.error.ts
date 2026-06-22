@@ -44,16 +44,16 @@ export async function getDefaultResponseError<ErrorResponse>(response: Response,
   return new HttpClientError<ErrorResponse>(body, response.status, message);
 }
 
-export function mapErrorToHttpClientErrorResponse<ErrorResponse>(
+export function mapErrorToHttpClientErrorResponse<ErrorResponse = unknown>(
   error: HttpClientError<ErrorResponse>,
 ): HttpClientErrorResponse<ErrorResponse> {
-  const { status = 500, message = '' } = error;
+  const { status = 500, message = '', body } = error;
 
   return {
     data: null,
-    errorData: error.body,
+    errorData: body,
     errorMessage: message,
-    error,
     status: status,
+    error,
   };
 }

@@ -38,7 +38,7 @@ export class HttpClient {
     const {
       baseURL,
       apiName,
-      getLogger,
+      logger,
       getHeaders,
       getResponseError = getDefaultResponseError,
       ...httpConfig
@@ -63,26 +63,34 @@ export class HttpClient {
       request = await interceptor(request);
     }
 
-    return { buildURL, request, urlParams, apiName, getLogger, getResponseError };
+    return { buildURL, request, urlParams, apiName, logger, getResponseError };
   }
 
   private async log(
-    { apiName, urlParams, buildURL, request, getLogger }: RequestParams,
+    { apiName, urlParams, buildURL, request, logger }: RequestParams,
     state: LoggerParams['state'],
     response: HttpClientResponse<unknown>,
   ) {
-    if (getLogger) {
-      const logger = getLogger();
+    if (logger) {
       await logger({ apiName, buildURL, urlParams, request, state, response });
     }
   }
 
-  private async callOrThrow<Response>({
-    apiName,
-    buildURL,
-    request,
-    getResponseError,
-  }: RequestParams): Promise<HttpClientSuccessResponse<Response>> {
+  public async callOrThrow<Response = void, Data extends object = object>(
+    config: HttpClientRequestConfig<Data>,
+  ): Promise<HttpClientSuccessResponse<Response>>;
+
+  public async callOrThrow<Response, Data extends object = object, NewResponse = Response>(
+    config: HttpClientRequestConfig<Data>,
+    mapData: (data: Response) => NewResponse,
+  ): Promise<HttpClientSuccessResponse<NewResponse>>;
+
+  public async callOrThrow<Response, Data extends object = object, NewResponse = Response>(
+    config: HttpClientRequestConfig<Data>,
+    mapData?: undefined | ((data: Response) => NewResponse),
+  ): Promise<HttpClientSuccessResponse<Response | NewResponse>> {
+    const requestParams = await this.getRequestParams(config);
+    const { apiName, buildURL, request, getResponseError } = requestParams;
     const response = await fetch(buildURL, request);
 
     if (!response.ok) {
@@ -91,7 +99,16 @@ export class HttpClient {
         `[${apiName}]: There was a problem fetching [${request.method}] - ${buildURL}`,
       );
 
-      throw await getResponseError(response, message);
+      const error = await getResponseError(response, message);
+
+      const errorResponse = mapErrorToHttpClientErrorResponse(error);
+      await this.log(requestParams, RequestState.REJECTED, errorResponse);
+
+      if (this.onErrorInterceptor) {
+        await this.onErrorInterceptor<Response, NewResponse>(requestParams.request, errorResponse);
+      }
+
+      throw error;
     }
 
     if (response.status === 204 || response.status === 202) {
@@ -106,13 +123,17 @@ export class HttpClient {
 
     const data = (await response.json()) as Response;
 
-    return {
-      data,
+    const successResponse: HttpClientSuccessResponse<Response | NewResponse> = {
+      data: mapData ? mapData(data) : data,
       errorData: null,
       status: response.status,
       errorMessage: null,
       error: null,
     };
+
+    await this.log(requestParams, RequestState.RESOLVED, successResponse);
+
+    return successResponse;
   }
 
   public async call<Response = void, Data extends object = object, ErrorResponse = unknown>(
@@ -128,25 +149,12 @@ export class HttpClient {
     config: HttpClientRequestConfig<Data>,
     mapData?: (data: Response) => NewResponse,
   ): Promise<HttpClientResponse<Response | NewResponse, ErrorResponse>> {
-    const requestParams = await this.getRequestParams(config);
-
     try {
-      const response = await this.callOrThrow<Response>(requestParams);
-      await this.log(requestParams, RequestState.RESOLVED, response);
-
-      return {
-        ...response,
-        data: mapData ? mapData(response.data) : response.data,
-      };
+      return mapData
+        ? await this.callOrThrow<Response, Data, NewResponse>(config, mapData)
+        : await this.callOrThrow<Response, Data>(config);
     } catch (error: unknown) {
-      const errorResponse = mapErrorToHttpClientErrorResponse<ErrorResponse>(error as HttpClientError<ErrorResponse>);
-      await this.log(requestParams, RequestState.REJECTED, errorResponse);
-
-      if (this.onErrorInterceptor) {
-        return this.onErrorInterceptor<Response, NewResponse, ErrorResponse>(requestParams.request, errorResponse);
-      }
-
-      return errorResponse;
+      return mapErrorToHttpClientErrorResponse<ErrorResponse>(error as HttpClientError<ErrorResponse>);
     }
   }
 }
