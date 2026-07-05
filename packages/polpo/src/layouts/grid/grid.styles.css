@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .grida {
     display: grid;
 }

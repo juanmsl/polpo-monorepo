@@ -1,34 +1,35 @@
+@reference "polpo-tailwind-config/styles";
 
 .typography {
     margin: 0;
     padding: 0.5em 0 0.4em;
 
     &.primary {
-        color: var(--primary-500);
+        color: var(--color-primary-500);
     }
 
     &.secondary {
-        color: var(--secondary-500);
+        color: var(--color-secondary-500);
     }
 
     &.tertiary {
-        color: var(--tertiary-500);
+        color: var(--color-tertiary-500);
     }
 
     &.active {
-        color: var(--active-500);
+        color: var(--color-active-500);
     }
 
     &.alert {
-        color: var(--alert-500);
+        color: var(--color-alert-500);
     }
 
     &.warning {
-        color: var(--warning-500);
+        color: var(--color-warning-500);
     }
 
     &.info {
-        color: var(--info-500);
+        color: var(--color-info-500);
     }
 
     &.recommended-width {
@@ -76,51 +77,35 @@
     }
 
     &.hero {
-        font-size: var(--typography-size-hero);
-        line-height: var(--typography-line-height-header);
-        font-weight: 700;
+        @apply text-hero;
     }
 
     &.header1 {
-        font-size: var(--typography-size-header1);
-        line-height: var(--typography-line-height-header);
-        font-weight: 700;
+        @apply text-header1;
     }
 
     &.header2 {
-        font-size: var(--typography-size-header2);
-        line-height: var(--typography-line-height-header);
-        font-weight: 700;
+        @apply text-header2;
     }
 
     &.header3 {
-        font-size: var(--typography-size-header3);
-        line-height: var(--typography-line-height-header);
-        font-weight: 700;
+        @apply text-header3;
     }
 
     &.header4 {
-        font-size: var(--typography-size-header4);
-        line-height: var(--typography-line-height-header);
-        font-weight: 700;
+        @apply text-header4;
     }
 
     &.body {
-        font-size: var(--typography-size-body);
-        line-height: var(--typography-line-height-common);
-        font-weight: 400;
+        @apply text-body;
     }
 
     &.label {
-        font-size: var(--typography-size-label);
-        line-height: var(--typography-line-height-common);
-        font-weight: 400;
+        @apply text-label;
     }
 
     &.small {
-        font-size: var(--typography-size-small);
-        line-height: var(--typography-line-height-common);
-        font-weight: 400;
+        @apply text-small;
     }
 
     &.bold {

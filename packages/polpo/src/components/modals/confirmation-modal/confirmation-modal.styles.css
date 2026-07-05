@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .confirmation-modal {
     display: grid;
     max-width: 450px;

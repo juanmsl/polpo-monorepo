@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .infinity-scroll {
     display: grid;
     place-content: start center;

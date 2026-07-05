@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .input-color {
     display: grid;
     grid-auto-flow: column;
@@ -13,8 +15,8 @@
         padding-right: 1em;
         border-radius: inherit;
         width: 100%;
-        font-size: var(--typography-size-label);
-        font-family: var(--typography-family-main) sans-serif;
+        @apply text-label;
+        font-family: var(--font-main) sans-serif;
     }
 }
 
@@ -43,12 +45,12 @@
 .input-color-selector {
     display: grid;
     gap: 10px;
-    background: var(--background);
-    color: var(--foreground);
+    background: var(--color-background);
+    color: var(--color-foreground);
     padding: 10px;
     border-radius: 0 18px 18px 18px;
     border: 1px solid;
-    box-shadow: 0 5px 30px -5px var(--neutral-900);
+    box-shadow: 0 5px 30px -5px var(--color-gray-900);
 
     .react-colorful__pointer {
         width: 1em;
@@ -79,11 +81,11 @@
     .color-input {
         padding: 0;
         border-radius: inherit;
-        background: var(--background);
-        color: var(--foreground);
+        background: var(--color-background);
+        color: var(--color-foreground);
         width: 100%;
-        font-size: var(--typography-size-label);
-        font-family: var(--typography-family-main) sans-serif;
+        @apply text-label;
+        font-family: var(--font-main) sans-serif;
         letter-spacing: 2px;
         text-align: center;
     }

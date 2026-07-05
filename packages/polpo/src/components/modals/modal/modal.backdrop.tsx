@@ -32,13 +32,13 @@ export const Backdrop = ({
   const backgroundStyles = useMemo(() => {
     const backdropStyles = {
       [ModalBackdrop.OPAQUE]: {
-        background: `hsl(from var(--background-paper) h s l / ${opacity * 100}%)`,
+        background: `hsl(from var(--color-background-paper) h s l / ${opacity * 100}%)`,
       },
       [ModalBackdrop.TRANSPARENT]: {
         background: 'transparent',
       },
       [ModalBackdrop.BLUR]: {
-        background: `hsl(from var(--background-paper) h s l / ${opacity * 100}%)`,
+        background: `hsl(from var(--color-background-paper) h s l / ${opacity * 100}%)`,
         backdropFilter: 'blur(5px)',
       },
       [ModalBackdrop.NONE]: {

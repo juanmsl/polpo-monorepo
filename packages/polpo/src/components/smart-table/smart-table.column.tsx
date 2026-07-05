@@ -56,7 +56,7 @@ export const SmartTableColumn = <RowData extends RowDataObject>({
         </Typography>
         {sortIcon}
       </Grid>
-      <Ripple color='var(--primary-700)' />
+      <Ripple color='var(--color-primary-700)' />
     </th>
   );
 };

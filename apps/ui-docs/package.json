@@ -12,7 +12,7 @@
     "build-vite": "tsc -b && vite build"
   },
   "dependencies": {
-    "@polpo/tailwind-config": "workspace:*",
+    "polpo-tailwind-config": "workspace:*",
     "polpo": "workspace:*",
     "@tailwindcss/vite": "^4.1.11",
     "react": "*",

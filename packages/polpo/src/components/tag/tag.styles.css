@@ -1,8 +1,10 @@
+@reference "polpo-tailwind-config/styles";
+
 .tag {
-    --background: attr(data-background, var(--primary-500));
-    --text: attr(data-text, var(--primary-50));
-    --background-selected: attr(data-background-selected, var(--primary-700));
-    --text-selected: attr(data-text-selected, var(--primary-50));
+    --background: attr(data-background, var(--color-primary-500));
+    --text: attr(data-text, var(--color-primary-50));
+    --background-selected: attr(data-background-selected, var(--color-primary-700));
+    --text-selected: attr(data-text-selected, var(--color-primary-50));
 
     padding: 0.4em 0.8em;
     border-radius: 0.3em;
@@ -11,7 +13,7 @@
     color: var(--text);
     transition: all 300ms ease;
     display: inline-block;
-    font-size: var(--typography-size-label);
+    @apply text-label;
     user-select: none;
 
     &.no-wrap {

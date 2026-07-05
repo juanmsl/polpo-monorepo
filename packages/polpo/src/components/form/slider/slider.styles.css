@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .input-slider {
     display: grid;
     grid-template-columns: 1fr 50px;
@@ -20,8 +22,8 @@
             width: 20px;
             height: 20px;
             border-radius: 1em;
-            background: var(--primary-500);
-            box-shadow: 0 0 0 0 var(--neutral-500);
+            background: var(--color-primary-500);
+            box-shadow: 0 0 0 0 var(--color-gray-500);
             margin-top: -8px;
             transition: all 300ms ease;
             cursor: pointer;
@@ -30,37 +32,37 @@
         &::-webkit-slider-runnable-track {
             height: 4px;
             border-radius: 1em;
-            background: hsl(from var(--primary-200) h s l / 50%);
+            background: hsl(from var(--color-primary-200) h s l / 50%);
             transition: all 300ms ease;
         }
 
         &:focus,
         &:hover {
             &::-webkit-slider-thumb {
-                background: var(--primary-500);
-                box-shadow: 0 0 0 6px hsl(from var(--primary-500) h s l / 50%);
+                background: var(--color-primary-500);
+                box-shadow: 0 0 0 6px hsl(from var(--color-primary-500) h s l / 50%);
                 cursor: grab;
             }
         }
 
         &:active {
             &::-webkit-slider-thumb {
-                box-shadow: 0 0 0 12px hsl(from var(--primary-500) h s l / 31%);
+                box-shadow: 0 0 0 12px hsl(from var(--color-primary-500) h s l / 31%);
                 cursor: grabbing;
             }
         }
 
         &:focus {
             &::-webkit-slider-runnable-track {
-                background: var(--primary-300);
+                background: var(--color-primary-300);
             }
         }
     }
 
     &:has(.slider-number:focus) .slider::-webkit-slider-thumb,
     &:has(.slider-number:hover) .slider::-webkit-slider-thumb {
-        background: var(--primary-500);
-        box-shadow: 0 0 0 6px hsl(from var(--primary-500) h s l / 31%);
+        background: var(--color-primary-500);
+        box-shadow: 0 0 0 6px hsl(from var(--color-primary-500) h s l / 31%);
     }
 
     .slider-number {
@@ -68,7 +70,7 @@
         border: 1px solid;
         border-radius: 5px;
         text-align: center;
-        font-size: var(--typography-size-label);
+        @apply text-label;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -86,7 +88,7 @@
 
     &.is-focus {
         .slider-number {
-            color: var(--primary-500);
+            color: var(--color-primary-500);
         }
     }
 }

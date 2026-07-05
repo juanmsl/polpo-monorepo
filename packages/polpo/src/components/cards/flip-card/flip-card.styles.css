@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .flip-card {
     --cardZIndex: attr(data-zIndex);
     --flipSpeed: attr(data-flipSpeed, 500ms);

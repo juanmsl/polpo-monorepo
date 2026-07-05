@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .input-file-container {
     display: grid;
     gap: 10px;
@@ -11,16 +13,16 @@
         grid-template-columns: 32px 1fr;
         padding: 10px;
         gap: 10px;
-        background: var(--secondary-500);
-        color: var(--secondary-50);
+        background: var(--color-secondary-500);
+        color: var(--color-secondary-50);
         align-items: center;
 
         .input-file--box--icon {
             width: 32px;
             height: 32px;
             border-radius: 5px;
-            background: var(--primary-50);
-            color: var(--primary-500);
+            background: var(--color-primary-50);
+            color: var(--color-primary-500);
             display: grid;
             place-content: center;
         }
@@ -36,12 +38,12 @@
         }
 
         &:hover {
-            background: var(--primary-50);
-            color: var(--primary-500);
+            background: var(--color-primary-50);
+            color: var(--color-primary-500);
 
             .input-file--box--icon {
-                background: var(--primary-500);
-                color: var(--primary-50);
+                background: var(--color-primary-500);
+                color: var(--color-primary-50);
             }
         }
     }
@@ -82,8 +84,8 @@
             font-size: 0.8em;
 
             &:hover {
-                background: var(--primary-500);
-                color: var(--primary-50);
+                background: var(--color-primary-500);
+                color: var(--color-primary-50);
             }
         }
     }
@@ -95,7 +97,7 @@
     gap: 1em;
     align-items: center;
     padding: 10px;
-    background: var(--background);
+    background: var(--color-background);
 
     &:not(:last-child) {
         border-bottom: 1px dashed;
@@ -103,13 +105,13 @@
 
     &:hover {
         .file-card--delete {
-            color: var(--primary-500);
+            color: var(--color-primary-500);
         }
     }
 
     .file-card--image {
-        background: var(--primary-500);
-        color: var(--primary-50);
+        background: var(--color-primary-500);
+        color: var(--color-primary-50);
         width: 32px;
         height: 32px;
         border-radius: 5px;
@@ -134,8 +136,8 @@
         transition: all 0.3s ease;
 
         &:hover {
-            background: var(--primary-500);
-            color: var(--primary-50);
+            background: var(--color-primary-500);
+            color: var(--color-primary-50);
         }
     }
 }

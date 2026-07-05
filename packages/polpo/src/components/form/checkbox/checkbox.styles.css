@@ -1,6 +1,8 @@
+@reference "polpo-tailwind-config/styles";
+
 .checkbox {
     border-radius: 40%;
-    background: var(--background-paper);
+    background: var(--color-background-paper);
     transition: all 300ms ease;
     width: 1em;
     height: 1em;
@@ -54,9 +56,9 @@
 }
 
 .checkbox-container {
-    --color: var(--neutral-800);
-    --color-icon: var(--neutral-50);
-    --color-hover: hsl(from var(--neutral-800) h s l / 50%);
+    --color: var(--color-gray-800);
+    --color-icon: var(--color-gray-50);
+    --color-hover: hsl(from var(--color-gray-800) h s l / 50%);
 
     display: grid;
     grid-auto-flow: column;
@@ -117,44 +119,44 @@
     }
 
     &.color-primary {
-        --color: var(--primary-500);
-        --color-icon: var(--primary-50);
-        --color-hover: hsl(from var(--primary-500) h s l / 50%);
+        --color: var(--color-primary-500);
+        --color-icon: var(--color-primary-50);
+        --color-hover: hsl(from var(--color-primary-500) h s l / 50%);
     }
 
     &.color-secondary {
-        --color: var(--secondary-500);
-        --color-icon: var(--secondary-50);
-        --color-hover: hsl(from var(--secondary-500) h s l / 50%);
+        --color: var(--color-secondary-500);
+        --color-icon: var(--color-secondary-50);
+        --color-hover: hsl(from var(--color-secondary-500) h s l / 50%);
     }
 
     &.color-tertiary {
-        --color: var(--tertiary-500);
-        --color-icon: var(--tertiary-50);
-        --color-hover: hsl(from var(--tertiary-500) h s l / 50%);
+        --color: var(--color-tertiary-500);
+        --color-icon: var(--color-tertiary-50);
+        --color-hover: hsl(from var(--color-tertiary-500) h s l / 50%);
     }
 
     &.color-active {
-        --color: var(--active-500);
-        --color-icon: var(--active-50);
-        --color-hover: hsl(from var(--active-500) h s l / 50%);
+        --color: var(--color-active-500);
+        --color-icon: var(--color-active-50);
+        --color-hover: hsl(from var(--color-active-500) h s l / 50%);
     }
 
     &.color-warning {
-        --color: var(--warning-500);
-        --color-icon: var(--warning-50);
-        --color-hover: hsl(from var(--warning-500) h s l / 50%);
+        --color: var(--color-warning-500);
+        --color-icon: var(--color-warning-50);
+        --color-hover: hsl(from var(--color-warning-500) h s l / 50%);
     }
 
     &.color-alert {
-        --color: var(--alert-500);
-        --color-icon: var(--alert-50);
-        --color-hover: hsl(from var(--alert-500) h s l / 50%);
+        --color: var(--color-alert-500);
+        --color-icon: var(--color-alert-50);
+        --color-hover: hsl(from var(--color-alert-500) h s l / 50%);
     }
 
     &.color-info {
-        --color: var(--info-500);
-        --color-icon: var(--info-50);
-        --color-hover: hsl(from var(--info-500) h s l / 50%);
+        --color: var(--color-info-500);
+        --color-icon: var(--color-info-50);
+        --color-hover: hsl(from var(--color-info-500) h s l / 50%);
     }
 }

@@ -1,57 +1,87 @@
 {
   "name": "polpo",
-  "version": "0.1.8",
-  "sideEffects": [
-    "*.css"
-  ],
+  "version": "0.1.19",
   "license": "MIT",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "exports": {
+      ".": null,
+      "./components.css": "./dist/components.css",
+      "./layouts.css": "./dist/layouts.css",
+      "./components": {
+        "types": {
+          "import": "./dist/components.d.ts",
+          "require": "./dist/components.d.cts"
+        },
+        "import": "./dist/components.js",
+        "require": "./dist/components.cjs",
+        "default": "./dist/components.js"
+      },
+      "./hooks": {
+        "types": {
+          "import": "./dist/hooks.d.ts",
+          "require": "./dist/hooks.d.cts"
+        },
+        "import": "./dist/hooks.js",
+        "require": "./dist/hooks.cjs",
+        "default": "./dist/hooks.js"
+      },
+      "./layouts": {
+        "types": {
+          "import": "./dist/layouts.d.ts",
+          "require": "./dist/layouts.d.cts"
+        },
+        "import": "./dist/layouts.js",
+        "require": "./dist/layouts.cjs",
+        "default": "./dist/layouts.js"
+      },
+      "./helpers": {
+        "types": {
+          "import": "./dist/helpers.d.ts",
+          "require": "./dist/helpers.d.cts"
+        },
+        "import": "./dist/helpers.js",
+        "require": "./dist/helpers.cjs",
+        "default": "./dist/helpers.js"
+      },
+      "./types": {
+        "types": {
+          "import": "./dist/types.d.ts",
+          "require": "./dist/types.d.cts"
+        },
+        "import": "./dist/types.js",
+        "require": "./dist/types.cjs",
+        "default": "./dist/types.js"
+      }
+    }
   },
-  "files": ["dist"],
   "exports": {
     ".": null,
-    "./styles": "./dist/index.css",
+    "./components.css": "./dist/components.css",
+    "./layouts.css": "./dist/layouts.css",
     "./components": {
-      "production": {
-        "module": "./dist/components.js",
-        "types": "./dist/components.d.ts",
-        "main": "./dist/components.cjs"
-      },
-      "default": "./src/components/index.ts"
+      "types": "./src/components/index.ts",
+      "import": "./src/components/index.ts"
     },
     "./hooks": {
-      "production": {
-        "module": "./dist/hooks.js",
-        "types": "./dist/hooks.d.ts",
-        "main": "./dist/hooks.cjs"
-      },
-      "default": "./src/hooks/index.ts"
+      "types": "./src/hooks/index.ts",
+      "import": "./src/hooks/index.ts"
     },
     "./layouts": {
-      "production": {
-        "module": "./dist/layouts.js",
-        "types": "./dist/layouts.d.ts",
-        "main": "./dist/layouts.cjs"
-      },
-      "default": "./src/layouts/index.ts"
-    },
-    "./types": {
-      "production": {
-        "module": "./dist/types.js",
-        "types": "./dist/types.d.ts",
-        "main": "./dist/types.cjs"
-      },
-      "default": "./src/types/index.ts"
+      "types": "./src/layouts/index.ts",
+      "import": "./src/layouts/index.ts"
     },
     "./helpers": {
-      "production": {
-        "module": "./dist/helpers.js",
-        "types": "./dist/helpers.d.ts",
-        "main": "./dist/helpers.cjs"
-      },
-      "default": "./src/helpers/index.ts"
+      "types": "./src/helpers/index.ts",
+      "import": "./src/helpers/index.ts"
+    },
+    "./types": {
+      "types": "./src/types/index.ts",
+      "import": "./src/types/index.ts"
     }
   },
   "repository": {
@@ -67,13 +97,14 @@
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
-    "@polpo/tailwind-config": "workspace:*",
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
+    "esbuild-postcss": "^0.0.4",
     "eslint": "*",
     "polpo-eslint-config": "workspace:*",
     "polpo-typescript-config": "workspace:*",
+    "postcss": "^8.5.15",
     "tsup": "*",
     "typescript": "*"
   },
@@ -84,6 +115,7 @@
     "tailwindcss": "^4.1.11"
   },
   "dependencies": {
+    "polpo-tailwind-config": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "color": "^5.0.3",
