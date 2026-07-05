@@ -67,6 +67,7 @@ export interface RequestParams<Error extends HttpClientError<unknown>> extends P
   request: RequestInit;
   urlParams: GetUrlParams;
   getResponseError: GetResponseErrorFunction<Error>;
+  retries: number;
 }
 
 export interface HttpClientSuccessData<Response> {
@@ -96,6 +97,6 @@ export type HttpClientResponse<Response, Error extends HttpClientError<unknown>>
 export type OnRequestCallback = (requestInit: RequestInit) => Promise<RequestInit>;
 
 export type OnErrorCallback<Error extends HttpClientError<unknown> = HttpClientError<unknown>> = (
-  request: RequestParams<Error>,
+  request: Omit<RequestParams<Error>, 'logger' | 'apiName' | 'getResponseError'>,
   response: HttpClientErrorData<Error>,
 ) => Promise<void>;

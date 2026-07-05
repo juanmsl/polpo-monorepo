@@ -31,7 +31,7 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
   private async getRequestParams<Data extends object>(
     _config: HttpClientRequestConfig<Data>,
   ): Promise<RequestParams<ClassError>> {
-    const { path, url, params, disableCache, data: requestData, retries: _, ...config } = _config;
+    const { path, url, params, disableCache, data: requestData, retries = 0, ...config } = _config;
     const {
       baseURL,
       apiName,
@@ -60,7 +60,7 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
       request = await interceptor(request);
     }
 
-    return { buildURL, request, urlParams, apiName, logger, getResponseError };
+    return { buildURL, request, urlParams, apiName, logger, getResponseError, retries };
   }
 
   private async log(
@@ -84,7 +84,7 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
     requestParams: RequestParams<ClassError>,
     mapData?: undefined | ((data: Response) => NewResponse),
   ): Promise<HttpClientSuccessData<Response | NewResponse>> {
-    const { apiName, buildURL, request, getResponseError } = requestParams;
+    const { apiName, buildURL, request, getResponseError, retries } = requestParams;
     const response = await fetch(buildURL, request);
 
     if (!response.ok) {
@@ -101,10 +101,28 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
       });
 
       if (this.onErrorInterceptor) {
-        await this.onErrorInterceptor(requestParams, {
-          status: response.status,
-          error,
-        });
+        await this.onErrorInterceptor(
+          {
+            request: requestParams.request,
+            buildURL: requestParams.buildURL,
+            urlParams: requestParams.urlParams,
+            retries: requestParams.retries,
+          },
+          {
+            status: response.status,
+            error,
+          },
+        );
+      }
+
+      if (retries) {
+        return this.fetchCall<Response, NewResponse>(
+          {
+            ...requestParams,
+            retries: retries - 1,
+          },
+          mapData,
+        );
       }
 
       throw error;
