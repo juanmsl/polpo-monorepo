@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 import { ColorTypes, RadiusTypes, SizeTypes, VariantTypes } from '../component.types';
 import { Ripple } from '../ripple';
 
@@ -16,6 +16,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   ref?: React.Ref<HTMLButtonElement>;
   forIcon?: boolean;
   isLoading?: boolean;
+  fullWidth?: boolean;
 }
 
 export const Button = ({
@@ -26,22 +27,25 @@ export const Button = ({
   size = SizeTypes.REGULAR,
   noWrap = false,
   forIcon = false,
+  fullWidth = false,
   className = '',
   ...props
 }: ButtonProps) => {
-  const classNames = useClassNames({
-    button: true,
-    [color]: Boolean(color),
-    [variant]: Boolean(variant),
-    [`radius-${radius}`]: Boolean(radius),
-    [`size-${size}`]: Boolean(size),
-    'no-wrap': noWrap,
-    icon: forIcon,
-    [className]: Boolean(className),
-  });
-
   return (
-    <button {...props} className={classNames}>
+    <button
+      {...props}
+      className={cn(
+        'polpo-button',
+        color,
+        variant,
+        fullWidth && 'full',
+        radius && `radius-${radius}`,
+        size && `size-${size}`,
+        noWrap && 'no-wrap',
+        forIcon && 'icon',
+        className,
+      )}
+    >
       {children}
       <Ripple />
     </button>

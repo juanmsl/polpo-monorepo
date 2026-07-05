@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .hover-card {
     display: inline-block;
     transition: all 300ms ease;

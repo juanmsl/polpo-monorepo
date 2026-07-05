@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .custom-line {
     --color: attr(data-color, 'currentColor');
     --size: attr(data-size, 1px);

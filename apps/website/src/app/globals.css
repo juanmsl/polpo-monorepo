@@ -1,12 +1,43 @@
-@import "@polpo/tailwind-config/styles";
+@import "tailwindcss";
+@import "polpo-tailwind-config/styles" theme(static);
+
+@theme {
+    --color-active: hsl(147 100% 35%);
+    --color-alert: hsl(359 90% 62%);
+    --color-warning: hsl(38 100% 50%);
+    --color-info: hsl(210 100% 51%);
+    --color-primary: hsl(174 53% 28%);
+    --color-secondary: hsl(79 52% 70%);
+    --color-tertiary: hsl(181 64% 57%);
+    --color-highlight: hsl(205 100% 68%);
+    --color-accent: hsl(285 26% 70%);
+
+    --color-background: var(--color-white);
+    --color-background-paper: hsl(0 0 91%);
+    --color-background-disabled: var(--color-gray-400);
+    --color-foreground: hsl(32 54% 13%);
+    --color-foreground-disabled: var(--color-gray-900);
+    --color-border: hsl(300 18% 79%);
+
+    --font-main: 'Montserrat', 'Segoe UI', sans-serif;
+    --font-title: 'Josefin Sans', var(--font-main);
+    --font-brand: 'Roboto', var(--font-title);
+}
+
+@layer base {
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
 
 body {
     background-size: 40px 40px;
     background-position:
             0 0,
             20px 20px;
-    background-image: radial-gradient(var(--primary-500) 1px, var(--background-paper) 1px),
-    radial-gradient(var(--primary-500) 1px, var(--background-paper) 1px);
+    background-image: radial-gradient(var(--color-primary-500) 1px, var(--color-background-paper) 1px),
+    radial-gradient(var(--color-primary-500) 1px, var(--color-background-paper) 1px);
     background-attachment: fixed;
 }
 
@@ -22,25 +53,25 @@ body {
 .main-section {
     display: grid;
     grid-template-columns: 400px auto;
-    background: hsl(from var(--background) h s l / 50%);
+    background: hsl(from var(--color-background) h s l / 50%);
     backdrop-filter: blur(1px);
-    box-shadow: 0 5px 15px var(--neutral-200);
+    box-shadow: 0 5px 15px var(--color-gray-200);
     border-radius: 2em;
     overflow: hidden;
     grid-area: main;
 }
 
 .second-section {
-    background: hsl(from var(--background) h s l / 50%);
+    background: hsl(from var(--color-background) h s l / 50%);
     backdrop-filter: blur(1px);
-    box-shadow: 0 5px 15px var(--neutral-200);
+    box-shadow: 0 5px 15px var(--color-gray-200);
     border-radius: 2em;
     overflow: hidden;
     grid-area: second;
 
     .section-header {
         padding: 1em 2em;
-        background: hsl(from var(--primary-50) h s l / 80%);
+        background: hsl(from var(--color-primary-50) h s l / 80%);
     }
 
     .section-content {
@@ -48,10 +79,10 @@ body {
     }
 }
 .third-section {
-    color: var(--primary-500);
-    background: linear-gradient(135deg, hsl(from var(--primary-500) h s l / 50%), hsl(from var(--secondary-500) h s l / 50%));
+    color: var(--color-primary-500);
+    background: linear-gradient(135deg, hsl(from var(--color-primary-500) h s l / 50%), hsl(from var(--color-secondary-500) h s l / 50%));
     backdrop-filter: blur(1px);
-    box-shadow: 0 5px 15px var(--neutral-200);
+    box-shadow: 0 5px 15px var(--color-gray-200);
     border-radius: 2em;
     overflow: hidden;
     grid-area: third;
@@ -66,7 +97,7 @@ body {
     display: grid;
     align-content: center;
     gap: 1em;
-    background: hsl(from var(--primary-50) h s l / 80%);
+    background: hsl(from var(--color-primary-50) h s l / 80%);
     padding: 4em 2em 4em 4em;
 }
 
@@ -85,14 +116,14 @@ body {
     overflow: auto;
 
     .table-background {
-        background: hsl(from var(--white) h s l / 50%);
+        background: hsl(from var(--color-white) h s l / 50%);
         backdrop-filter: blur(1px);
     }
 }
 
 .credit-bar {
     --credit-size: 0;
-    background: var(--primary-100);
+    background: var(--color-primary-100);
     position: relative;
     height: 10px;
     border-radius: 1em;
@@ -104,7 +135,7 @@ body {
         top: 50%;
         right: 0;
         height: 10px;
-        background: var(--primary-500);
+        background: var(--color-primary-500);
         width: var(--credit-size);
         transform: translateY(-50%);
         border-radius: 0 1em 1em 0;

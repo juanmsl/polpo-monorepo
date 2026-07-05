@@ -28,19 +28,22 @@ export interface LoggerParams {
   request: RequestInit;
   urlParams: GetUrlParams;
   state: (typeof RequestState)[keyof typeof RequestState];
-  response: HttpClientResponse<unknown> | null;
+  response: unknown;
 }
 
 export type Logger = (params: LoggerParams) => Promise<void>;
 
-export type GetResponseErrorFunction = (response: Response, message: string) => Promise<HttpClientError<unknown>>;
+export type GetResponseErrorFunction<Error extends HttpClientError<unknown>> = (
+  response: Response,
+  message: string,
+) => Promise<Error>;
 
-export interface HttpClientConfig extends HttpClientCommonConfig {
+export interface HttpClientConfig<Error extends HttpClientError<unknown>> extends HttpClientCommonConfig {
   apiName: string;
   baseURL?: string;
   getHeaders?: () => Promise<HeadersInit>;
   logger?: Logger | undefined;
-  getResponseError?: GetResponseErrorFunction;
+  getResponseError?: GetResponseErrorFunction<Error>;
 }
 
 export interface HttpClientRequestConfig<Data extends object> extends HttpClientCommonConfig {
@@ -56,36 +59,43 @@ export interface HttpClientRequestConfig<Data extends object> extends HttpClient
   retries?: number;
 }
 
-export interface RequestParams extends Pick<HttpClientConfig, 'apiName' | 'logger'> {
+export interface RequestParams<Error extends HttpClientError<unknown>> extends Pick<
+  HttpClientConfig<Error>,
+  'apiName' | 'logger'
+> {
   buildURL: URL;
   request: RequestInit;
   urlParams: GetUrlParams;
-  getResponseError: GetResponseErrorFunction;
+  getResponseError: GetResponseErrorFunction<Error>;
 }
 
-export interface HttpClientSuccessResponse<Response> {
+export interface HttpClientSuccessData<Response> {
   data: Response;
-  errorData: null;
   status: number;
-  errorMessage: null;
+}
+
+export interface HttpClientErrorData<Error extends HttpClientError<unknown>> {
+  error: Error;
+  status: number;
+}
+
+export interface HttpClientSuccessResponse<Response> extends HttpClientSuccessData<Response> {
+  ok: true;
   error: null;
 }
 
-export interface HttpClientErrorResponse<ErrorResponse = unknown> {
+export interface HttpClientErrorResponse<Error extends HttpClientError<unknown>> extends HttpClientErrorData<Error> {
+  ok: false;
   data: null;
-  errorData: ErrorResponse;
-  status: number;
-  errorMessage: string;
-  error: Error;
 }
 
-export type HttpClientResponse<Response, ErrorResponse = unknown> =
+export type HttpClientResponse<Response, Error extends HttpClientError<unknown>> =
   | HttpClientSuccessResponse<Response>
-  | HttpClientErrorResponse<ErrorResponse>;
+  | HttpClientErrorResponse<Error>;
 
 export type OnRequestCallback = (requestInit: RequestInit) => Promise<RequestInit>;
 
-export type OnErrorCallback = <Response = void, NewResponse = Response, ErrorResponse = unknown>(
-  request: RequestInit,
-  response: HttpClientErrorResponse<ErrorResponse>,
-) => Promise<HttpClientResponse<Response | NewResponse, ErrorResponse>>;
+export type OnErrorCallback<Error extends HttpClientError<unknown> = HttpClientError<unknown>> = (
+  request: RequestParams<Error>,
+  response: HttpClientErrorData<Error>,
+) => Promise<void>;

@@ -1,3 +1,4 @@
+import postcss from 'esbuild-postcss';
 import { defineConfig } from 'tsup';
 
 export default defineConfig([
@@ -13,13 +14,12 @@ export default defineConfig([
     dts: true,
     bundle: true,
     minify: true,
-    sourcemap: true,
+    sourcemap: false,
     target: 'node24',
     format: ['cjs', 'esm'],
     banner: {
       js: '"use client";',
     },
-    injectStyle: true,
     clean: true,
     splitting: false,
     esbuildTarget: 'esnext',
@@ -28,9 +28,7 @@ export default defineConfig([
       react: 'React',
       'react-dom': 'ReactDOM',
     },
-    loader: {
-      '.css': 'local-css',
-    },
+    esbuildPlugins: [postcss()],
     esbuildOptions: options => {
       options.packages = 'external';
     },

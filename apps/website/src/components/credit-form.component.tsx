@@ -75,7 +75,7 @@ export const CreditForm = ({
         <Typography variant='label' weight='bold' color='primary' noPadding>
           Crédito
         </Typography>
-        <Typography variant='header1' color='primary' noPadding>
+        <Typography variant='header2' color='primary' noPadding>
           {MoneyFormat(creditValue)}
         </Typography>
         <section>

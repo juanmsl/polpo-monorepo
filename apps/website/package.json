@@ -11,7 +11,7 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@polpo/tailwind-config": "workspace:*",
+    "polpo-tailwind-config": "workspace:*",
     "polpo": "workspace:*",
     "react": "*",
     "react-dom": "*",

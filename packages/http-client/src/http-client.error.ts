@@ -1,5 +1,3 @@
-import type { HttpClientErrorResponse } from './http-client.types';
-
 export class HttpClientError<Body> extends Error {
   constructor(
     readonly body: Body,
@@ -38,22 +36,8 @@ export async function getResponseErrorMessage(response: Response, defaultMessage
   return defaultMessage;
 }
 
-export async function getDefaultResponseError<ErrorResponse>(response: Response, message: string) {
-  const body = (await response.json()) as ErrorResponse;
+export async function getDefaultResponseError(response: Response, message: string) {
+  const body = (await response.json()) as unknown;
 
-  return new HttpClientError<ErrorResponse>(body, response.status, message);
-}
-
-export function mapErrorToHttpClientErrorResponse<ErrorResponse = unknown>(
-  error: HttpClientError<ErrorResponse>,
-): HttpClientErrorResponse<ErrorResponse> {
-  const { status = 500, message = '', body } = error;
-
-  return {
-    data: null,
-    errorData: body,
-    errorMessage: message,
-    status: status,
-    error,
-  };
+  return new HttpClientError<unknown>(body, response.status, message);
 }

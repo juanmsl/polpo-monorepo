@@ -1,3 +1,3 @@
-import { postcssConfig } from '@polpo/tailwind-config/postcss';
+import { postcssConfig } from 'polpo-tailwind-config/postcss';
 
 export default postcssConfig;

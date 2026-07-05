@@ -1,6 +1,8 @@
+@reference "polpo-tailwind-config/styles";
+
 .radio {
     border-radius: 50%;
-    background: var(--background-paper);
+    background: var(--color-background-paper);
     transition: all 300ms ease;
     width: 1em;
     height: 1em;
@@ -42,7 +44,7 @@
 }
 
 .radio-container {
-    --color: var(--neutral-800);
+    --color: var(--color-gray-800);
 
     display: flex;
     align-items: center;
@@ -86,30 +88,30 @@
     }
 
     &.color-primary {
-        --color: var(--primary-500);
+        --color: var(--color-primary-500);
     }
 
     &.color-secondary {
-        --color: var(--secondary-500);
+        --color: var(--color-secondary-500);
     }
 
     &.color-tertiary {
-        --color: var(--tertiary-500);
+        --color: var(--color-tertiary-500);
     }
 
     &.color-active {
-        --color: var(--active-500);
+        --color: var(--color-active-500);
     }
 
     &.color-warning {
-        --color: var(--warning-500);
+        --color: var(--color-warning-500);
     }
 
     &.color-alert {
-        --color: var(--alert-500);
+        --color: var(--color-alert-500);
     }
 
     &.color-info {
-        --color: var(--info-500);
+        --color: var(--color-info-500);
     }
 }

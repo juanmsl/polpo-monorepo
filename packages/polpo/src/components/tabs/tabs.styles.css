@@ -1,3 +1,5 @@
+@reference "polpo-tailwind-config/styles";
+
 .tab {
     cursor: pointer;
     user-select: none;
@@ -5,8 +7,8 @@
 }
 
 .tab-list {
-    --color: var(--neutral-900);
-    --color-contrast: var(--neutral-50);
+    --color: var(--color-gray-900);
+    --color-contrast: var(--color-gray-50);
     --inner-radius: 0;
     --outer-radius: 0;
 
@@ -15,7 +17,7 @@
     gap: 1em;
     align-items: center;
     position: relative;
-    font-size: var(--typography-size-label);
+    @apply text-label;
     border-radius: var(--outer-radius);
 
     .tab, .tabs-selector {
@@ -23,15 +25,15 @@
     }
 
     &.size-small {
-        font-size: var(--typography-size-small);
+        @apply text-small;
     }
 
     &.size-medium {
-        font-size: var(--typography-size-label);
+        @apply text-label;
     }
 
     &.size-large {
-        font-size: var(--typography-size-body);
+        @apply text-body;
     }
 
     .tabs-selector {
@@ -56,7 +58,7 @@
         }
 
         &:not(.is-open):hover {
-            color: var(--neutral-900);
+            color: var(--color-gray-900);
         }
     }
 
@@ -92,8 +94,8 @@
     }
 
     &.variant-solid {
-        background: var(--background-paper);
-        color: var(--foreground);
+        background: var(--color-background-paper);
+        color: var(--color-foreground);
         padding: 0.5em;
     }
 
@@ -109,7 +111,7 @@
         border-radius: 0;
 
         &:not(.vertical-direction) {
-            border-bottom: 2px solid var(--border);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .tabs-selector {
@@ -126,37 +128,37 @@
     }
 
     &.color-primary {
-        --color: var(--primary-500);
-        --color-contrast: var(--primary-50);
+        --color: var(--color-primary-500);
+        --color-contrast: var(--color-primary-50);
     }
 
     &.color-secondary {
-        --color: var(--secondary-500);
-        --color-contrast: var(--secondary-50);
+        --color: var(--color-secondary-500);
+        --color-contrast: var(--color-secondary-50);
     }
 
     &.color-tertiary {
-        --color: var(--tertiary-500);
-        --color-contrast: var(--tertiary-50);
+        --color: var(--color-tertiary-500);
+        --color-contrast: var(--color-tertiary-50);
     }
 
     &.color-active {
-        --color: var(--active-500);
-        --color-contrast: var(--active-50);
+        --color: var(--color-active-500);
+        --color-contrast: var(--color-active-50);
     }
 
     &.color-warning {
-        --color: var(--warning-500);
-        --color-contrast: var(--warning-50);
+        --color: var(--color-warning-500);
+        --color-contrast: var(--color-warning-50);
     }
 
     &.color-alert {
-        --color: var(--alert-500);
-        --color-contrast: var(--alert-50);
+        --color: var(--color-alert-500);
+        --color-contrast: var(--color-alert-50);
     }
 
     &.color-info {
-        --color: var(--info-500);
-        --color-contrast: var(--info-50);
+        --color: var(--color-info-500);
+        --color-contrast: var(--color-info-50);
     }
 }
