@@ -1,8 +1,8 @@
 import React, { CSSProperties, useMemo, useRef } from 'react';
 
+import { cn } from '../../../helpers';
 import {
   ModalState,
-  useClassNames,
   useClickOutside,
   useModalInContainer,
   UseModalInContainerParams,
@@ -71,13 +71,6 @@ export const Modal = ({
     }
   });
 
-  const modalContentClassName = useClassNames({
-    'modal-content': true,
-    [className]: Boolean(className),
-    [`animation-${animation}`]: Boolean(animation) && animation !== 'none',
-    [closeAnimationClassName]: modalState === ModalState.CLOSING || modalState === ModalState.CLOSED,
-  });
-
   if (!isVisible) {
     return null;
   }
@@ -86,7 +79,7 @@ export const Modal = ({
     <Portal id={`modal-${id}-${uuid}`}>
       <Backdrop {...backdropProps} modalState={modalState} zIndex={zIndex} />
       <section
-        className='modal'
+        className='polpo-modal'
         ref={modalRefProp ?? modalRef}
         style={{
           maxWidth: `calc(100dvw - ${windowOffset * 2}px)`,
@@ -95,7 +88,15 @@ export const Modal = ({
           zIndex: +zIndex + 1,
         }}
       >
-        <section style={{ ...style, animationDuration: `${transitionDuration}ms` }} className={modalContentClassName}>
+        <section
+          style={{ ...style, animationDuration: `${transitionDuration}ms` }}
+          className={cn(
+            'polpo-modal-content',
+            className,
+            Boolean(animation) && animation !== 'none' && `animation-${animation}`,
+            modalState === ModalState.CLOSING || (modalState === ModalState.CLOSED && closeAnimationClassName),
+          )}
+        >
           {children}
         </section>
       </section>

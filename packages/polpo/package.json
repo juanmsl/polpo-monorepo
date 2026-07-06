@@ -11,7 +11,6 @@
     "exports": {
       ".": null,
       "./components.css": "./dist/components.css",
-      "./layouts.css": "./dist/layouts.css",
       "./components": {
         "types": {
           "import": "./dist/components.d.ts",
@@ -62,7 +61,6 @@
   "exports": {
     ".": null,
     "./components.css": "./dist/components.css",
-    "./layouts.css": "./dist/layouts.css",
     "./components": {
       "types": "./src/components/index.ts",
       "import": "./src/components/index.ts"

@@ -2,8 +2,7 @@ import { createContext, useCallback, useContext, useRef, useState } from 'react'
 import { IconType } from 'react-icons';
 import { ImCross } from 'react-icons/im';
 
-import { PositionContainer } from '../../../helpers';
-import { useClassNames } from '../../../hooks';
+import { cn, PositionContainer } from '../../../helpers';
 import { Button, ButtonProps } from '../../button';
 import { Typography } from '../../typography';
 import { Modal, ModalProps } from '../modal';
@@ -66,17 +65,10 @@ export const ActionModal = ({
     }, 500);
   }, []);
 
-  const actionModalClassName = useClassNames({
-    'action-modal-content': true,
-    'back-card': backCard,
-    'line-on-top': lineOnTop,
-    'no-padding': noPadding,
-  });
-
   return (
     <ActionModalContext.Provider value={{ onClose, isActionInProgress, setIsActionInProgress }}>
       <Modal
-        className='action-modal'
+        className='polpo-action-modal'
         id='action-modal'
         animation='bounce'
         opacity={0.8}
@@ -86,8 +78,15 @@ export const ActionModal = ({
         backdropOnClick={actionRequired ? remainAction : onClose}
         position={PositionContainer.CENTER}
       >
-        <section ref={ref} className='modal-content'>
-          <section className={actionModalClassName}>
+        <section ref={ref} className='polpo-modal-content'>
+          <section
+            className={cn(
+              'polpo-action-modal-content',
+              backCard && 'back-card',
+              lineOnTop && 'line-on-top',
+              noPadding && 'no-padding',
+            )}
+          >
             {!noCloseButton && !actionRequired && (
               <section className='close-modal-button' onClick={() => onClose()}>
                 <ImCross />
@@ -98,8 +97,8 @@ export const ActionModal = ({
                 <Icon />
               </Typography>
             ) : null}
-            <section className='action-modal-body'>
-              <section className={`action-modal-content ${className}`} style={style}>
+            <section className='polpo-action-modal-body'>
+              <section className={`polpo-action-modal-content ${className}`} style={style}>
                 {children}
               </section>
             </section>

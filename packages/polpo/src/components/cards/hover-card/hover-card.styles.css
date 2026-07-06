@@ -1,13 +1,15 @@
 @reference "polpo-tailwind-config/styles";
 
-.hover-card {
-    display: inline-block;
-    transition: all 300ms ease;
+@layer components {
+    .polpo-hover-card {
+        display: inline-block;
+        transition: all 300ms ease;
 
-    .card-hover-layer {
-        transition: all 100ms ease;
-        width: 100%;
-        height: 100%;
-        display: grid;
+        .polpo-hover-card-layer {
+            transition: all 100ms ease;
+            width: 100%;
+            height: 100%;
+            display: grid;
+        }
     }
 }

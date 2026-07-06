@@ -1,6 +1,7 @@
 import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react';
 
-import { useClassNames, useEventListener } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { useEventListener } from '../../../hooks';
 
 import './hover-card.styles.css';
 
@@ -61,14 +62,9 @@ export const HoverCard = ({
   useEventListener('mousemove', mouseMoveCallback as unknown as EventListener, refCard);
   useEventListener('mouseleave', mouseLeaveCallback as unknown as EventListener, refCard);
 
-  const cardClassName = useClassNames({
-    'hover-card': true,
-    [className]: Boolean(className),
-  });
-
   return (
-    <span ref={refCard} style={{ width }} className={cardClassName}>
-      <span className='card-hover-layer' ref={refLayer}>
+    <span ref={refCard} style={{ width }} className={cn('polpo-hover-card', className)}>
+      <span className='polpo-hover-card-layer' ref={refLayer}>
         {children}
       </span>
     </span>

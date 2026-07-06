@@ -1,165 +1,167 @@
 @reference "polpo-tailwind-config/styles";
 
-.switch-container {
-    --width: attr(data-width);
-    --dot-size: attr(data-dot-size);
-    --dot-hover-size: attr(data-dot-hover-size);
-    --padding: attr(data-padding);
-    --color: var(--color-gray-500);
-    --color-dark: var(--color-gray-800);
-    --color-contrast: var(--color-gray-50);
+@layer components {
+    .polpo-switch-container {
+        --width: attr(data-width);
+        --dot-size: attr(data-dot-size);
+        --dot-hover-size: attr(data-dot-hover-size);
+        --padding: attr(data-padding);
+        --color: var(--color-gray-500);
+        --color-dark: var(--color-gray-800);
+        --color-contrast: var(--color-gray-50);
 
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        width: fit-content;
 
-    .switch {
-        width: calc(var(--width) + var(--padding) * 2);
-        border-radius: 100em;
-        background: var(--color-background-paper);
-        padding: var(--padding);
-        transition: all 300ms ease;
-        position: relative;
-
-        .switch-dot {
-            width: var(--dot-size);
-            height: var(--dot-size);
+        .polpo-switch {
+            width: calc(var(--width) + var(--padding) * 2);
             border-radius: 100em;
-            background: var(--color);
-            display: block;
+            background: var(--color-background-paper);
+            padding: var(--padding);
             transition: all 300ms ease;
-            margin-left: 0;
             position: relative;
-            z-index: 1;
-        }
 
-        .switch-icon {
-            cursor: pointer;
-            display: block;
-        }
-
-        .switch-internal-left-icon,
-        .switch-internal-right-icon {
-            width: var(--dot-size);
-            height: var(--dot-size);
-            position: absolute;
-            top: var(--padding);
-            display: grid;
-            place-content: center;
-            color: var(--color-contrast);
-            transition: all 300ms ease;
-        }
-
-        .switch-internal-left-icon {
-            left: var(--padding);
-        }
-
-        .switch-internal-right-icon {
-            right: var(--padding);
-        }
-
-        &.is-checked {
-            background: var(--color);
-
-            .switch-dot {
-                margin-left: calc(var(--width) - var(--dot-size));
-                background: color-mix(in hsl, var(--color), var(--color-contrast) 75%);
+            .polpo-switch-dot {
+                width: var(--dot-size);
+                height: var(--dot-size);
+                border-radius: 100em;
+                background: var(--color);
+                display: block;
+                transition: all 300ms ease;
+                margin-left: 0;
+                position: relative;
+                z-index: 1;
             }
-        }
 
-        &:not(.is-readonly):has(input:disabled) {
-            background: var(--color-background-disabled);
-
-            .switch-dot {
-                background: var(--color-foreground-disabled);
+            .polpo-switch-icon {
+                cursor: pointer;
+                display: block;
             }
 
             .switch-internal-left-icon,
             .switch-internal-right-icon {
-                color: var(--color-foreground-disabled);
+                width: var(--dot-size);
+                height: var(--dot-size);
+                position: absolute;
+                top: var(--padding);
+                display: grid;
+                place-content: center;
+                color: var(--color-contrast);
+                transition: all 300ms ease;
+            }
+
+            .switch-internal-left-icon {
+                left: var(--padding);
+            }
+
+            .switch-internal-right-icon {
+                right: var(--padding);
             }
 
             &.is-checked {
-                background: var(--color-dark);
+                background: var(--color);
+
+                .polpo-switch-dot {
+                    margin-left: calc(var(--width) - var(--dot-size));
+                    background: color-mix(in hsl, var(--color), var(--color-contrast) 75%);
+                }
+            }
+
+            &:not(.is-readonly):has(input:disabled) {
+                background: var(--color-background-disabled);
+
+                .polpo-switch-dot {
+                    background: var(--color-foreground-disabled);
+                }
+
+                .switch-internal-left-icon,
+                .switch-internal-right-icon {
+                    color: var(--color-foreground-disabled);
+                }
+
+                &.is-checked {
+                    background: var(--color-dark);
+                }
+            }
+
+            .polpo-switch-checkbox {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                opacity: 0;
+                z-index: 3;
             }
         }
 
-        .switch-checkbox {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .polpo-switch-label {
             cursor: pointer;
-            opacity: 0;
-            z-index: 3;
+            user-select: none;
+            padding: 0 0.5em;
         }
-    }
 
-    .switch-label {
-        cursor: pointer;
-        user-select: none;
-        padding: 0 0.5em;
-    }
+        .polpo-switch:not(:has(.is-readonly, input:disabled)):hover .polpo-switch-dot,
+        &:has(.polpo-switch-icon:hover) .polpo-switch:not(:has(.is-readonly, input:disabled)) .polpo-switch-dot,
+        &:has(.polpo-switch-label:hover) .polpo-switch:not(:has(.is-readonly, input:disabled)) .polpo-switch-dot {
+            box-shadow: 0 0 0 calc(0.3 * var(--dot-size)) color-mix(in hsl, var(--color) 50%, var(--color-contrast));
+        }
 
-    .switch:not(:has(.is-readonly, input:disabled)):hover .switch-dot,
-    &:has(.switch-icon:hover) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot,
-    &:has(.switch-label:hover) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot {
-        box-shadow: 0 0 0 calc(0.3 * var(--dot-size)) color-mix(in hsl, var(--color) 50%, var(--color-contrast));
-    }
+        .polpo-switch:not(:has(.is-readonly, input:disabled)):active .polpo-switch-dot,
+        &:has(.polpo-switch-icon:active) .polpo-switch:not(:has(.is-readonly, input:disabled)) .polpo-switch-dot,
+        &:has(.polpo-switch-label:active) .polpo-switch:not(:has(.is-readonly, input:disabled)) .polpo-switch-dot {
+            width: var(--dot-hover-size);
+        }
 
-    .switch:not(:has(.is-readonly, input:disabled)):active .switch-dot,
-    &:has(.switch-icon:active) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot,
-    &:has(.switch-label:active) .switch:not(:has(.is-readonly, input:disabled)) .switch-dot {
-        width: var(--dot-hover-size);
-    }
+        .polpo-switch:not(:has(.is-readonly, input:disabled)).is-checked:active .polpo-switch-dot,
+        &:has(.polpo-switch-icon:active) .polpo-switch:not(:has(.is-readonly, input:disabled)).is-checked .polpo-switch-dot,
+        &:has(.polpo-switch-label:active) .polpo-switch:not(:has(.is-readonly, input:disabled)).is-checked .polpo-switch-dot {
+            margin-left: calc(var(--width) - var(--dot-hover-size));
+        }
 
-    .switch:not(:has(.is-readonly, input:disabled)).is-checked:active .switch-dot,
-    &:has(.switch-icon:active) .switch:not(:has(.is-readonly, input:disabled)).is-checked .switch-dot,
-    &:has(.switch-label:active) .switch:not(:has(.is-readonly, input:disabled)).is-checked .switch-dot {
-        margin-left: calc(var(--width) - var(--dot-hover-size));
-    }
+        &.color-primary {
+            --color: var(--color-primary-500);
+            --color-dark: var(--color-primary-700);
+            --color-contrast: var(--color-primary-50);
+        }
 
-    &.color-primary {
-        --color: var(--color-primary-500);
-        --color-dark: var(--color-primary-700);
-        --color-contrast: var(--color-primary-50);
-    }
+        &.color-secondary {
+            --color: var(--color-secondary-500);
+            --color-dark: var(--color-secondary-700);
+            --color-contrast: var(--color-secondary-50);
+        }
 
-    &.color-secondary {
-        --color: var(--color-secondary-500);
-        --color-dark: var(--color-secondary-700);
-        --color-contrast: var(--color-secondary-50);
-    }
+        &.color-tertiary {
+            --color: var(--color-tertiary-500);
+            --color-dark: var(--color-tertiary-700);
+            --color-contrast: var(--color-tertiary-50);
+        }
 
-    &.color-tertiary {
-        --color: var(--color-tertiary-500);
-        --color-dark: var(--color-tertiary-700);
-        --color-contrast: var(--color-tertiary-50);
-    }
+        &.color-active {
+            --color: var(--color-active-500);
+            --color-dark: var(--color-active-700);
+            --color-contrast: var(--color-active-50);
+        }
 
-    &.color-active {
-        --color: var(--color-active-500);
-        --color-dark: var(--color-active-700);
-        --color-contrast: var(--color-active-50);
-    }
+        &.color-warning {
+            --color: var(--color-warning-500);
+            --color-dark: var(--color-warning-700);
+            --color-contrast: var(--color-warning-50);
+        }
 
-    &.color-warning {
-        --color: var(--color-warning-500);
-        --color-dark: var(--color-warning-700);
-        --color-contrast: var(--color-warning-50);
-    }
+        &.color-alert {
+            --color: var(--color-alert-500);
+            --color-dark: var(--color-alert-700);
+            --color-contrast: var(--color-alert-50);
+        }
 
-    &.color-alert {
-        --color: var(--color-alert-500);
-        --color-dark: var(--color-alert-700);
-        --color-contrast: var(--color-alert-50);
-    }
-
-    &.color-info {
-        --color: var(--color-info-500);
-        --color-dark: var(--color-info-700);
-        --color-contrast: var(--color-info-50);
+        &.color-info {
+            --color: var(--color-info-500);
+            --color-dark: var(--color-info-700);
+            --color-contrast: var(--color-info-50);
+        }
     }
 }

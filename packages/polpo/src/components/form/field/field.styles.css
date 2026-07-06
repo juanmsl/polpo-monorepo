@@ -1,98 +1,100 @@
 @reference "polpo-tailwind-config/styles";
 
-.form-field {
-    display: grid;
-    grid-auto-columns: auto;
-    gap: 0.5em;
-    transition: all 200ms ease;
-
-    .field-content {
+@layer components {
+    .form-field {
         display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-    }
+        grid-auto-columns: auto;
+        gap: 0.5em;
+        transition: all 200ms ease;
 
-    .field-left-icon,
-    .field-right-icon {
-        font-size: 1em;
-    }
-
-    .field-left-icon {
-        margin-right: 1em;
-    }
-
-    .field-right-icon {
-        margin-left: 1em;
-    }
-
-    .field-message {
-        display: grid;
-        grid-auto-flow: column;
-        gap: 5px;
-        align-items: center;
-        justify-content: start;
-    }
-
-    &.variant-content-border {
         .field-content {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+        }
+
+        .field-left-icon,
+        .field-right-icon {
+            font-size: 1em;
+        }
+
+        .field-left-icon {
+            margin-right: 1em;
+        }
+
+        .field-right-icon {
+            margin-left: 1em;
+        }
+
+        .field-message {
+            display: grid;
+            grid-auto-flow: column;
+            gap: 5px;
+            align-items: center;
+            justify-content: start;
+        }
+
+        &.variant-content-border {
+            .field-content {
+                border: 1px solid var(--color-border);
+                border-radius: 4px;
+                padding: 1em;
+                background: var(--color-background);
+            }
+        }
+
+        &.variant-content-line {
+            .field-content {
+                border-bottom: 1px solid;
+                padding: 0.5em 0;
+            }
+        }
+
+        &.variant-full-border {
             border: 1px solid var(--color-border);
             border-radius: 4px;
-            padding: 1em;
-            background: var(--color-background);
-        }
-    }
-
-    &.variant-content-line {
-        .field-content {
-            border-bottom: 1px solid;
             padding: 0.5em 0;
+            background: var(--color-background);
+
+            .field-label,
+            .field-content,
+            .field-message {
+                padding: 0 1em;
+            }
         }
-    }
 
-    &.variant-full-border {
-        border: 1px solid var(--color-border);
-        border-radius: 4px;
-        padding: 0.5em 0;
-        background: var(--color-background);
+        &.variant-inline {
+            grid-auto-flow: column;
+            padding: 0.5em 0;
+            align-items: center;
 
-        .field-label,
-        .field-content,
-        .field-message {
-            padding: 0 1em;
+            .field-label {
+                width: auto;
+            }
         }
-    }
 
-    &.variant-inline {
-        grid-auto-flow: column;
-        padding: 0.5em 0;
-        align-items: center;
-
-        .field-label {
-            width: auto;
+        &.error {
+            color: var(--color-alert-500);
+            border-color: var(--color-alert-500);
         }
-    }
 
-    &.error {
-        color: var(--color-alert-500);
-        border-color: var(--color-alert-500);
-    }
-
-    &.focus {
-        color: var(--color-info-500);
-        border-color: var(--color-info-500);
-    }
-
-    &.error,
-    &.focus {
-        .field-left-icon,
-        .field-right-icon,
-        .field-children {
-            color: var(--color-foreground);
-            border-color: var(--color-foreground);
+        &.focus {
+            color: var(--color-info-500);
+            border-color: var(--color-info-500);
         }
-    }
 
-    .field-children > * {
-        width: 100%;
+        &.error,
+        &.focus {
+            .field-left-icon,
+            .field-right-icon,
+            .field-children {
+                color: var(--color-foreground);
+                border-color: var(--color-foreground);
+            }
+        }
+
+        .field-children > * {
+            width: 100%;
+        }
     }
 }

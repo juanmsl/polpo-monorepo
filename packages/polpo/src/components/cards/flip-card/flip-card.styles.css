@@ -1,50 +1,52 @@
 @reference "polpo-tailwind-config/styles";
 
-.flip-card {
-    --cardZIndex: attr(data-zIndex);
-    --flipSpeed: attr(data-flipSpeed, 500ms);
-    --frontRotate: attr(data-frontRotate);
-    --backRotate: attr(data-backRotate);
+@layer components {
+    .polpo-flip-card {
+        --cardZIndex: attr(data-zIndex);
+        --flipSpeed: attr(data-flipSpeed, 500ms);
+        --frontRotate: attr(data-frontRotate);
+        --backRotate: attr(data-backRotate);
 
-    perspective: 1000px;
-    z-index: var(--cardZIndex);
+        perspective: 1000px;
+        z-index: var(--cardZIndex);
 
-    .flipper {
-        height: 100%;
-        position: relative;
-        width: 100%;
-        transform-style: preserve-3d;
-    }
-
-    .front,
-    .back {
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        transform-style: preserve-3d;
-        transition: var(--flipSpeed);
-        height: 100%;
-        left: 0;
-        top: 0;
-        width: 100%;
-    }
-
-    .front {
-        position: relative;
-        transform: var(--frontRotate);
-        z-index: 2;
-    }
-
-    .back {
-        position: absolute;
-        transform: var(--backRotate);
-    }
-
-    .is-flipped {
-        .front {
-            position: absolute;
-        }
-        .back {
+        .polpo-flipper {
+            height: 100%;
             position: relative;
+            width: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .front,
+        .back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            transition: var(--flipSpeed);
+            height: 100%;
+            left: 0;
+            top: 0;
+            width: 100%;
+        }
+
+        .front {
+            position: relative;
+            transform: var(--frontRotate);
+            z-index: 2;
+        }
+
+        .back {
+            position: absolute;
+            transform: var(--backRotate);
+        }
+
+        .is-flipped {
+            .front {
+                position: absolute;
+            }
+            .back {
+                position: relative;
+            }
         }
     }
 }

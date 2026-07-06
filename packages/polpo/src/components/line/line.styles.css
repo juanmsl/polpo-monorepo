@@ -1,61 +1,63 @@
 @reference "polpo-tailwind-config/styles";
 
-.custom-line {
-    --color: attr(data-color, 'currentColor');
-    --size: attr(data-size, 1px);
-    --spacing: attr(data-spacing, 1px);
-    --dashSize: attr(data-dash-size, 1px);
+@layer components {
+    .polpo-custom-line {
+        --color: attr(data-color, 'currentColor');
+        --size: attr(data-size, 1px);
+        --spacing: attr(data-spacing, 1px);
+        --dashSize: attr(data-dash-size, 1px);
 
-    &.horizontal,
-    &.vertical {
-        background: var(--color);
-        display: inline-block;
-        border-radius: 100px;
-    }
-
-    &.horizontal {
-        width: 100%;
-        height: var(--size);
-
-        &.dotted {
-            background: radial-gradient(
-                    calc(var(--size) / 2) calc(var(--size) / 2),
-                    var(--color) 100%,
-                    transparent
-            ) 0 0 / calc(var(--spacing) + var(--size)) 100%;
+        &.horizontal,
+        &.vertical {
+            background: var(--color);
+            display: inline-block;
+            border-radius: 100px;
         }
 
-        &.dashed {
-            background: repeating-linear-gradient(
-                    90deg,
-                    var(--color),
-                    var(--color) var(--dashSize),
-                    transparent var(--dashSize),
-                    transparent calc(var(--spacing) + var(--dashSize))
-            );
+        &.horizontal {
+            width: 100%;
+            height: var(--size);
+
+            &.dotted {
+                background: radial-gradient(
+                        calc(var(--size) / 2) calc(var(--size) / 2),
+                        var(--color) 100%,
+                        transparent
+                ) 0 0 / calc(var(--spacing) + var(--size)) 100%;
+            }
+
+            &.dashed {
+                background: repeating-linear-gradient(
+                        90deg,
+                        var(--color),
+                        var(--color) var(--dashSize),
+                        transparent var(--dashSize),
+                        transparent calc(var(--spacing) + var(--dashSize))
+                );
+            }
         }
-    }
 
-    &.vertical {
-        height: 100%;
-        width: var(--size);
+        &.vertical {
+            height: 100%;
+            width: var(--size);
 
-        &.dotted {
-            background: radial-gradient(
-                    calc(var(--size) / 2) calc(var(--size) / 2),
-                    var(--color) 100%,
-                    transparent
-            ) 0 0 / 100% calc(var(--spacing) + var(--size));
-        }
+            &.dotted {
+                background: radial-gradient(
+                        calc(var(--size) / 2) calc(var(--size) / 2),
+                        var(--color) 100%,
+                        transparent
+                ) 0 0 / 100% calc(var(--spacing) + var(--size));
+            }
 
-        &.dashed {
-            background: repeating-linear-gradient(
-                    0deg,
-                    var(--color),
-                    var(--color) var(--dashSize),
-                    transparent var(--dashSize),
-                    transparent calc(var(--spacing) + var(--dashSize))
-            );
+            &.dashed {
+                background: repeating-linear-gradient(
+                        0deg,
+                        var(--color),
+                        var(--color) var(--dashSize),
+                        transparent var(--dashSize),
+                        transparent calc(var(--spacing) + var(--dashSize))
+                );
+            }
         }
     }
 }

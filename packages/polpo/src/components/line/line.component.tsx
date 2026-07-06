@@ -1,4 +1,4 @@
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 
 import './line.styles.css';
 
@@ -53,16 +53,9 @@ export const Line = ({
   dashedSize = 1,
   spacing = 1,
 }: LineProps) => {
-  const classNames = useClassNames({
-    'custom-line': true,
-    [orientation]: true,
-    [className]: !!className,
-    [lineStyle]: true,
-  });
-
   return (
     <span
-      className={classNames}
+      className={cn('polpo-custom-line', orientation, className, lineStyle)}
       style={
         {
           ...style,

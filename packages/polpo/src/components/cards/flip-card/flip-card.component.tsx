@@ -1,6 +1,6 @@
 import { CSSProperties, useMemo } from 'react';
 
-import { useClassNames } from '../../../hooks';
+import { cn } from '../../../helpers';
 
 import './flip-card.styles.css';
 
@@ -39,14 +39,9 @@ export const FlipCard = ({
     return `rotate${flipDirection === 'horizontal' ? 'Y' : 'X'}(${deg}deg)`;
   }, [flipDirection, isFlipped]);
 
-  const className = useClassNames({
-    'flip-card': true,
-    'is-flipped': isFlipped,
-  });
-
   return (
     <section
-      className={className}
+      className={cn('polpo-flip-card', isFlipped && 'is-flipped')}
       style={
         {
           '--cardZIndex': cardZIndex,
@@ -56,7 +51,7 @@ export const FlipCard = ({
         } as React.CSSProperties
       }
     >
-      <section className='flipper'>
+      <section className='polpo-flipper'>
         <section className='front'>{getComponent(0)}</section>
 
         <section className='back'>{getComponent(1)}</section>

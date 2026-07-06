@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { useClassNames, useInputHandlers } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { useInputHandlers } from '../../../hooks';
 import { Controller } from '../controller';
 import { Field, InputFieldProps } from '../field';
 import { ControllerGeneratorProps, UnControlledComponentProps } from '../form.types';
@@ -45,17 +46,12 @@ export const Textarea = ({
     onFocus: onFocus,
   });
 
-  const textareaClassName = useClassNames({
-    textarea: true,
-    [className]: Boolean(className),
-  });
-
   return (
     <Field id={id} error={error} isFocus={isFocus} {...fieldProps}>
       <textarea
         id={id}
         name={name}
-        className={textareaClassName}
+        className={cn('polpo-textarea', className)}
         style={{
           resize: resize,
           ...style,

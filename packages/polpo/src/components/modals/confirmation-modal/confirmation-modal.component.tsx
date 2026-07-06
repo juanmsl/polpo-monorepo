@@ -24,10 +24,10 @@ export const ConfirmationModal = ({
 }: ConfirmationModalProps) => {
   return (
     <ActionModal {...actionModalProps} backCard>
-      <section className='confirmation-modal'>
+      <section className='polpo-confirmation-modal'>
         <Typography variant='header4'>{title}</Typography>
         <section>{children}</section>
-        <section className='confirmation-modal-actions'>
+        <section className='polpo-confirmation-modal-actions'>
           {!isLoading && (
             <ActionModal.ActionButton variant='flat' onClick={onReject}>
               {rejectText}

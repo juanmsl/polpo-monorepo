@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { useClassNames, useInputHandlers } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { useInputHandlers } from '../../../hooks';
 import { ColorTypes, SizeTypes } from '../../component.types';
 import { Typography } from '../../typography';
 import { Controller } from '../controller';
@@ -46,27 +47,15 @@ export const Radio = ({
     onFocus: onFocus,
   });
 
-  const radioContainerClassName = useClassNames({
-    'radio-container': true,
-    [className]: Boolean(className),
-    [`color-${color}`]: Boolean(color),
-  });
-
-  const radioClassName = useClassNames({
-    radio: true,
-    'is-checked': radioValue === value,
-    [`size-${size}`]: Boolean(size),
-  });
-
   return (
-    <section className={radioContainerClassName} style={style}>
-      <section className={radioClassName}>
-        <section className='radio-fill' />
+    <section className={cn('polpo-radio-container', className, color && [`color-${color}`])} style={style}>
+      <section className={cn('polpo-radio', radioValue === value && 'is-checked', size && [`size-${size}`])}>
+        <section className='polpo-radio-fill' />
         <input
           id={id}
           type='radio'
           name={name}
-          className={`radio-input ${className}`}
+          className={`polpo-radio-input ${className}`}
           style={style}
           value={radioValue}
           checked={radioValue === value}
@@ -77,7 +66,7 @@ export const Radio = ({
         />
       </section>
       {label ? (
-        <Typography variant='label-form' htmlFor={id} className='radio-label'>
+        <Typography variant='label-form' htmlFor={id} className='polpo-radio-label'>
           {label}
         </Typography>
       ) : null}

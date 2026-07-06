@@ -31,15 +31,15 @@ export const Cursor = () => {
   const translate3d = `translate3d(${elementX}px, ${elementY}px, 0)`;
 
   return (
-    <section className='cursor-overlay' ref={ref}>
+    <section className='polpo-cursor-overlay' ref={ref}>
       <span
-        className={`cursor outer-circle ${isCursorHover ? 'cursor-hover' : ''}`}
+        className={`polpo-cursor outer-circle ${isCursorHover ? 'cursor-hover' : ''}`}
         style={{
           transform: translate3d,
         }}
       />
       <span
-        className={`cursor inner-circle ${isCursorHover ? 'cursor-hover' : ''}`}
+        className={`polpo-cursor inner-circle ${isCursorHover ? 'cursor-hover' : ''}`}
         style={{
           transform: translate3d,
         }}

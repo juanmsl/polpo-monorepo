@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 import { Line } from '../line';
 
 import './accordion.styles.css';
@@ -58,11 +58,6 @@ export const Accordion = ({
 
   const openedItemsIDs = useMemo(() => Object.keys(openedItems).filter(id => openedItems[id]), [openedItems]);
 
-  const accordionClassName = useClassNames({
-    accordion: true,
-    [className]: Boolean(className),
-  });
-
   return (
     <AccordionContext.Provider
       value={{
@@ -70,7 +65,7 @@ export const Accordion = ({
         openedItems: openedItemsIDs,
       }}
     >
-      <section className={accordionClassName} style={style}>
+      <section className={cn('polpo-accordion', className)} style={style}>
         {(Array.isArray(children) ? children : [children]).flatMap((child, key) => {
           return key === 0 ? child : [noSeparators ? null : <Line orientation='horizontal' key={`${key}.5`} />, child];
         })}

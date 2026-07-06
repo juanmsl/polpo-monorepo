@@ -1,6 +1,6 @@
 import React, { createElement, useMemo } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 
 import {
   TypographyColors,
@@ -43,23 +43,6 @@ export const Typography = ({
   recommendedWidth = false,
   ...props
 }: TypographyProps) => {
-  const className = useClassNames({
-    typography: true,
-    [TypographyVariantsClassNames[variant]]: TypographyVariantsClassNames[variant] !== undefined,
-    [customClassname]: !!customClassname,
-    [weight ?? '']: !!weight,
-    [color ?? '']: Boolean(color),
-    'no-padding': noPadding,
-    'code-family': family === 'code',
-    'recommended-width': recommendedWidth,
-    'nowrap-max-lines': typeof nowrap === 'number',
-    'nowrap-max-lines-2': nowrap === 2,
-    'nowrap-max-lines-3': nowrap === 3,
-    'nowrap-max-lines-4': nowrap === 4,
-    'nowrap-max-lines-5': nowrap === 5,
-    nowrap: nowrap === true,
-  });
-
   const component = useMemo<React.HTMLElementType>(
     () => TypographyVariantsElements[variant] ?? TypographyVariantsElements[TypographyVariant.BODY],
     [variant],
@@ -69,7 +52,22 @@ export const Typography = ({
     as ?? component,
     {
       ...props,
-      className,
+      className: cn(
+        'polpo-typography',
+        TypographyVariantsClassNames[variant],
+        customClassname,
+        weight,
+        color,
+        noPadding && 'no-padding',
+        family === 'code' && 'code-family',
+        recommendedWidth && 'recommended-width',
+        typeof nowrap === 'number' && 'nowrap-max-lines',
+        nowrap === 2 && 'nowrap-max-lines-2',
+        nowrap === 3 && 'nowrap-max-lines-3',
+        nowrap === 4 && 'nowrap-max-lines-4',
+        nowrap === 5 && 'nowrap-max-lines-5',
+        nowrap && 'nowrap',
+      ),
       htmlFor,
       style: {
         textAlign: align,

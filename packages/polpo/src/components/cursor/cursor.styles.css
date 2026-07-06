@@ -1,73 +1,75 @@
 @reference "polpo-tailwind-config/styles";
 
-.cursor-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: none;
-    pointer-events: none;
-}
-
-.cursor {
-    position: fixed;
-    border-radius: 50%;
-    z-index: 99999999;
-    pointer-events: none;
-    transform: translateZ(0);
-
-    @media (any-pointer: coarse) {
-        display: none;
+@layer components {
+    .polpo-cursor-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: none;
+        pointer-events: none;
     }
 
-    &.outer-circle {
-        margin-left: -15px;
-        margin-top: -15px;
-        width: 30px;
-        height: 30px;
-        border: 2px solid var(--color-primary-500);
-        box-sizing: border-box;
+    .polpo-cursor {
+        position: fixed;
+        border-radius: 50%;
         z-index: 99999999;
-        opacity: 0.5;
-        transition:
-                all 0.08s ease-out,
-                width 0.3s ease-in-out,
-                height 0.3s ease-in-out,
-                margin 0.3s ease-in-out,
-                opacity 0.3s ease-in-out;
+        pointer-events: none;
+        transform: translateZ(0);
 
-        &.cursor-hover {
-            margin-left: -40px;
-            margin-top: -40px;
-            width: 80px;
-            height: 80px;
-            background-color: var(--color-primary-500);
-            opacity: 0.3;
+        @media (any-pointer: coarse) {
+            display: none;
         }
 
-        &.cursor-text {
-            margin-left: -2px;
-            margin-top: -40px;
-            width: 4px;
-            height: 80px;
-            background-color: var(--color-primary-500);
-            opacity: 0.3;
+        &.outer-circle {
+            margin-left: -15px;
+            margin-top: -15px;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--color-primary-500);
+            box-sizing: border-box;
+            z-index: 99999999;
+            opacity: 0.5;
+            transition:
+                    all 0.08s ease-out,
+                    width 0.3s ease-in-out,
+                    height 0.3s ease-in-out,
+                    margin 0.3s ease-in-out,
+                    opacity 0.3s ease-in-out;
+
+            &.cursor-hover {
+                margin-left: -40px;
+                margin-top: -40px;
+                width: 80px;
+                height: 80px;
+                background-color: var(--color-primary-500);
+                opacity: 0.3;
+            }
+
+            &.cursor-text {
+                margin-left: -2px;
+                margin-top: -40px;
+                width: 4px;
+                height: 80px;
+                background-color: var(--color-primary-500);
+                opacity: 0.3;
+            }
         }
-    }
 
-    &.inner-circle {
-        margin-left: -3px;
-        margin-top: -3px;
-        width: 6px;
-        height: 6px;
-        z-index: 99999999;
-        background-color: var(--color-primary-500);
-        transition: opacity 0.3s ease-in-out;
-        opacity: 1;
+        &.inner-circle {
+            margin-left: -3px;
+            margin-top: -3px;
+            width: 6px;
+            height: 6px;
+            z-index: 99999999;
+            background-color: var(--color-primary-500);
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
 
-        &.cursor-hover {
-            opacity: 0;
+            &.cursor-hover {
+                opacity: 0;
+            }
         }
     }
 }

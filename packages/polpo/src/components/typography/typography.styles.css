@@ -1,122 +1,124 @@
 @reference "polpo-tailwind-config/styles";
 
-.typography {
-    margin: 0;
-    padding: 0.5em 0 0.4em;
+@layer components {
+    .polpo-typography {
+        margin: 0;
+        padding: 0.5em 0 0.4em;
 
-    &.primary {
-        color: var(--color-primary-500);
-    }
+        &.primary {
+            color: var(--color-primary-500);
+        }
 
-    &.secondary {
-        color: var(--color-secondary-500);
-    }
+        &.secondary {
+            color: var(--color-secondary-500);
+        }
 
-    &.tertiary {
-        color: var(--color-tertiary-500);
-    }
+        &.tertiary {
+            color: var(--color-tertiary-500);
+        }
 
-    &.active {
-        color: var(--color-active-500);
-    }
+        &.active {
+            color: var(--color-active-500);
+        }
 
-    &.alert {
-        color: var(--color-alert-500);
-    }
+        &.alert {
+            color: var(--color-alert-500);
+        }
 
-    &.warning {
-        color: var(--color-warning-500);
-    }
+        &.warning {
+            color: var(--color-warning-500);
+        }
 
-    &.info {
-        color: var(--color-info-500);
-    }
+        &.info {
+            color: var(--color-info-500);
+        }
 
-    &.recommended-width {
-        max-width: 70ch;
-    }
+        &.recommended-width {
+            max-width: 70ch;
+        }
 
-    &.code-family {
-        font-family: monospace;
-    }
+        &.code-family {
+            font-family: monospace;
+        }
 
-    &.no-padding {
-        padding: 0;
-    }
+        &.no-padding {
+            padding: 0;
+        }
 
-    &.nowrap {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+        &.nowrap {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-    &.nowrap-max-lines {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-    }
+        &.nowrap-max-lines {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
 
-    &.nowrap-max-lines-2 {
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-    }
+        &.nowrap-max-lines-2 {
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+        }
 
-    &.nowrap-max-lines-3 {
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-    }
+        &.nowrap-max-lines-3 {
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+        }
 
-    &.nowrap-max-lines-4 {
-        -webkit-line-clamp: 4;
-        line-clamp: 4;
-    }
+        &.nowrap-max-lines-4 {
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+        }
 
-    &.nowrap-max-lines-5 {
-        -webkit-line-clamp: 5;
-        line-clamp: 5;
-    }
+        &.nowrap-max-lines-5 {
+            -webkit-line-clamp: 5;
+            line-clamp: 5;
+        }
 
-    &.hero {
-        @apply text-hero;
-    }
+        &.hero {
+            @apply text-hero;
+        }
 
-    &.header1 {
-        @apply text-header1;
-    }
+        &.header1 {
+            @apply text-header1;
+        }
 
-    &.header2 {
-        @apply text-header2;
-    }
+        &.header2 {
+            @apply text-header2;
+        }
 
-    &.header3 {
-        @apply text-header3;
-    }
+        &.header3 {
+            @apply text-header3;
+        }
 
-    &.header4 {
-        @apply text-header4;
-    }
+        &.header4 {
+            @apply text-header4;
+        }
 
-    &.body {
-        @apply text-body;
-    }
+        &.body {
+            @apply text-body;
+        }
 
-    &.label {
-        @apply text-label;
-    }
+        &.label {
+            @apply text-label;
+        }
 
-    &.small {
-        @apply text-small;
-    }
+        &.small {
+            @apply text-small;
+        }
 
-    &.bold {
-        font-weight: 700;
-    }
+        &.bold {
+            font-weight: 700;
+        }
 
-    &.regular {
-        font-weight: 400;
-    }
+        &.regular {
+            font-weight: 400;
+        }
 
-    &.light {
-        font-weight: 300;
+        &.light {
+            font-weight: 300;
+        }
     }
 }

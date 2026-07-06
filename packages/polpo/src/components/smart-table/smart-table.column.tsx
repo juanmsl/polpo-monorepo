@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { MdArrowDownward, MdArrowUpward } from 'react-icons/md';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 import { Grid } from '../../layouts';
 import { Ripple } from '../ripple';
 import { Typography } from '../typography';
@@ -27,10 +27,6 @@ export const SmartTableColumn = <RowData extends RowDataObject>({
 }: SmartTableColumnProps<RowData>) => {
   const sortByKey = sortBy !== undefined ? sortBy : field;
 
-  const columnClassName = useClassNames({
-    'sort-on-click': Boolean(sortByKey),
-  });
-
   const columnOnClick = sortByKey ? () => toggleSortField(sortByKey) : undefined;
 
   const sortIcon = useMemo(() => {
@@ -48,7 +44,7 @@ export const SmartTableColumn = <RowData extends RowDataObject>({
   if (hidden) return null;
 
   return (
-    <th style={{ width }} className={columnClassName} onClick={columnOnClick}>
+    <th style={{ width }} className={cn(sortByKey && 'sort-on-click')} onClick={columnOnClick}>
       <Grid flow='column' gap='0.5em' jc='space-between' ai='center'>
         {Icon ? <Icon /> : null}
         <Typography variant='label' noPadding>

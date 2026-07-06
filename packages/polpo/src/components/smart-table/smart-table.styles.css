@@ -1,102 +1,104 @@
 @reference "polpo-tailwind-config/styles";
 
-.smart-table-container {
-    border: 0 solid var(--color-primary-500);
-    border-radius: 5px;
-    overflow: auto;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-}
-
-.smart-table {
-    border-collapse: collapse;
-    position: relative;
-    width: 100%;
-
-    &.layout-fixed {
-        table-layout: fixed;
+@layer components {
+    .polpo-smart-table-container {
+        border: 0 solid var(--color-primary-500);
+        border-radius: 5px;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        margin: auto;
     }
 
-    &.layout-scrollable {
-        table-layout: auto;
-    }
+    .polpo-smart-table {
+        border-collapse: collapse;
+        position: relative;
+        width: 100%;
 
-    thead {
-        position: sticky;
-        z-index: 10;
-        top: 0;
-        box-shadow:
-                0 3px 5px 0 rgba(0, 0, 0, 0.2),
-                0 1px 10px 0 rgba(0, 0, 0, 0.12);
+        &.layout-fixed {
+            table-layout: fixed;
+        }
 
-        tr {
-            background: var(--color-primary-500);
-            color: var(--color-primary-50);
+        &.layout-scrollable {
+            table-layout: auto;
+        }
+
+        thead {
+            position: sticky;
+            z-index: 10;
+            top: 0;
+            box-shadow:
+                    0 3px 5px 0 rgba(0, 0, 0, 0.2),
+                    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+
+            tr {
+                background: var(--color-primary-500);
+                color: var(--color-primary-50);
+                transition: all 300ms ease;
+            }
+        }
+
+        tbody {
+            tr {
+                box-shadow: inset 0 0 0 0 var(--color-primary-500);
+                transition: box-shadow 300ms ease;
+
+                &.row-selected,
+                &:hover {
+                    background: var(--color-background-paper);
+                }
+
+                &.row-selected {
+                    box-shadow: inset 10px 0 0 -5px var(--color-primary-500);
+                }
+
+                &:not(:last-child) {
+                    border-bottom: 1px solid var(--color-border);
+                }
+            }
+        }
+
+        th {
+            padding: 0.8em 1.2em;
+            user-select: none;
+
+            &.sort-on-click {
+                cursor: pointer;
+            }
+
+            .sort-icon {
+                width: 1em;
+                display: block;
+            }
+
+            svg {
+                animation: fadeIn 300ms ease;
+            }
+
+            path {
+                transition: all 300ms ease;
+            }
+
+            &:first-child {
+                padding-left: 2em;
+            }
+
+            &:last-child {
+                padding-right: 2em;
+            }
+        }
+
+        td {
             transition: all 300ms ease;
-        }
-    }
+            padding: 0.6em 1em;
 
-    tbody {
-        tr {
-            box-shadow: inset 0 0 0 0 var(--color-primary-500);
-            transition: box-shadow 300ms ease;
-
-            &.row-selected,
-            &:hover {
-                background: var(--color-background-paper);
+            &:first-child {
+                padding-left: 2em;
             }
 
-            &.row-selected {
-                box-shadow: inset 10px 0 0 -5px var(--color-primary-500);
+            &:last-child {
+                padding-right: 2em;
             }
-
-            &:not(:last-child) {
-                border-bottom: 1px solid var(--color-border);
-            }
-        }
-    }
-
-    th {
-        padding: 0.8em 1.2em;
-        user-select: none;
-
-        &.sort-on-click {
-            cursor: pointer;
-        }
-
-        .sort-icon {
-            width: 1em;
-            display: block;
-        }
-
-        svg {
-            animation: fadeIn 300ms ease;
-        }
-
-        path {
-            transition: all 300ms ease;
-        }
-
-        &:first-child {
-            padding-left: 2em;
-        }
-
-        &:last-child {
-            padding-right: 2em;
-        }
-    }
-
-    td {
-        transition: all 300ms ease;
-        padding: 0.6em 1em;
-
-        &:first-child {
-            padding-left: 2em;
-        }
-
-        &:last-child {
-            padding-right: 2em;
         }
     }
 }

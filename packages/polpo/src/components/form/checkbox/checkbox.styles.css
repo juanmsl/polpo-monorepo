@@ -1,162 +1,164 @@
 @reference "polpo-tailwind-config/styles";
 
-.checkbox {
-    border-radius: 40%;
-    background: var(--color-background-paper);
-    transition: all 300ms ease;
-    width: 1em;
-    height: 1em;
-    margin: 2px;
-    outline: 1px solid;
-    display: flex;
-    position: relative;
-
-    .checkbox-input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        opacity: 0;
-        z-index: 2;
-    }
-
-    &.size-small {
-        font-size: 1em;
-    }
-
-    &.size-regular {
-        font-size: 1.2em;
-    }
-
-    &.size-large {
-        font-size: 1.4em;
-    }
-}
-
-.checkbox-fill {
-    transition: all 200ms ease-out;
-    border-radius: inherit;
-    margin: auto;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    position: relative;
-    display: grid;
-    place-content: center;
-    place-items: center;
-
-    .checkbox-icon {
-        font-size: 0.7em;
-        z-index: 1;
-        opacity: 0;
-        transition: opacity 300ms ease;
-    }
-}
-
-.checkbox-container {
-    --color: var(--color-gray-800);
-    --color-icon: var(--color-gray-50);
-    --color-hover: hsl(from var(--color-gray-800) h s l / 50%);
-
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: auto 1fr;
-    align-items: center;
-    gap: 0.5em;
-    width: fit-content;
-
-    .checkbox-label {
-        cursor: pointer;
-        user-select: none;
-        width: 100%;
-    }
-
+@layer components {
     .checkbox {
-        color: var(--color);
+        border-radius: 40%;
+        background: var(--color-background-paper);
+        transition: all 300ms ease;
+        width: 1em;
+        height: 1em;
+        margin: 2px;
+        outline: 1px solid;
+        display: flex;
+        position: relative;
 
-        &.is-checked {
+        .checkbox-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        &.size-small {
+            font-size: 1em;
+        }
+
+        &.size-regular {
+            font-size: 1.2em;
+        }
+
+        &.size-large {
+            font-size: 1.4em;
+        }
+    }
+
+    .checkbox-fill {
+        transition: all 200ms ease-out;
+        border-radius: inherit;
+        margin: auto;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        position: relative;
+        display: grid;
+        place-content: center;
+        place-items: center;
+
+        .checkbox-icon {
+            font-size: 0.7em;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 300ms ease;
+        }
+    }
+
+    .checkbox-container {
+        --color: var(--color-gray-800);
+        --color-icon: var(--color-gray-50);
+        --color-hover: hsl(from var(--color-gray-800) h s l / 50%);
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: auto 1fr;
+        align-items: center;
+        gap: 0.5em;
+        width: fit-content;
+
+        .checkbox-label {
+            cursor: pointer;
+            user-select: none;
+            width: 100%;
+        }
+
+        .checkbox {
+            color: var(--color);
+
+            &.is-checked {
+                .checkbox-fill {
+                    width: 100%;
+                    height: 100%;
+                    background: var(--color);
+                    color: var(--color-icon);
+                }
+
+                .checkbox-icon {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .checkbox:hover,
+        &:has(.checkbox-label:hover) .checkbox {
+            box-shadow: 0 0 0 0.3em var(--color-hover);
+
             .checkbox-fill {
-                width: 100%;
-                height: 100%;
-                background: var(--color);
+                width: 20%;
+                height: 20%;
+                border-radius: 20%;
+                background: var(--color-hover);
                 color: var(--color-icon);
             }
 
-            .checkbox-icon {
-                opacity: 1;
+            &:is(.is-checked) {
+                .checkbox-fill {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: inherit;
+                    background: var(--color);
+                }
             }
         }
-    }
 
-    .checkbox:hover,
-    &:has(.checkbox-label:hover) .checkbox {
-        box-shadow: 0 0 0 0.3em var(--color-hover);
-
-        .checkbox-fill {
-            width: 20%;
-            height: 20%;
-            border-radius: 20%;
-            background: var(--color-hover);
-            color: var(--color-icon);
+        .checkbox:focus,
+        &:has(.checkbox-input:focus) .checkbox,
+        &:has(.checkbox-label:focus) .checkbox {
+            box-shadow: 0 0 0 0.3em var(--color-hover);
         }
 
-        &:is(.is-checked) {
-            .checkbox-fill {
-                width: 100%;
-                height: 100%;
-                border-radius: inherit;
-                background: var(--color);
-            }
+        &.color-primary {
+            --color: var(--color-primary-500);
+            --color-icon: var(--color-primary-50);
+            --color-hover: hsl(from var(--color-primary-500) h s l / 50%);
         }
-    }
 
-    .checkbox:focus,
-    &:has(.checkbox-input:focus) .checkbox,
-    &:has(.checkbox-label:focus) .checkbox {
-        box-shadow: 0 0 0 0.3em var(--color-hover);
-    }
+        &.color-secondary {
+            --color: var(--color-secondary-500);
+            --color-icon: var(--color-secondary-50);
+            --color-hover: hsl(from var(--color-secondary-500) h s l / 50%);
+        }
 
-    &.color-primary {
-        --color: var(--color-primary-500);
-        --color-icon: var(--color-primary-50);
-        --color-hover: hsl(from var(--color-primary-500) h s l / 50%);
-    }
+        &.color-tertiary {
+            --color: var(--color-tertiary-500);
+            --color-icon: var(--color-tertiary-50);
+            --color-hover: hsl(from var(--color-tertiary-500) h s l / 50%);
+        }
 
-    &.color-secondary {
-        --color: var(--color-secondary-500);
-        --color-icon: var(--color-secondary-50);
-        --color-hover: hsl(from var(--color-secondary-500) h s l / 50%);
-    }
+        &.color-active {
+            --color: var(--color-active-500);
+            --color-icon: var(--color-active-50);
+            --color-hover: hsl(from var(--color-active-500) h s l / 50%);
+        }
 
-    &.color-tertiary {
-        --color: var(--color-tertiary-500);
-        --color-icon: var(--color-tertiary-50);
-        --color-hover: hsl(from var(--color-tertiary-500) h s l / 50%);
-    }
+        &.color-warning {
+            --color: var(--color-warning-500);
+            --color-icon: var(--color-warning-50);
+            --color-hover: hsl(from var(--color-warning-500) h s l / 50%);
+        }
 
-    &.color-active {
-        --color: var(--color-active-500);
-        --color-icon: var(--color-active-50);
-        --color-hover: hsl(from var(--color-active-500) h s l / 50%);
-    }
+        &.color-alert {
+            --color: var(--color-alert-500);
+            --color-icon: var(--color-alert-50);
+            --color-hover: hsl(from var(--color-alert-500) h s l / 50%);
+        }
 
-    &.color-warning {
-        --color: var(--color-warning-500);
-        --color-icon: var(--color-warning-50);
-        --color-hover: hsl(from var(--color-warning-500) h s l / 50%);
-    }
-
-    &.color-alert {
-        --color: var(--color-alert-500);
-        --color-icon: var(--color-alert-50);
-        --color-hover: hsl(from var(--color-alert-500) h s l / 50%);
-    }
-
-    &.color-info {
-        --color: var(--color-info-500);
-        --color-icon: var(--color-info-50);
-        --color-hover: hsl(from var(--color-info-500) h s l / 50%);
+        &.color-info {
+            --color: var(--color-info-500);
+            --color-icon: var(--color-info-50);
+            --color-hover: hsl(from var(--color-info-500) h s l / 50%);
+        }
     }
 }
