@@ -5,7 +5,7 @@ import { KeyValuesOf } from '../../types';
 
 export type Primitive = string | number | boolean;
 
-export type RowDataObject = { [key: string]: Primitive | object };
+export type RowDataObject = object;
 
 export type Order = 'asc' | 'desc';
 

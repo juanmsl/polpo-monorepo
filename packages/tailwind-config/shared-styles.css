@@ -230,10 +230,11 @@
     --text-hero--letter-spacing: -4px;
 
     /* ================================================
-     * BREAKPOINTS
-     * ================================================ */
-    --breakpoint-xs: 360px;
-    --breakpoint-sm: 480px;
+   * BREAKPOINTS
+   * ================================================ */
+    --breakpoint-2xs: 360px;
+    --breakpoint-xs: 480px;
+    --breakpoint-sm: 640px;
     --breakpoint-md: 768px;
     --breakpoint-lg: 1024px;
     --breakpoint-xl: 1280px;
@@ -275,8 +276,8 @@
     }
 
     :root {
-        @apply bg-background text-foreground font-main text-body min-h-screen;
-        min-width: var(--breakpoint-xs);
+        @apply bg-background text-foreground font-main text-body min-h-dvh;
+        min-width: var(--breakpoint-2xs);
         color-scheme: light dark;
         font-synthesis: none;
         text-rendering: optimizeLegibility;
