@@ -12,6 +12,6 @@ export type AmortizationFormData = {
   propertyValue: number;
   periods: number;
   interest: number;
-  initialPaymentPercentage: number;
+  initialPayment: number;
   monthlyPayment: number;
 };

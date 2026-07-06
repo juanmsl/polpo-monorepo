@@ -8,10 +8,9 @@ export const getAmortizationTableData = ({
   periods,
   monthlyPayment,
   propertyValue,
-  initialPaymentPercentage,
+  initialPayment,
   interest,
 }: AmortizationFormData) => {
-  const initialPayment = (propertyValue * initialPaymentPercentage) / 100;
   const creditValue = propertyValue - initialPayment;
   const monthlyFee = creditValue * (interest / (1 - Math.pow(1 + interest, -periods)));
   const extraPayment = Math.max(monthlyPayment - monthlyFee, 0);
@@ -51,7 +50,6 @@ export const getAmortizationTableData = ({
 
   return {
     data,
-    initialPayment,
     creditValue,
     monthlyFee,
     extraPayment,
