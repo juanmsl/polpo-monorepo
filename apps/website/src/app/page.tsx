@@ -9,12 +9,12 @@ import { getColumns, getAmortizationTableData } from '@/helpers';
 import { AmortizationFormData } from '@/types';
 
 export default function Home() {
-  const [{ propertyValue, periods, interest, initialPaymentPercentage, monthlyPayment }, setFormData] =
+  const [{ propertyValue, periods, interest, initialPayment, monthlyPayment }, setFormData] =
     useState<AmortizationFormData>({
-      propertyValue: 500000000,
+      propertyValue: 520000000,
       periods: 180,
       interest: 0.01,
-      initialPaymentPercentage: 30,
+      initialPayment: 180000000,
       monthlyPayment: 0,
     });
 
@@ -22,23 +22,22 @@ export default function Home() {
     setFormData(prev => ({ ...prev, [key]: value }));
   }, []);
 
-  const { creditValue, monthlyFee, data, initialPayment, extraPayment } = useMemo(
+  const { creditValue, monthlyFee, data, extraPayment } = useMemo(
     () =>
       getAmortizationTableData({
         periods,
         monthlyPayment,
         propertyValue,
-        initialPaymentPercentage,
+        initialPayment,
         interest,
       }),
-    [initialPaymentPercentage, interest, monthlyPayment, periods, propertyValue],
+    [initialPayment, interest, monthlyPayment, periods, propertyValue],
   );
 
   return (
     <section className='calculator'>
       <CreditForm
         propertyValue={propertyValue}
-        initialPaymentPercentage={initialPaymentPercentage}
         periods={periods}
         interest={interest}
         creditValue={creditValue}

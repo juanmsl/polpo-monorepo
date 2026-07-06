@@ -8,7 +8,6 @@ import { AmortizationFormData } from '@/types';
 
 type CreditFormProps = {
   propertyValue: number;
-  initialPaymentPercentage: number;
   periods: number;
   interest: number;
   creditValue: number;
@@ -19,7 +18,6 @@ type CreditFormProps = {
 
 export const CreditForm = ({
   propertyValue,
-  initialPaymentPercentage,
   periods,
   interest,
   creditValue,
@@ -27,6 +25,8 @@ export const CreditForm = ({
   initialPayment,
   onChange,
 }: CreditFormProps) => {
+  const initialPaymentPercentage = Math.round((initialPayment / propertyValue) * 10000) / 100;
+
   return (
     <section className='main-section'>
       <section className='left-card'>
@@ -45,13 +45,20 @@ export const CreditForm = ({
             maximumFractionDigits: 0,
           }}
         />
-        <Slider
-          name='initial-payment'
-          value={initialPaymentPercentage}
-          setValue={v => onChange('initialPaymentPercentage', v)}
-          label='Porcentaje cuota inicial'
-          min={10}
-          max={90}
+        <InputNumber
+          name='initialPayment'
+          variant='line'
+          value={initialPayment}
+          setValue={v => onChange('initialPayment', v)}
+          label='Valor del pago inicial'
+          decimalSeparator=','
+          format={{
+            locales: 'es-CO',
+            style: 'currency',
+            currency: 'COP',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }}
         />
         <Slider
           name='periods'
@@ -93,8 +100,6 @@ export const CreditForm = ({
           </Grid>
         </section>
         <Grid flow='column' gap='1em' jc='start'>
-          <Metric label='Pago inicial' value={MoneyFormat(initialPayment)} />
-          <Line orientation='vertical' />
           <Tooltip content='Interes mensual' position='bottom'>
             <Metric label='Interes' value={PercentageFormat(interest * 100)} />
           </Tooltip>
