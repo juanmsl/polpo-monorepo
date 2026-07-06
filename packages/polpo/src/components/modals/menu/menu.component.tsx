@@ -1,6 +1,7 @@
 import React, { RefObject, useCallback, useMemo } from 'react';
 import { IconType } from 'react-icons';
 
+import { cn } from '../../../helpers';
 import { useClassNames } from '../../../hooks';
 import { Checkbox } from '../../form';
 import { Line } from '../../line';
@@ -28,14 +29,15 @@ export const Menu = ({
   className = '',
   ...modalProps
 }: MenuProps) => {
-  const modalClassName = useClassNames({
-    'menu-modal': true,
-    [className]: Boolean(className),
-  });
-
   return (
-    <Modal className={modalClassName} {...modalProps} id={`menu-${id}`} isOpen={isOpen} onClose={onClose}>
-      <ul className={`menu-content ${contentClassName}`} role='listbox' style={contentStyle} ref={menuContentRef}>
+    <Modal
+      className={cn('polpo-menu-modal', className)}
+      {...modalProps}
+      id={`menu-${id}`}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <ul className={`polpo-menu-content ${contentClassName}`} role='listbox' style={contentStyle} ref={menuContentRef}>
         {children}
       </ul>
     </Modal>
@@ -68,13 +70,6 @@ const MenuOption = ({
   onClick = () => null,
   ...liProps
 }: MenuOptionProps) => {
-  const menuOptionClassName = useClassNames({
-    'menu-option': true,
-    [className]: true,
-    'is-disabled': disabled,
-    'is-selected': selected,
-  });
-
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -128,7 +123,7 @@ const MenuOption = ({
       aria-selected={selected}
       aria-disabled={disabled}
       onClick={handleClick}
-      className={menuOptionClassName}
+      className={cn('polpo-menu-option', disabled && 'is-disabled', selected && 'is-selected', className)}
       style={style}
     >
       <Ripple zIndex={10} />
@@ -147,7 +142,7 @@ const Divider = () => {
 
 const Label = ({ children, className = '', ...props }: Omit<TypographyProps, 'variant'>) => {
   return (
-    <li tabIndex={-1} className='menu-label'>
+    <li tabIndex={-1} className='polpo-menu-label'>
       <Typography {...props} variant='small' className={`menu-group-label ${className}`}>
         {children}
       </Typography>
@@ -174,14 +169,14 @@ const Group = ({
   ...props
 }: MenuGroupProps) => {
   const groupClassName = useClassNames({
-    'menu-group': true,
+    'polpo-menu-group': true,
     [className]: Boolean(className),
   });
 
   return (
     <li tabIndex={-1} {...props} className={groupClassName} style={style}>
       {label && <Label>{label}</Label>}
-      <ul className={`menu-group-content ${contentClassName}`} role='listbox' style={contentStyle}>
+      <ul className={`polpo-menu-group-content ${contentClassName}`} role='listbox' style={contentStyle}>
         {children}
       </ul>
     </li>

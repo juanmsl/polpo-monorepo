@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
+import { cn } from '../../helpers';
+
 import './ripple.styles.css';
 
 interface RippleProps {
@@ -64,5 +66,7 @@ export const Ripple = ({
     );
   };
 
-  return <span ref={ref} onMouseDown={handleClick} className={`ripple ${className}`} style={{ ...style, zIndex }} />;
+  return (
+    <span ref={ref} onMouseDown={handleClick} className={cn('polpo-ripple', className)} style={{ ...style, zIndex }} />
+  );
 };

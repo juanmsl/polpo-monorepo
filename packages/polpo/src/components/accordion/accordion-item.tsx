@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { IconType } from 'react-icons';
 import { FaCaretLeft } from 'react-icons/fa';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 import { SlideCard } from '../cards';
 import { Typography } from '../typography';
 
@@ -65,34 +65,12 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 }: AccordionItemProps) => {
   const id = useMemo(() => crypto.randomUUID(), []);
   const [isOpen, toggle] = useAccordionItem(id);
-  const headerClassName = useClassNames({
-    'accordion-header': true,
-    'has-start-content': !!startContent,
-    [classNames?.header ?? '']: !!classNames?.header,
-    'is-open': isOpen,
-  });
-
-  const headerContentClassName = useClassNames({
-    'accordion-header-content': true,
-    [classNames?.headerContent ?? '']: !!classNames?.headerContent,
-  });
-
-  const toggleIconClassName = useClassNames({
-    'accordion-toggle-icon': true,
-    isOpen: isOpen,
-    [classNames?.toggleIcon ?? '']: !!classNames?.toggleIcon,
-  });
-
-  const bodyContentClassName = useClassNames({
-    'accordion-body': true,
-    [classNames?.body ?? '']: !!classNames?.body,
-  });
 
   const titleContent = getContent(title, isOpen);
   const subtitleContent = getContent(subtitle, isOpen);
   const headerStart = getContent(startContent, isOpen);
   const headerMiddle = getContent(content, isOpen) ?? (
-    <section className={headerContentClassName}>
+    <section className={cn('polpo-accordion-header-content', classNames?.headerContent)}>
       <Typography className={classNames?.title} variant='body' noPadding weight='bold'>
         {titleContent}
       </Typography>
@@ -101,22 +79,28 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       </Typography>
     </section>
   );
-  const headerEnd = getContent(endContent, isOpen) ?? <Icon className={toggleIconClassName} />;
 
-  const accordionItemClassName = useClassNames({
-    'accordion-item': true,
-    [className]: Boolean(className),
-  });
+  const headerEnd = getContent(endContent, isOpen) ?? (
+    <Icon className={cn('polpo-accordion-toggle-icon', isOpen && 'is-open', classNames?.toggleIcon)} />
+  );
 
   return (
-    <section className={accordionItemClassName} style={style}>
-      <section className={headerClassName} onClick={toggle}>
+    <section className={cn('polpo-accordion-item', className)} style={style}>
+      <section
+        className={cn(
+          'polpo-accordion-header',
+          startContent && 'has-start-content',
+          isOpen && 'is-open',
+          classNames?.header,
+        )}
+        onClick={toggle}
+      >
         {headerStart}
         {headerMiddle}
         {headerEnd}
       </section>
       <SlideCard isOpen={isOpen}>
-        <section className={bodyContentClassName}>{children}</section>
+        <section className={cn('polpo-accordion-body', classNames?.body)}>{children}</section>
       </SlideCard>
     </section>
   );

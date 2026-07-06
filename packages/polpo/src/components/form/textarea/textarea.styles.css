@@ -1,7 +1,9 @@
 @reference "polpo-tailwind-config/styles";
 
-.textarea {
-    border: 0;
-    outline: 0;
-    field-sizing: content;
+@layer components {
+    .polpo-textarea {
+        border: 0;
+        outline: 0;
+        field-sizing: content;
+    }
 }

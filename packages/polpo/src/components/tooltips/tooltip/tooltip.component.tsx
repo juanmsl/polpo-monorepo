@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 
-import { PositionContainer } from '../../../helpers';
-import { useClassNames, useEventListener, useModal } from '../../../hooks';
+import { cn, PositionContainer } from '../../../helpers';
+import { useEventListener, useModal } from '../../../hooks';
 import { Modal } from '../../modals';
 
 import './tooltip.styles.css';
@@ -29,11 +29,6 @@ export const Tooltip = ({
 }: TooltipProps) => {
   const { containerRef, openModal, closeModal, isOpen } = useModal();
 
-  const classNames = useClassNames({
-    tooltip: true,
-    [position]: true,
-  });
-
   useEventListener('mouseenter', () => openModal(), containerRef);
   useEventListener('mouseleave', () => closeModal(), containerRef);
 
@@ -50,7 +45,7 @@ export const Tooltip = ({
         containerRef={containerRef}
         onClose={closeModal}
         position={position}
-        className={classNames}
+        className={cn('polpo-tooltip', position)}
         closeOnClickOutside={false}
         offset={6 + +offset}
         windowOffset={10}

@@ -1,41 +1,43 @@
 @reference "polpo-tailwind-config/styles";
 
-.accordion {
-    display: grid;
-}
-
-.accordion-item {
-    display: grid;
-    position: relative;
-
-    .accordion-header {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        gap: 20px;
-        cursor: pointer;
-        position: sticky;
-        top: 0;
-        padding: 20px 0;
-
-        &.has-start-content {
-            grid-template-columns: auto 1fr auto;
-        }
-    }
-
-    .accordion-header-content {
+@layer components {
+    .polpo-accordion {
         display: grid;
     }
 
-    .accordion-toggle-icon {
-        transition: all 300ms ease;
+    .polpo-accordion-item {
+        display: grid;
+        position: relative;
 
-        &.isOpen {
-            transform: rotate(-90deg);
+        .polpo-accordion-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            position: sticky;
+            top: 0;
+            padding: 20px 0;
+
+            &.has-start-content {
+                grid-template-columns: auto 1fr auto;
+            }
         }
-    }
 
-    .accordion-body {
-        padding: 10px 0 20px;
+        .polpo-accordion-header-content {
+            display: grid;
+        }
+
+        .polpo-accordion-toggle-icon {
+            transition: all 300ms ease;
+
+            &.is-open {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .polpo-accordion-body {
+            padding: 10px 0 20px;
+        }
     }
 }

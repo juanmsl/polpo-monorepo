@@ -35,7 +35,7 @@ export const InfinityScroll = ({
   return (
     <>
       {children}
-      <section className='infinity-scroll'>
+      <section className='polpo-infinity-scroll'>
         {Boolean(emptyMessage) && !childrenExists && !isLoading && <p className='empty-message'>{emptyMessage}</p>}
         {(hasNextPage || isLoading) &&
           (customLoadMoreElement ? (

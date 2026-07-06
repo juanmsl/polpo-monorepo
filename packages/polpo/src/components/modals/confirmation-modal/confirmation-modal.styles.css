@@ -1,17 +1,19 @@
 @reference "polpo-tailwind-config/styles";
 
-.confirmation-modal {
-    display: grid;
-    max-width: 450px;
-    gap: 1em;
-    place-content: center;
-    justify-items: center;
-    text-align: center;
-
-    .confirmation-modal-actions {
+@layer components {
+    .polpo-confirmation-modal {
         display: grid;
-        grid-auto-flow: column;
-        justify-content: center;
+        max-width: 450px;
         gap: 1em;
+        place-content: center;
+        justify-items: center;
+        text-align: center;
+
+        .polpo-confirmation-modal-actions {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: center;
+            gap: 1em;
+        }
     }
 }

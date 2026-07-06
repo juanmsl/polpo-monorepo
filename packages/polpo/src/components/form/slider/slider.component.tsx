@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { useClassNames, useInputHandlers } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { useInputHandlers } from '../../../hooks';
 import { Controller } from '../controller';
 import { Field, InputFieldProps } from '../field';
 import { ControllerGeneratorProps, UnControlledComponentProps } from '../form.types';
@@ -63,19 +64,14 @@ export const Slider = ({
     onFocus: onFocus,
   });
 
-  const inputSliderClassName = useClassNames({
-    'input-slider': true,
-    'is-focus': isFocus,
-  });
-
   return (
     <Field id={id} error={error} isFocus={isFocus} {...fieldProps}>
-      <section className={inputSliderClassName}>
+      <section className={cn('polpo-input-slider', isFocus && 'is-focus')}>
         <input
           id={id}
           type='range'
           name={name}
-          className={`slider ${className}`}
+          className={`polpo-slider ${className}`}
           style={style}
           value={value}
           autoFocus={autoFocus}
@@ -93,7 +89,7 @@ export const Slider = ({
             id={id}
             type='number'
             name={name}
-            className={`slider-number ${className}`}
+            className={`polpo-slider-number ${className}`}
             style={style}
             value={value}
             autoComplete={autoComplete}

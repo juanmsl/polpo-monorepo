@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 
 import { Tabs } from './tabs';
 
@@ -75,15 +75,6 @@ export const TabsList = ({
   const selectedTabRef = useRef<HTMLSpanElement>(null);
   const [isSelectorActive, setIsSelectorActive] = useState(false);
   const [selector, setSelector] = useState(DefaultRect);
-  const containerClassNames = useClassNames({
-    'tab-list': true,
-    [`variant-${variant}`]: Boolean(variant),
-    [`size-${size}`]: Boolean(size),
-    [`radius-${radius}`]: Boolean(radius),
-    [`color-${color}`]: Boolean(color),
-    'vertical-direction': direction === TabListDirection.VERTICAL,
-    [className]: Boolean(className),
-  });
 
   useEffect(() => {
     const selectedRect = selectedTabRef.current?.getBoundingClientRect() ?? DefaultRect;
@@ -107,8 +98,22 @@ export const TabsList = ({
   }, [isSelectorActive, variant, openTab]);
 
   return (
-    <section className={containerClassNames} ref={containerRef} style={style}>
-      {Boolean(variant) && <span className={`tabs-selector ${isSelectorActive ? 'active' : ''}`} style={selector} />}
+    <section
+      className={cn(
+        'polpo-tab-list',
+        variant && `variant-${variant}`,
+        size && `size-${size}`,
+        radius && `radius-${radius}`,
+        color && `color-${color}`,
+        direction === TabListDirection.VERTICAL && 'vertical-direction',
+        className,
+      )}
+      ref={containerRef}
+      style={style}
+    >
+      {Boolean(variant) && (
+        <span className={cn('polpo-tabs-selector', isSelectorActive && 'active')} style={selector} />
+      )}
       {tabs.map(({ id, label }) => (
         <Tabs.Tab key={id} id={id} ref={id === openTab ? selectedTabRef : undefined}>
           {label}

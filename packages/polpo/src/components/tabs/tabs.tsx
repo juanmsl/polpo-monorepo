@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 
 import { TabsList as TabListComponent, TabListProps } from './tabs-list';
 import './tabs.styles.css';
@@ -72,11 +72,6 @@ type TabProps = {
 
 const Tab = ({ id, children, className = '', style = {}, onClick, ref }: TabProps) => {
   const [isOpen, openTab] = useTab(id);
-  const tabClassNames = useClassNames({
-    tab: true,
-    [className]: !!className,
-    'is-open': isOpen,
-  });
 
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
     openTab();
@@ -87,7 +82,7 @@ const Tab = ({ id, children, className = '', style = {}, onClick, ref }: TabProp
   };
 
   return (
-    <span className={tabClassNames} style={style} onClick={handleClick} ref={ref}>
+    <span className={cn('polpo-tab', className, isOpen && 'is-open')} style={style} onClick={handleClick} ref={ref}>
       {children}
     </span>
   );

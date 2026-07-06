@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 
 import { renderRow } from './smart-table.helpers';
 import { ColumnData, RowDataObject } from './smart-table.types';
@@ -20,9 +20,5 @@ export const SmartTableRow = <RowData extends RowDataObject>({
   selectable = false,
   rowKey,
 }: SmartTableRowProps<RowData>) => {
-  const rowClassName = useClassNames({
-    'row-selected': selectable && isSelected,
-  });
-
-  return <tr className={rowClassName}>{renderRow(data, columns, rowKey)}</tr>;
+  return <tr className={cn(selectable && isSelected && 'row-selected')}>{renderRow(data, columns, rowKey)}</tr>;
 };

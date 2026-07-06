@@ -1,7 +1,7 @@
 import { CSSProperties, useMemo } from 'react';
 import { ImCross } from 'react-icons/im';
 
-import { PositionContainer } from '../../../helpers';
+import { cn, PositionContainer } from '../../../helpers';
 import { Modal, ModalProps } from '../modal';
 
 import './aside-modal.styles.css';
@@ -48,7 +48,7 @@ export const AsideModal = ({
       opacity={0.6}
       windowOffset={0}
       animation='none'
-      className={`aside-modal ${className} ${position}`}
+      className={cn('polpo-aside-modal', className, position)}
       rootStyle={modalRootStyles}
       backdropOnClick={onClose}
       position={position}
@@ -57,7 +57,7 @@ export const AsideModal = ({
       <span className='close-modal-button' onClick={onClose}>
         <ImCross />
       </span>
-      <section className='aside-modal-content'>{children}</section>
+      <section className='polpo-aside-modal-content'>{children}</section>
     </Modal>
   );
 };

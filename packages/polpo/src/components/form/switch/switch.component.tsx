@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { IconType } from 'react-icons';
 
-import { useClassNames, useInputHandlers } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { useInputHandlers } from '../../../hooks';
 import { ColorTypes, SizeTypes } from '../../component.types';
 import { Tooltip } from '../../tooltips';
 import { Typography } from '../../typography';
@@ -80,25 +81,13 @@ export const Switch = ({
     onFocus: onFocus,
   });
 
-  const switchContainerClassName = useClassNames({
-    'switch-container': true,
-    [className]: Boolean(className),
-    [`color-${color}`]: Boolean(color),
-  });
-
-  const switchClassName = useClassNames({
-    switch: true,
-    'is-checked': value,
-    'is-readonly': !disabled && readOnly,
-  });
-
   const dotSize = DotSizeMap[size] ?? DotSizeMap[SizeTypes.REGULAR];
   const _width = (WidthMap[width] ?? WidthMap[SizeTypes.REGULAR]) * dotSize;
   const _padding = Math.min(padding, dotSize);
 
   return (
     <section
-      className={switchContainerClassName}
+      className={cn('polpo-switch-container', className, color && `color-${color}`)}
       style={
         {
           ...style,
@@ -110,16 +99,16 @@ export const Switch = ({
       }
     >
       {leftLabel ? (
-        <Typography variant='label-form' className='switch-label' htmlFor={id}>
+        <Typography variant='label-form' className='polpo-switch-label' htmlFor={id}>
           {leftLabel}
         </Typography>
       ) : null}
       {LeftIcon !== undefined && (
         <Tooltip content={leftIconTooltip} disabled={!leftIconTooltip} offset={10}>
-          <LeftIcon size={`${dotSize * 0.7}em`} className='switch-icon' onClick={() => setValue(!value)} />
+          <LeftIcon size={`${dotSize * 0.7}em`} className='polpo-switch-icon' onClick={() => setValue(!value)} />
         </Tooltip>
       )}
-      <section className={switchClassName}>
+      <section className={cn('polpo-switch', value && 'is-checked', !disabled && readOnly && 'is-readonly')}>
         {InternalLeftIcon !== undefined && (
           <span className='switch-internal-left-icon'>
             <InternalLeftIcon size={`${dotSize * 0.7}em`} />
@@ -130,12 +119,12 @@ export const Switch = ({
             <InternalRightIcon size={`${dotSize * 0.7}em`} />
           </span>
         )}
-        <span className='switch-dot' />
+        <span className='polpo-switch-dot' />
         <input
           id={id}
           type='checkbox'
           name={name}
-          className={`switch-checkbox ${className}`}
+          className={`polpo-switch-checkbox ${className}`}
           style={style}
           checked={value}
           autoFocus={autoFocus}
@@ -147,11 +136,11 @@ export const Switch = ({
       </section>
       {RightIcon !== undefined && (
         <Tooltip content={rightIconTooltip} disabled={!rightIconTooltip} offset={10}>
-          <RightIcon size={`${dotSize * 0.7}em`} className='switch-icon' onClick={() => setValue(!value)} />
+          <RightIcon size={`${dotSize * 0.7}em`} className='polpo-switch-icon' onClick={() => setValue(!value)} />
         </Tooltip>
       )}
       {label || rightLabel ? (
-        <Typography variant='label-form' className='switch-label' htmlFor={id}>
+        <Typography variant='label-form' className='polpo-switch-label' htmlFor={id}>
           {label || rightLabel}
         </Typography>
       ) : null}

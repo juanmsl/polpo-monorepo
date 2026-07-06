@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { useClassNames } from '../../hooks';
+import { cn } from '../../helpers';
 import { KeyValuesOf } from '../../types';
 import { Checkbox } from '../form';
 
@@ -28,21 +28,9 @@ export const SmartTable = <RowData extends RowDataObject>({
   selectable = false,
   rowId,
   className = '',
-  tableClassName: _tableClassName = '',
+  tableClassName = '',
 }: SmartTableProps<RowData>) => {
   const [selected, setSelected] = useState<{ [key: string]: RowData }>({});
-
-  const tableClassName = useClassNames({
-    'smart-table': true,
-    [_tableClassName]: Boolean(_tableClassName),
-    'layout-fixed': width === 'content',
-    'layout-scrollable': width === 'scroll',
-  });
-
-  const tableContainerClassName = useClassNames({
-    'smart-table-container': true,
-    [className]: Boolean(className),
-  });
 
   const { sortBy, order, toggleSortField } = useSort<RowData>();
 
@@ -83,8 +71,15 @@ export const SmartTable = <RowData extends RowDataObject>({
   const rows = useMemo(() => sortData<RowData>(data, sortBy, order), [data, sortBy, order]);
 
   return (
-    <section className={tableContainerClassName}>
-      <table className={tableClassName}>
+    <section className={cn('polpo-smart-table-container', className)}>
+      <table
+        className={cn(
+          'polpo-smart-table',
+          tableClassName,
+          width === 'content' && 'layout-fixed',
+          width === 'scroll' && 'layout-scrollable',
+        )}
+      >
         <thead>
           <tr>
             {columns.map((column, key) => (

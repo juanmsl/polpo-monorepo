@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { ModalState, useClassNames } from '../../../hooks';
+import { cn } from '../../../helpers';
+import { ModalState } from '../../../hooks';
 
 export enum ModalBackdrop {
   OPAQUE = 'opaque',
@@ -24,11 +25,6 @@ export const Backdrop = ({
   backdropOnClick,
   modalState,
 }: BackdropProps) => {
-  const backdropClassName = useClassNames({
-    'modal-backdrop': true,
-    'backdrop-close': modalState === ModalState.CLOSING || modalState === ModalState.CLOSED,
-  });
-
   const backgroundStyles = useMemo(() => {
     const backdropStyles = {
       [ModalBackdrop.OPAQUE]: {
@@ -57,7 +53,10 @@ export const Backdrop = ({
     <section
       tabIndex={-1}
       onClick={backdropOnClick}
-      className={backdropClassName}
+      className={cn(
+        'polpo-modal-backdrop',
+        modalState === ModalState.CLOSING || (modalState === ModalState.CLOSED && 'backdrop-close'),
+      )}
       style={{
         zIndex,
         ...backgroundStyles,
