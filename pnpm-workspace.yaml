@@ -7,6 +7,8 @@ nodeLinker: hoisted
 ignoreScripts: true
 autoInstallPeers: true
 strictPeerDependencies: false
+registries:
+  default: https://registry.npmjs.org/
 
 allowBuilds:
   '@tailwindcss/oxide': false
