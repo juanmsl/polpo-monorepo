@@ -27,13 +27,16 @@ export const Button = ({
   size = SizeTypes.REGULAR,
   noWrap = false,
   forIcon = false,
+  isLoading = false,
   fullWidth = false,
+  disabled = false,
   className = '',
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
+      disabled={disabled}
       className={cn(
         'polpo-button',
         color,
@@ -44,10 +47,11 @@ export const Button = ({
         noWrap && 'no-wrap',
         forIcon && 'icon',
         className,
+        isLoading && 'is-loading',
       )}
     >
       {children}
-      <Ripple />
+      <Ripple disabled={isLoading || disabled} />
     </button>
   );
 };

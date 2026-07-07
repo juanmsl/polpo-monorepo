@@ -47,7 +47,7 @@
     --color-active-700: color-mix(in hsl, var(--color-active) var(--scale-700), var(--dark-base));
     --color-active-800: color-mix(in hsl, var(--color-active) var(--scale-800), var(--dark-base));
     --color-active-900: color-mix(in hsl, var(--color-active) var(--scale-900), var(--dark-base));
-    --color-active-foreground: var(--color-active-50);
+    --color-active-foreground: var(--color-active-800);
 
     /* ================================================
      * ALERT
@@ -62,7 +62,7 @@
     --color-alert-700: color-mix(in hsl, var(--color-alert) var(--scale-700), var(--dark-base));
     --color-alert-800: color-mix(in hsl, var(--color-alert) var(--scale-800), var(--dark-base));
     --color-alert-900: color-mix(in hsl, var(--color-alert) var(--scale-900), var(--dark-base));
-    --color-alert-foreground: var(--color-alert-50);
+    --color-alert-foreground: var(--color-alert-800);
 
     /* ================================================
      * WARNING
@@ -77,7 +77,7 @@
     --color-warning-700: color-mix(in hsl, var(--color-warning) var(--scale-700), var(--dark-base));
     --color-warning-800: color-mix(in hsl, var(--color-warning) var(--scale-800), var(--dark-base));
     --color-warning-900: color-mix(in hsl, var(--color-warning) var(--scale-900), var(--dark-base));
-    --color-warning-foreground: var(--color-warning-50);
+    --color-warning-foreground: var(--color-warning-800);
 
     /* ================================================
      * INFO
@@ -92,7 +92,7 @@
     --color-info-700: color-mix(in hsl, var(--color-info) var(--scale-700), var(--dark-base));
     --color-info-800: color-mix(in hsl, var(--color-info) var(--scale-800), var(--dark-base));
     --color-info-900: color-mix(in hsl, var(--color-info) var(--scale-900), var(--dark-base));
-    --color-info-foreground: var(--color-info-50);
+    --color-info-foreground: var(--color-info-800);
 
     /* ================================================
      * PRIMARY
@@ -107,7 +107,7 @@
     --color-primary-700: color-mix(in hsl, var(--color-primary) var(--scale-700), var(--dark-base));
     --color-primary-800: color-mix(in hsl, var(--color-primary) var(--scale-800), var(--dark-base));
     --color-primary-900: color-mix(in hsl, var(--color-primary) var(--scale-900), var(--dark-base));
-    --color-primary-foreground: var(--color-primary-50);
+    --color-primary-foreground: var(--color-primary-800);
 
     /* ================================================
      * SECONDARY
@@ -122,7 +122,7 @@
     --color-secondary-700: color-mix(in hsl, var(--color-secondary) var(--scale-700), var(--dark-base));
     --color-secondary-800: color-mix(in hsl, var(--color-secondary) var(--scale-800), var(--dark-base));
     --color-secondary-900: color-mix(in hsl, var(--color-secondary) var(--scale-900), var(--dark-base));
-    --color-secondary-foreground: var(--color-secondary-900);
+    --color-secondary-foreground: var(--color-secondary-800);
 
     /* ================================================
      * TERTIARY
@@ -137,7 +137,7 @@
     --color-tertiary-700: color-mix(in hsl, var(--color-tertiary) var(--scale-700), var(--dark-base));
     --color-tertiary-800: color-mix(in hsl, var(--color-tertiary) var(--scale-800), var(--dark-base));
     --color-tertiary-900: color-mix(in hsl, var(--color-tertiary) var(--scale-900), var(--dark-base));
-    --color-tertiary-foreground: var(--color-tertiary-50);
+    --color-tertiary-foreground: var(--color-tertiary-800);
 
     /* ================================================
      * HIGHLIGHT
@@ -152,7 +152,7 @@
     --color-highlight-700: color-mix(in hsl, var(--color-highlight) var(--scale-700), var(--dark-base));
     --color-highlight-800: color-mix(in hsl, var(--color-highlight) var(--scale-800), var(--dark-base));
     --color-highlight-900: color-mix(in hsl, var(--color-highlight) var(--scale-900), var(--dark-base));
-    --color-highlight-foreground: var(--color-highlight-900);
+    --color-highlight-foreground: var(--color-highlight-800);
 
     /* ================================================
      * ACCESS

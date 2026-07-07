@@ -6,6 +6,7 @@ import './ripple.styles.css';
 
 interface RippleProps {
   color?: string;
+  disabled?: boolean;
   duration?: number;
   timingFunction?: React.CSSProperties['animationTimingFunction'];
   times?: number;
@@ -16,6 +17,7 @@ interface RippleProps {
 
 export const Ripple = ({
   color,
+  disabled,
   duration = 1000,
   timingFunction = 'ease-out',
   times = 1,
@@ -23,7 +25,7 @@ export const Ripple = ({
   style = {},
   zIndex = 1,
 }: RippleProps) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!ref.current?.parentElement) {
@@ -38,12 +40,12 @@ export const Ripple = ({
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const { pageX, pageY, currentTarget } = e;
+    const { clientX, clientY, currentTarget } = e;
 
     const rect = currentTarget.getBoundingClientRect();
 
-    const x = ((pageX - rect.left) * 100) / rect.width;
-    const y = ((pageY - rect.top) * 100) / rect.height;
+    const x = ((clientX - rect.left) * 100) / rect.width;
+    const y = ((clientY - rect.top) * 100) / rect.height;
 
     const ripple = document.createElement('span');
     ripple.classList.add('ripple-effect');
@@ -65,6 +67,10 @@ export const Ripple = ({
       Math.max(duration, 500) * Math.max(times, 1),
     );
   };
+
+  if (disabled) {
+    return null;
+  }
 
   return (
     <span ref={ref} onMouseDown={handleClick} className={cn('polpo-ripple', className)} style={{ ...style, zIndex }} />

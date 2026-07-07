@@ -3,6 +3,8 @@ export enum ColorTypes {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
+  ACCENT = 'accent',
+  HIGHLIGHT = 'highlight',
   ACTIVE = 'active',
   WARNING = 'warning',
   ALERT = 'alert',
