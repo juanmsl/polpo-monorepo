@@ -1,5 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 
+import { FaSpinner } from 'react-icons/fa6';
+
 import { cn } from '../../helpers';
 import { ColorTypes, RadiusTypes, SizeTypes, VariantTypes } from '../component.types';
 import { Ripple } from '../ripple';
@@ -31,12 +33,14 @@ export const Button = ({
   fullWidth = false,
   disabled = false,
   className = '',
+  onClick,
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
       disabled={disabled}
+      onClick={disabled || isLoading ? undefined : onClick}
       className={cn(
         'polpo-button',
         color,
@@ -50,7 +54,7 @@ export const Button = ({
         isLoading && 'is-loading',
       )}
     >
-      {children}
+      {isLoading ? <FaSpinner className='size-[1.6em] py-[0.3em] animate-spin' /> : children}
       <Ripple disabled={isLoading || disabled} />
     </button>
   );

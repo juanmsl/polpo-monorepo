@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useRef, useState } from 'react';
 import { IconType } from 'react-icons';
-import { ImCross } from 'react-icons/im';
+import { LuX } from 'react-icons/lu';
 
 import { cn, PositionContainer } from '../../../helpers';
 import { Button, ButtonProps } from '../../button';
@@ -89,7 +89,7 @@ export const ActionModal = ({
           >
             {!noCloseButton && !actionRequired && (
               <section className='close-modal-button' onClick={() => onClose()}>
-                <ImCross />
+                <LuX />
               </section>
             )}
             {Icon ? (

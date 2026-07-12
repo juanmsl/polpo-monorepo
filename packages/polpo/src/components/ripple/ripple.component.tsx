@@ -40,6 +40,10 @@ export const Ripple = ({
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+    if (disabled) {
+      return;
+    }
+
     const { clientX, clientY, currentTarget } = e;
 
     const rect = currentTarget.getBoundingClientRect();
@@ -67,10 +71,6 @@ export const Ripple = ({
       Math.max(duration, 500) * Math.max(times, 1),
     );
   };
-
-  if (disabled) {
-    return null;
-  }
 
   return (
     <span ref={ref} onMouseDown={handleClick} className={cn('polpo-ripple', className)} style={{ ...style, zIndex }} />

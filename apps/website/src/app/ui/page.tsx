@@ -1,26 +1,53 @@
 'use client';
-import { Button, ColorTypes, VariantTypes } from 'polpo/components';
+import { ActionModal, Button, ColorTypes, SizeTypes, VariantTypes } from 'polpo/components';
+import { useState } from 'react';
+import { FaUsers } from 'react-icons/fa';
 
 const colors = Object.values(ColorTypes);
 const variants = Object.values(VariantTypes);
+const sizes = Object.values(SizeTypes);
 
 export default function UIPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [size, setSize] = useState<SizeTypes>(SizeTypes.REGULAR);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section>
       <section className='p-6 grid grid-cols-[repeat(4,200px)] gap-4'>
+        <section className='col-span-4 flex gap-4 items-center'>
+          <Button onClick={() => setIsOpen(true)}>Open modal</Button>
+          <Button onClick={() => setIsLoading(p => !p)}>{isLoading ? 'loading...' : 'not loading'}</Button>
+          {sizes.map(sizeType => (
+            <Button
+              key={sizeType}
+              onClick={() => setSize(sizeType)}
+              variant={size === sizeType ? 'solid' : 'outlined'}
+              size={sizeType}
+            >
+              {sizeType}
+            </Button>
+          ))}
+        </section>
         {colors.map(color => [
           ...variants.map(variant => (
-            <Button key={`${variant}-${color}`} color={color} variant={variant}>
+            <Button key={`${variant}-${color}`} size={size} color={color} variant={variant} isLoading={isLoading}>
               {variant}
             </Button>
           )),
         ])}
         {variants.map(variant => (
-          <Button key={`${variant}-disabled`} disabled variant={variant}>
+          <Button key={`${variant}-disabled`} size={size} disabled variant={variant} isLoading={isLoading}>
             disabled
           </Button>
         ))}
       </section>
+
+      <ActionModal isOpen={isOpen} backCard lineOnTop icon={FaUsers} onClose={() => setIsOpen(false)}>
+        <section className='w-200 h-50'>
+          <h1>Action modal</h1>
+        </section>
+      </ActionModal>
 
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis quia quidem reprehenderit tenetur? Ad,

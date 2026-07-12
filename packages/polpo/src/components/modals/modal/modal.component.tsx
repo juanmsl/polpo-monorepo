@@ -41,7 +41,7 @@ export const Modal = ({
   closeAnimationClassName = 'modal-close',
   modalRef: modalRefProp,
   closeOnClickOutside = true,
-  transitionDuration = 300,
+  transitionDuration = 500,
   windowOffset = 10,
   offset = 20,
   position,
@@ -94,7 +94,7 @@ export const Modal = ({
             'polpo-modal-content',
             className,
             Boolean(animation) && animation !== 'none' && `animation-${animation}`,
-            modalState === ModalState.CLOSING || (modalState === ModalState.CLOSED && closeAnimationClassName),
+            (modalState === ModalState.CLOSING || modalState === ModalState.CLOSED) && closeAnimationClassName,
           )}
         >
           {children}

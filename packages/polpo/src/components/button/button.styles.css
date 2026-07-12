@@ -28,7 +28,6 @@
         align-items: center;
         padding: 0.625em 2.1875em;
         gap: 0.625em;
-        width: auto;
         border-radius: 0.5em;
         font-weight: bold;
         font-size: var(--text-label);
@@ -87,6 +86,7 @@
         &.is-loading {
             pointer-events: none;
             cursor: progress;
+            opacity: 80%;
         }
 
         &:not(:disabled):not(.is-loading) {
