@@ -16,6 +16,7 @@ export type BackdropProps = {
   zIndex?: React.CSSProperties['zIndex'];
   backdropOnClick?: () => void;
   modalState?: ModalState;
+  backdropBackground?: string;
 };
 
 export const Backdrop = ({
@@ -24,18 +25,19 @@ export const Backdrop = ({
   zIndex,
   backdropOnClick,
   modalState,
+  backdropBackground = 'var(--modal-backdrop-background)',
 }: BackdropProps) => {
   const backgroundStyles = useMemo(() => {
     const backdropStyles = {
       [ModalBackdrop.OPAQUE]: {
-        background: `hsl(from var(--color-background-paper) h s l / ${opacity * 100}%)`,
+        background: `hsl(from ${backdropBackground} h s l / ${opacity * 100}%)`,
       },
       [ModalBackdrop.TRANSPARENT]: {
         background: 'transparent',
       },
       [ModalBackdrop.BLUR]: {
-        background: `hsl(from var(--color-background-paper) h s l / ${opacity * 100}%)`,
-        backdropFilter: 'blur(5px)',
+        background: `hsl(from ${backdropBackground} h s l / ${opacity * 100}%)`,
+        backdropFilter: 'blur(2px)',
       },
       [ModalBackdrop.NONE]: {
         display: 'none',
@@ -43,7 +45,7 @@ export const Backdrop = ({
     };
 
     return backdropStyles[backdrop] ?? {};
-  }, [backdrop, opacity]);
+  }, [backdrop, backdropBackground, opacity]);
 
   if (backdrop === ModalBackdrop.NONE) {
     return null;
@@ -55,12 +57,15 @@ export const Backdrop = ({
       onClick={backdropOnClick}
       className={cn(
         'polpo-modal-backdrop',
-        modalState === ModalState.CLOSING || (modalState === ModalState.CLOSED && 'backdrop-close'),
+        (modalState === ModalState.CLOSING || modalState === ModalState.CLOSED) && 'backdrop-close',
       )}
-      style={{
-        zIndex,
-        ...backgroundStyles,
-      }}
+      style={
+        {
+          '--modal-backdrop-background': 'var(--color-gray-400)',
+          zIndex,
+          ...backgroundStyles,
+        } as unknown as React.CSSProperties
+      }
     />
   );
 };

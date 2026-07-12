@@ -98,7 +98,7 @@ export const ActionModal = ({
               </Typography>
             ) : null}
             <section className='polpo-action-modal-body'>
-              <section className={`polpo-action-modal-content ${className}`} style={style}>
+              <section className={`polpo-action-modal-body-content ${className}`} style={style}>
                 {children}
               </section>
             </section>

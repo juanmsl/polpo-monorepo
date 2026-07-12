@@ -1,5 +1,5 @@
 import { CSSProperties, useMemo } from 'react';
-import { ImCross } from 'react-icons/im';
+import { LuX } from 'react-icons/lu';
 
 import { cn, PositionContainer } from '../../../helpers';
 import { Modal, ModalProps } from '../modal';
@@ -17,7 +17,9 @@ type AsideModalProps = Omit<
     | `${PositionContainer.BOTTOM}`;
   size?: number | `${number}px` | `${number}em`;
   className?: string;
+  contentClassName?: string;
   style?: React.CSSProperties;
+  noCloseButton?: boolean;
 };
 
 export const AsideModal = ({
@@ -27,6 +29,8 @@ export const AsideModal = ({
   position = PositionContainer.LEFT,
   size,
   className = '',
+  contentClassName = '',
+  noCloseButton = false,
   ...modalProps
 }: AsideModalProps) => {
   const modalRootStyles = useMemo<CSSProperties>(() => {
@@ -54,10 +58,12 @@ export const AsideModal = ({
       position={position}
       {...modalProps}
     >
-      <span className='close-modal-button' onClick={onClose}>
-        <ImCross />
-      </span>
-      <section className='polpo-aside-modal-content'>{children}</section>
+      {!noCloseButton && (
+        <span className='close-modal-button' onClick={onClose}>
+          <LuX />
+        </span>
+      )}
+      <section className={cn('polpo-aside-modal-content', contentClassName)}>{children}</section>
     </Modal>
   );
 };

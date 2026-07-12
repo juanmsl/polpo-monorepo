@@ -1,5 +1,5 @@
 'use client';
-import { ActionModal, Button, ColorTypes, SizeTypes, VariantTypes } from 'polpo/components';
+import { ActionModal, AsideModal, Button, ColorTypes, SizeTypes, VariantTypes } from 'polpo/components';
 import { useState } from 'react';
 import { FaUsers } from 'react-icons/fa';
 
@@ -10,13 +10,17 @@ const sizes = Object.values(SizeTypes);
 export default function UIPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [size, setSize] = useState<SizeTypes>(SizeTypes.REGULAR);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isActionModalOpen, setActionModalOpen] = useState(false);
+  const [isAsideModalOpen, setAsideModalOpen] = useState(false);
 
   return (
     <section>
       <section className='p-6 grid grid-cols-[repeat(4,200px)] gap-4'>
         <section className='col-span-4 flex gap-4 items-center'>
-          <Button onClick={() => setIsOpen(true)}>Open modal</Button>
+          <Button onClick={() => setActionModalOpen(true)}>Action modal</Button>
+          <Button onClick={() => setAsideModalOpen(true)}>Aside modal</Button>
+        </section>
+        <section className='col-span-4 flex gap-4 items-center'>
           <Button onClick={() => setIsLoading(p => !p)}>{isLoading ? 'loading...' : 'not loading'}</Button>
           {sizes.map(sizeType => (
             <Button
@@ -43,11 +47,26 @@ export default function UIPage() {
         ))}
       </section>
 
-      <ActionModal isOpen={isOpen} backCard lineOnTop icon={FaUsers} onClose={() => setIsOpen(false)}>
+      <ActionModal
+        isOpen={isActionModalOpen}
+        backCard
+        lineOnTop
+        icon={FaUsers}
+        onClose={() => setActionModalOpen(false)}
+      >
         <section className='w-200 h-50'>
           <h1>Action modal</h1>
         </section>
       </ActionModal>
+
+      <AsideModal size='400px' position='left' isOpen={isAsideModalOpen} onClose={() => setAsideModalOpen(false)}>
+        <h4>Aside modal</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid architecto autem consequatur culpa cumque
+          dolores, id laborum laudantium molestias nostrum provident quisquam, veniam voluptates. Atque consequuntur
+          quibusdam repellat. Aliquam, consectetur?
+        </p>
+      </AsideModal>
 
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum debitis quia quidem reprehenderit tenetur? Ad,

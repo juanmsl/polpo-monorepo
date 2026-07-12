@@ -5,6 +5,7 @@
         background: transparent;
 
         .polpo-modal-content {
+            background: transparent;
             &.shake-animation {
                 animation: headShake 600ms linear;
             }
@@ -21,18 +22,18 @@
             display: grid;
         }
 
-        .polpo-action-modal-content {
+        .polpo-action-modal-body-content {
             background: var(--color-background);
             padding: 3em 4em 2em;
             display: grid;
             gap: 1em;
         }
 
-        &.no-padding .polpo-action-modal-content {
+        &.no-padding .polpo-action-modal-body-content {
             padding: 2em 0 0;
         }
 
-        &:has(.action-modal-icon) .polpo-action-modal-content {
+        &:has(.action-modal-icon) .polpo-action-modal-body-content {
             padding-top: 4em;
         }
 
