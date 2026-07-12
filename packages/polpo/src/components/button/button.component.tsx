@@ -54,7 +54,7 @@ export const Button = ({
         isLoading && 'is-loading',
       )}
     >
-      {isLoading ? <FaSpinner className='size-[1.6em] py-[0.3em] animate-spin' /> : children}
+      {isLoading ? <FaSpinner className='icon-loader' /> : children}
       <Ripple disabled={isLoading || disabled} />
     </button>
   );

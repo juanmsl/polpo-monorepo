@@ -37,6 +37,13 @@
         user-select: none;
         white-space: nowrap;
 
+        .icon-loader {
+            width: 1.6em;
+            height: 1.6em;
+            padding: 0.3em;
+            animation: spin 1s infinite linear;
+        }
+
         &.icon {
             padding: 0.625em;
         }
