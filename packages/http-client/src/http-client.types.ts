@@ -97,6 +97,9 @@ export type HttpClientResponse<Response, Error extends HttpClientError<unknown>>
 export type OnRequestCallback = (requestInit: RequestInit) => Promise<RequestInit>;
 
 export type OnErrorCallback<Error extends HttpClientError<unknown> = HttpClientError<unknown>> = (
-  request: Omit<RequestParams<Error>, 'logger' | 'apiName' | 'getResponseError'>,
+  request: Omit<RequestParams<Error>, 'logger' | 'apiName' | 'getResponseError'> & {
+    isReFetch: boolean;
+    reFetch: () => Promise<HttpClientSuccessData<unknown>>;
+  },
   response: HttpClientErrorData<Error>,
-) => Promise<void>;
+) => Promise<HttpClientSuccessData<unknown> | undefined | void>;

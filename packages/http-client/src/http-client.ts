@@ -78,11 +78,13 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
   private async fetchCall<Response, NewResponse = Response>(
     requestParams: RequestParams<ClassError>,
     mapData: undefined | ((data: Response) => NewResponse),
+    isReFetch?: boolean,
   ): Promise<HttpClientSuccessData<NewResponse>>;
 
   private async fetchCall<Response, NewResponse = Response>(
     requestParams: RequestParams<ClassError>,
-    mapData?: undefined | ((data: Response) => NewResponse),
+    mapData?: (data: Response) => NewResponse,
+    isReFetch?: boolean,
   ): Promise<HttpClientSuccessData<Response | NewResponse>> {
     const { apiName, buildURL, request, getResponseError, retries } = requestParams;
     const response = await fetch(buildURL, request);
@@ -101,18 +103,24 @@ export class HttpClient<ClassError extends HttpClientError<unknown> = HttpClient
       });
 
       if (this.onErrorInterceptor) {
-        await this.onErrorInterceptor(
+        const newResponse = await this.onErrorInterceptor(
           {
             request: requestParams.request,
             buildURL: requestParams.buildURL,
             urlParams: requestParams.urlParams,
             retries: requestParams.retries,
+            isReFetch: Boolean(isReFetch),
+            reFetch: async () => {
+              return this.fetchCall<Response, NewResponse>(requestParams, mapData, true);
+            },
           },
           {
             status: response.status,
             error,
           },
         );
+
+        if (newResponse !== undefined) return newResponse as HttpClientSuccessData<Response | NewResponse>;
       }
 
       if (retries) {
