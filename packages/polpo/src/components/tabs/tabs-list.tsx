@@ -1,22 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { cn } from '../../helpers';
+import { useEventListener, useResizeObserver } from '../../hooks';
+import { ColorTypes, RadiusTypes, SizeTypes } from '../component.types';
 
 import { Tabs } from './tabs';
-
-export enum RadiusVariants {
-  None = 'none',
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-  Full = 'full',
-}
-
-export enum SizeVariants {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
 
 const DefaultRect = {
   top: 0,
@@ -32,12 +20,6 @@ export enum TabListVariant {
   LINE = 'line',
 }
 
-export enum TabListColor {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-}
-
 export enum TabListDirection {
   HORIZONTAL = 'horizontal',
   VERTICAL = 'vertical',
@@ -47,28 +29,36 @@ export type TabListProps = {
   openTab: string;
   variant?: `${TabListVariant}`;
   children?: React.ReactNode;
-  size?: `${SizeVariants}`;
-  color?: `${TabListColor}`;
-  radius?: `${RadiusVariants}`;
+  size?: `${SizeTypes}`;
+  color?: `${ColorTypes}`;
+  radius?: `${RadiusTypes}`;
   direction?: `${TabListDirection}`;
   className?: string;
+  tabsClassName?: string | ((isActive: boolean) => string);
+  variantLineHeight?: number;
+  selectorClassName?: string;
   style?: React.CSSProperties;
   tabs?: Array<{
     id: string;
     label: React.ReactNode;
+    className?: string | ((isActive: boolean) => string);
+    style?: React.CSSProperties;
   }>;
 };
 
 export const TabsList = ({
   tabs = [],
   variant = TabListVariant.SOLID,
-  radius = RadiusVariants.Full,
+  radius = RadiusTypes.SMALL,
   direction = TabListDirection.HORIZONTAL,
-  color,
+  color = ColorTypes.DEFAULT,
+  size = SizeTypes.REGULAR,
   children,
   openTab,
-  size = SizeVariants.Medium,
+  variantLineHeight = 3,
   className = '',
+  tabsClassName = '',
+  selectorClassName = '',
   style = {},
 }: TabListProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,12 +66,12 @@ export const TabsList = ({
   const [isSelectorActive, setIsSelectorActive] = useState(false);
   const [selector, setSelector] = useState(DefaultRect);
 
-  useEffect(() => {
+  const updateSelector = useCallback(() => {
     const selectedRect = selectedTabRef.current?.getBoundingClientRect() ?? DefaultRect;
     const containerRect = containerRef.current?.getBoundingClientRect() ?? DefaultRect;
 
     const width = selectedRect.width;
-    const height = variant === TabListVariant.LINE ? 2 : selectedRect.height;
+    const height = variant === TabListVariant.LINE ? variantLineHeight : selectedRect.height;
     const left = selectedRect.left - containerRect.left;
     const top =
       variant === TabListVariant.LINE
@@ -93,9 +83,16 @@ export const TabsList = ({
     if (!isSelectorActive) {
       setTimeout(() => {
         setIsSelectorActive(true);
-      }, 100);
+      }, 50);
     }
-  }, [isSelectorActive, variant, openTab]);
+  }, [isSelectorActive, variant, variantLineHeight]);
+
+  useEventListener('resize', updateSelector);
+  useResizeObserver(containerRef, updateSelector);
+
+  useEffect(() => {
+    updateSelector();
+  }, [openTab, updateSelector]);
 
   return (
     <section
@@ -104,18 +101,31 @@ export const TabsList = ({
         variant && `variant-${variant}`,
         size && `size-${size}`,
         radius && `radius-${radius}`,
-        color && `color-${color}`,
         direction === TabListDirection.VERTICAL && 'vertical-direction',
         className,
       )}
       ref={containerRef}
-      style={style}
+      style={
+        color === ColorTypes.DEFAULT
+          ? style
+          : ({
+              ...style,
+              '--color': `var(--color-${color}-500)`,
+              '--color-contrast': `var(--color-${color}-50)`,
+            } as React.CSSProperties)
+      }
     >
       {Boolean(variant) && (
-        <span className={cn('polpo-tabs-selector', isSelectorActive && 'active')} style={selector} />
+        <span className={cn('polpo-tabs-selector', isSelectorActive && 'active', selectorClassName)} style={selector} />
       )}
-      {tabs.map(({ id, label }) => (
-        <Tabs.Tab key={id} id={id} ref={id === openTab ? selectedTabRef : undefined}>
+      {tabs.map(({ id, label, className, style }) => (
+        <Tabs.Tab
+          key={id}
+          id={id}
+          className={className || tabsClassName}
+          style={style}
+          ref={id === openTab ? selectedTabRef : undefined}
+        >
           {label}
         </Tabs.Tab>
       ))}

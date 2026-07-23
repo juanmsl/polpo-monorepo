@@ -33,6 +33,7 @@ export const Button = ({
   fullWidth = false,
   disabled = false,
   className = '',
+  style = {},
   onClick,
   ...props
 }: ButtonProps) => {
@@ -43,7 +44,6 @@ export const Button = ({
       onClick={disabled || isLoading ? undefined : onClick}
       className={cn(
         'polpo-button',
-        color,
         variant,
         fullWidth && 'full',
         radius && `radius-${radius}`,
@@ -53,6 +53,29 @@ export const Button = ({
         className,
         isLoading && 'is-loading',
       )}
+      style={
+        color === ColorTypes.DEFAULT
+          ? style
+          : ({
+              ...style,
+              '--color': `var(--color-${color}-500)`,
+              '--solid-background': `var(--color-${color}-400)`,
+              '--solid-text': `var(--color-${color}-foreground)`,
+              '--solid-hover-background': `var(--color-${color}-300)`,
+              '--solid-active-background': `var(--color-${color}-500)`,
+              '--flat-text': `var(--color-${color}-700)`,
+              '--flat-background': `hsl(from var(--color-${color}-400) h s l / 50%)`,
+              '--flat-hover-background': `hsl(from var(--color-${color}-300) h s l / 50%)`,
+              '--flat-active-background': `hsl(from var(--color-${color}-300) h s l / 80%)`,
+              '--outlined-text': `var(--color-${color}-600)`,
+              '--outlined-hover-background': `hsl(from var(--color-${color}-400) h s l / 20%)`,
+              '--outlined-active-background': `hsl(from var(--color-${color}-500) h s l / 30%)`,
+              '--text-hover-background': `hsl(from var(--color-${color}-300) h s l / 20%)`,
+              '--text-active-background': `hsl(from var(--color-${color}-400) h s l / 30%)`,
+              '--shadow-color': `hsl(from var(--color-${color}-500) h s l / 20%)`,
+              '--focus-background': `hsl(from var(--color-${color}-200) h s l / 20%)`,
+            } as React.CSSProperties)
+      }
     >
       {isLoading ? <FaSpinner className='icon-loader' /> : children}
       <Ripple disabled={isLoading || disabled} />
