@@ -64,7 +64,7 @@ export const Tabs = ({ children, defaultOpenTab, onChange }: TabsProps) => {
 type TabProps = {
   id: string;
   children: React.ReactNode;
-  className?: string;
+  className?: string | ((isActive: boolean) => string);
   style?: React.CSSProperties;
   onClick?: (e: React.MouseEvent<HTMLSpanElement>) => void;
   ref?: React.RefObject<HTMLSpanElement | null>;
@@ -82,7 +82,12 @@ const Tab = ({ id, children, className = '', style = {}, onClick, ref }: TabProp
   };
 
   return (
-    <span className={cn('polpo-tab', className, isOpen && 'is-open')} style={style} onClick={handleClick} ref={ref}>
+    <span
+      className={cn('polpo-tab', isOpen && 'is-open', typeof className === 'function' ? className(isOpen) : className)}
+      style={style}
+      onClick={handleClick}
+      ref={ref}
+    >
       {children}
     </span>
   );
