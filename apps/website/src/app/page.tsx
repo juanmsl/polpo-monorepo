@@ -3,17 +3,17 @@
 import { SmartTable } from 'polpo/components';
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { CreditForm, ExtraPaymentForm } from '@/components';
+import { CreditEstimations, CreditForm, ExtraPaymentForm } from '@/components';
 import { CreditResults } from '@/components/credit-results.component';
 import { getColumns, getAmortizationTableData } from '@/helpers';
 import { AmortizationFormData } from '@/types';
 
 export default function Home() {
-  const [{ propertyValue, periods, interest, initialPayment, monthlyPayment }, setFormData] =
+  const [{ propertyValue, periods, annualInterest, initialPayment, monthlyPayment }, setFormData] =
     useState<AmortizationFormData>({
       propertyValue: 520000000,
       periods: 180,
-      interest: 0.01,
+      annualInterest: 12.0,
       initialPayment: 180000000,
       monthlyPayment: 0,
     });
@@ -22,16 +22,16 @@ export default function Home() {
     setFormData(prev => ({ ...prev, [key]: value }));
   }, []);
 
-  const { creditValue, monthlyFee, data, extraPayment } = useMemo(
+  const { creditValue, interest, monthlyFee, data, originalData, extraPayment } = useMemo(
     () =>
       getAmortizationTableData({
         periods,
         monthlyPayment,
         propertyValue,
         initialPayment,
-        interest,
+        annualInterest,
       }),
-    [initialPayment, interest, monthlyPayment, periods, propertyValue],
+    [initialPayment, annualInterest, monthlyPayment, periods, propertyValue],
   );
 
   return (
@@ -39,6 +39,7 @@ export default function Home() {
       <CreditForm
         propertyValue={propertyValue}
         periods={periods}
+        annualInterest={annualInterest}
         interest={interest}
         creditValue={creditValue}
         monthlyFee={monthlyFee}
@@ -58,11 +59,20 @@ export default function Home() {
         extraPayment={extraPayment}
         data={data}
       />
+      <CreditEstimations
+        data={data}
+        extraPayment={extraPayment}
+        originalData={originalData}
+        creditValue={creditValue}
+        propertyValue={propertyValue}
+        periods={periods}
+        monthlyFee={monthlyFee}
+      />
       <SmartTable
         rowId='period'
         columns={getColumns(!!extraPayment)}
         data={data}
-        className='table-container'
+        className='table-container rounded-2xl border border-primary'
         tableClassName='table-background'
       />
     </section>

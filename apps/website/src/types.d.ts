@@ -11,7 +11,7 @@ export type RowData = {
 export type AmortizationFormData = {
   propertyValue: number;
   periods: number;
-  interest: number;
+  annualInterest: number;
   initialPayment: number;
   monthlyPayment: number;
 };

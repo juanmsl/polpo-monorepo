@@ -45,7 +45,7 @@ export const Slider = ({
   const onBlurInput = (e: React.FocusEvent<HTMLInputElement>) => {
     if (onBlur) onBlur(e);
 
-    const parsedValue = parseInt(`${value}`);
+    const parsedValue = parseFloat(`${value}`);
 
     if (min !== undefined && parsedValue < min) {
       setValue(min);

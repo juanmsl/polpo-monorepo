@@ -21,6 +21,10 @@ export const useModalTransition = ({ transitionDuration = 0, isOpen }: UseModalT
 
   useEffect(() => {
     document.documentElement.style.overflow = isVisible ? 'hidden' : 'auto';
+
+    return () => {
+      document.documentElement.style.overflow = 'auto';
+    };
   }, [isVisible]);
 
   const closeModal = useCallback(() => {

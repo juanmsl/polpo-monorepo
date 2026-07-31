@@ -48,7 +48,7 @@ body {
     gap: 2em;
     place-content: center;
     grid-template-columns: 1000px 300px;
-    grid-template-areas: 'main third' 'second third' 'table table';
+    grid-template-areas: 'main third' 'second third' 'estimations estimations' 'table table';
 }
 
 .main-section {
@@ -91,7 +91,6 @@ body {
     gap: 2em;
     display: grid;
     align-content: center;
-
 }
 
 .left-card {
@@ -111,8 +110,6 @@ body {
 
 .table-container {
     grid-area: table;
-    border-radius: 2em !important;
-    border: 0;
     max-height: 600px;
     overflow: auto;
 
@@ -141,4 +138,15 @@ body {
         transform: translateY(-50%);
         border-radius: 0 1em 1em 0;
     }
+}
+
+.section-estimations {
+    grid-area: estimations;
+    background: hsl(from var(--color-background) h s l / 50%);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px var(--color-gray-200);
+    border-radius: 2em;
+    padding: 1em 2em;
+    display: grid;
+    gap: 2em;
 }
