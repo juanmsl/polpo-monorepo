@@ -9,6 +9,7 @@ import { AmortizationFormData } from '@/types';
 type CreditFormProps = {
   propertyValue: number;
   periods: number;
+  annualInterest: number;
   interest: number;
   creditValue: number;
   monthlyFee: number;
@@ -19,6 +20,7 @@ type CreditFormProps = {
 export const CreditForm = ({
   propertyValue,
   periods,
+  annualInterest,
   interest,
   creditValue,
   monthlyFee,
@@ -71,9 +73,10 @@ export const CreditForm = ({
         />
         <Slider
           name='interest'
-          value={interest * 1200}
-          setValue={v => onChange('interest', v / 1200)}
+          value={annualInterest}
+          setValue={v => onChange('annualInterest', v)}
           label='Interes anual'
+          step={0.1}
           min={5}
           max={20}
         />

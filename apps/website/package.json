@@ -11,25 +11,29 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "polpo-tailwind-config": "workspace:*",
+    "@nivo/bar": "^0.99.0",
+    "@nivo/core": "^0.99.0",
+    "@nivo/line": "^0.99.0",
+    "@nivo/pie": "^0.99.0",
+    "next": "16.2.6",
     "polpo": "workspace:*",
+    "polpo-tailwind-config": "workspace:*",
     "react": "*",
     "react-dom": "*",
-    "next": "16.2.6",
     "react-icons": "*",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "polpo-eslint-config": "workspace:*",
-    "polpo-typescript-config": "workspace:*",
-    "typescript": "^5.8.2",
+    "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "@tailwindcss/postcss": "^4.1.11",
-    "tailwindcss": "^4.1.11",
     "eslint": "^9.31.0",
-    "eslint-config-next": "16.2.6"
+    "eslint-config-next": "16.2.6",
+    "polpo-eslint-config": "workspace:*",
+    "polpo-typescript-config": "workspace:*",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.2"
   }
 }

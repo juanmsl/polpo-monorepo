@@ -4,13 +4,40 @@ import React from 'react';
 import { MoneyFormat } from '@/helpers/formatters';
 import { AmortizationFormData, RowData } from '@/types';
 
+interface DataPointConstraints {
+  interest: number;
+  last: RowData;
+  monthlyFee: number;
+  monthlyPayment: number;
+}
+
+const getDataPoint = ({ interest, last, monthlyPayment, monthlyFee }: DataPointConstraints): RowData => {
+  const newInterest = interest * last.balance;
+  const fee = last.balance + newInterest + 1 >= monthlyFee ? monthlyFee : 0;
+  const additional = Math.max(monthlyPayment - fee, 0);
+  const calculatedAdditional = last.balance - fee + newInterest;
+  const totalAdditional = calculatedAdditional > additional ? additional : calculatedAdditional;
+  const capital = fee + totalAdditional - newInterest;
+
+  return {
+    period: last.period + 1,
+    monthlyFee: fee,
+    additional: totalAdditional,
+    totalMonthlyPayment: fee + totalAdditional,
+    interest: newInterest,
+    capital,
+    balance: last.balance - capital,
+  };
+};
+
 export const getAmortizationTableData = ({
   periods,
   monthlyPayment,
   propertyValue,
   initialPayment,
-  interest,
+  annualInterest,
 }: AmortizationFormData) => {
+  const interest = annualInterest / 1200;
   const creditValue = propertyValue - initialPayment;
   const monthlyFee = creditValue * (interest / (1 - Math.pow(1 + interest, -periods)));
   const extraPayment = Math.max(monthlyPayment - monthlyFee, 0);
@@ -26,33 +53,37 @@ export const getAmortizationTableData = ({
       balance: creditValue,
     },
   ];
+  const originalData = [...data];
 
-  for (let i = 1; i <= periods && data[data.length - 1].balance > 0; i++) {
-    const last = data[data.length - 1];
+  for (let i = 1; i <= periods; i++) {
+    if (data[data.length - 1].balance > 0) {
+      data.push(
+        getDataPoint({
+          last: data[data.length - 1],
+          interest,
+          monthlyFee,
+          monthlyPayment,
+        }),
+      );
+    }
 
-    const newInterest = interest * last.balance;
-    const fee = last.balance + newInterest + 1 >= monthlyFee ? monthlyFee : 0;
-    const additional = Math.max(monthlyPayment - fee, 0);
-    const calculatedAdditional = last.balance - fee + newInterest;
-    const totalAdditional = calculatedAdditional > additional ? additional : calculatedAdditional;
-    const capital = fee + totalAdditional - newInterest;
-
-    data.push({
-      period: last.period + 1,
-      monthlyFee: fee,
-      additional: totalAdditional,
-      totalMonthlyPayment: fee + totalAdditional,
-      interest: newInterest,
-      capital,
-      balance: last.balance - capital,
-    });
+    originalData.push(
+      getDataPoint({
+        last: originalData[originalData.length - 1],
+        interest,
+        monthlyFee,
+        monthlyPayment: 0,
+      }),
+    );
   }
 
   return {
     data,
+    originalData,
     creditValue,
     monthlyFee,
     extraPayment,
+    interest,
   };
 };
 
@@ -79,7 +110,7 @@ export const getCreditResults = ({ monthlyFee, periods, creditValue, data }: Get
     ...payments,
     totalPaymentSavingsPercentage:
       ((payments.noExtraPayment.total - payments.extraPayment.total) / payments.noExtraPayment.total) * 100,
-    timeSavingsPercentage: ((periods - data.length) / periods) * 100,
+    timeSavingsPercentage: ((periods - data[data.length - 1].period) / periods) * 100,
   };
 };
 

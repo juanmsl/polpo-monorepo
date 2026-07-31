@@ -3,7 +3,7 @@ import { Grid } from 'polpo/layouts';
 import { useMemo } from 'react';
 
 import { Metric } from '@/components/metric.component';
-import { getCreditResults, getTotalTime, MoneyFormat, PercentageFormat } from '@/helpers';
+import { getCreditResults, getTotalTime, MoneyFixedFormat, MoneyFormat, PercentageFormat } from '@/helpers';
 import { RowData } from '@/types';
 
 type CreditResultsProps = {
@@ -33,8 +33,8 @@ export const CreditResults = ({ periods, creditValue, data, monthlyFee, extraPay
           Sin abono a capital
         </Typography>
         <section>
-          <Metric label='Pago total' value={MoneyFormat(stats.noExtraPayment.total)} />
-          <Metric label='Intereses' value={MoneyFormat(stats.noExtraPayment.interest)} />
+          <Metric label='Pago total' value={MoneyFixedFormat(stats.noExtraPayment.total)} />
+          <Metric label='Intereses' value={MoneyFixedFormat(stats.noExtraPayment.interest)} />
         </section>
       </Grid>
       {extraPayment ? (
@@ -45,8 +45,8 @@ export const CreditResults = ({ periods, creditValue, data, monthlyFee, extraPay
               Con abono a capital
             </Typography>
             <section>
-              <Metric label='Pago total' value={MoneyFormat(stats.extraPayment.total)} />
-              <Metric label='Intereses' value={MoneyFormat(stats.extraPayment.interest)} />
+              <Metric label='Pago total' value={MoneyFixedFormat(stats.extraPayment.total)} />
+              <Metric label='Intereses' value={MoneyFixedFormat(stats.extraPayment.interest)} />
             </section>
           </Grid>
           <Line orientation='horizontal' />
@@ -60,7 +60,7 @@ export const CreditResults = ({ periods, creditValue, data, monthlyFee, extraPay
             <Grid>
               <Typography variant='label'>
                 Pagando <b>{MoneyFormat(extraPayment)}</b> extra mensualmente, terminarás de pagar el crédito en{' '}
-                <b>{getTotalTime(data.length)}</b>, en lugar de <b>{getTotalTime(periods)}</b>, pagándolo un{' '}
+                <b>{getTotalTime(data.length - 1)}</b>, en lugar de <b>{getTotalTime(periods)}</b>, pagándolo un{' '}
                 <b>{PercentageFormat(stats.timeSavingsPercentage)}</b> más rápido.
               </Typography>
             </Grid>
