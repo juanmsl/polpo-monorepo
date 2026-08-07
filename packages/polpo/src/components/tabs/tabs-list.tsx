@@ -4,7 +4,7 @@ import { cn } from '../../helpers';
 import { useEventListener, useResizeObserver } from '../../hooks';
 import { ColorTypes, RadiusTypes, SizeTypes } from '../component.types';
 
-import { Tabs } from './tabs';
+import { TabProps, Tabs } from './tabs';
 
 const DefaultRect = {
   top: 0,
@@ -38,12 +38,11 @@ export type TabListProps = {
   variantLineHeight?: number;
   selectorClassName?: string;
   style?: React.CSSProperties;
-  tabs?: Array<{
-    id: string;
-    label: React.ReactNode;
-    className?: string | ((isActive: boolean) => string);
-    style?: React.CSSProperties;
-  }>;
+  tabs?: Array<
+    Omit<TabProps, 'onClick' | 'children'> & {
+      label: React.ReactNode;
+    }
+  >;
 };
 
 export const TabsList = ({
@@ -92,7 +91,7 @@ export const TabsList = ({
 
   useEffect(() => {
     updateSelector();
-  }, [openTab, updateSelector]);
+  }, [openTab, updateSelector, tabs]);
 
   return (
     <section
@@ -118,13 +117,13 @@ export const TabsList = ({
       {Boolean(variant) && (
         <span className={cn('polpo-tabs-selector', isSelectorActive && 'active', selectorClassName)} style={selector} />
       )}
-      {tabs.map(({ id, label, className, style }) => (
+      {tabs.map(({ id, label, className, ref, ...tabProps }) => (
         <Tabs.Tab
+          {...tabProps}
           key={id}
           id={id}
           className={className || tabsClassName}
-          style={style}
-          ref={id === openTab ? selectedTabRef : undefined}
+          ref={id === openTab ? selectedTabRef : ref}
         >
           {label}
         </Tabs.Tab>

@@ -11,10 +11,10 @@ import { AmortizationFormData } from '@/types';
 export default function Home() {
   const [{ propertyValue, periods, annualInterest, initialPayment, monthlyPayment }, setFormData] =
     useState<AmortizationFormData>({
-      propertyValue: 520000000,
+      propertyValue: 520_000_000,
       periods: 180,
       annualInterest: 12.0,
-      initialPayment: 180000000,
+      initialPayment: 180_000_000,
       monthlyPayment: 0,
     });
 

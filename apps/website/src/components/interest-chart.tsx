@@ -6,21 +6,13 @@ import { RowData } from '@/types';
 
 interface InterestChartProps {
   data: Array<RowData>;
-  originalData: Array<RowData>;
   creditValue: number;
   periods: number;
   monthlyFee: number;
   extraPayment: number;
 }
 
-export const InterestChart = ({
-  data,
-  originalData,
-  extraPayment,
-  creditValue,
-  periods,
-  monthlyFee,
-}: InterestChartProps) => {
+export const InterestChart = ({ data, extraPayment, creditValue, periods, monthlyFee }: InterestChartProps) => {
   const stats = useMemo(
     () =>
       getCreditResults({
@@ -62,7 +54,7 @@ export const InterestChart = ({
               label: 'Intereses',
               value: stats.extraPayment.interest,
             },
-            ...(data.length < originalData.length
+            ...(extraPayment
               ? [
                   {
                     id: 'Ahorro',
@@ -76,7 +68,7 @@ export const InterestChart = ({
         />
       </section>
       <section>
-        {data.length < originalData.length && (
+        {Boolean(extraPayment) && (
           <label className='block px-4 py-2 bg-info/20 text-info-700 text-center rounded-xl'>
             Pagando <b>{MoneyFormat(extraPayment)}</b> extra mensualmente, te ahorrarias{' '}
             <b>

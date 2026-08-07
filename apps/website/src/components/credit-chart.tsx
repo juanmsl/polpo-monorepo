@@ -62,12 +62,8 @@ export const CreditChart = ({
           axisLeft={{ legendOffset: -40, format: CompactFormat }}
           axisBottom={{ legend: 'Meses', legendOffset: 36, tickValues: 20 }}
           yFormat={MoneyFixedFormat}
-          data={data.length === originalData.length ? [chartOriginalData] : [chartData, chartOriginalData]}
-          colors={
-            data.length === originalData.length
-              ? ['var(--color-primary)']
-              : ['var(--color-primary)', 'var(--color-secondary)']
-          }
+          data={extraPayment ? [chartData, chartOriginalData] : [chartOriginalData]}
+          colors={extraPayment ? ['var(--color-primary)', 'var(--color-secondary)'] : ['var(--color-primary)']}
           sliceTooltip={({ slice }) => {
             return (
               <div className='bg-white px-4 py-2 rounded-2xl w-80 whitespace-nowrap shadow-2xl'>
@@ -98,9 +94,8 @@ export const CreditChart = ({
             );
           }}
           markers={
-            data.length === originalData.length
-              ? []
-              : [
+            extraPayment
+              ? [
                   {
                     axis: 'x',
                     value: data[data.length - 1].period,
@@ -117,11 +112,12 @@ export const CreditChart = ({
                     },
                   },
                 ]
+              : []
           }
         />
       </section>
       <section>
-        {data.length < originalData.length && (
+        {Boolean(extraPayment) && (
           <label className='block px-4 py-2 bg-info/20 text-info-700 text-center rounded-xl'>
             Pagando <b>{MoneyFormat(extraPayment)}</b> extra mensualmente, terminarás de pagar el crédito en{' '}
             <b>{getTotalTime(data.length - 1)}</b>, en lugar de <b>{getTotalTime(periods)}</b>, pagándolo un{' '}

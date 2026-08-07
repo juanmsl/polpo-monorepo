@@ -39,11 +39,12 @@ export const CreditEstimations = ({
           color='primary'
           variant='ghost'
           radius='full'
+          className='grid-flow-row md:grid-flow-col'
           tabsClassName={isActive => (isActive ? 'font-bold' : 'font-bold text-gray-400')}
           tabs={[
             { id: CreditEstimationTabs.TIME_CHART, label: 'Tiempo' },
             { id: CreditEstimationTabs.INTEREST_CHART, label: 'Intereses' },
-            { id: CreditEstimationTabs.COSTS_TABLE, label: 'Costos totales' },
+            { id: CreditEstimationTabs.COSTS_TABLE, label: 'Costos totales', isHidden: !extraPayment },
             { id: CreditEstimationTabs.SELL_DATA, label: 'Gastos de venta' },
           ]}
         />
@@ -63,7 +64,6 @@ export const CreditEstimations = ({
             <InterestChart
               monthlyFee={monthlyFee}
               data={data}
-              originalData={originalData}
               creditValue={creditValue}
               extraPayment={extraPayment}
               periods={periods}
@@ -71,7 +71,6 @@ export const CreditEstimations = ({
           </Tabs.TabPanel>
           <Tabs.TabPanel id={CreditEstimationTabs.COSTS_TABLE}>
             <EstimationsChart
-              originalData={originalData}
               extraPayment={extraPayment}
               monthlyFee={monthlyFee}
               data={data}
