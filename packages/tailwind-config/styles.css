@@ -1,4 +1,3 @@
-@import "tailwindcss";
 @import "./animations.css";
 
 :root {
@@ -184,7 +183,7 @@
      * DIMENSIONS
      * ================================================ */
     --radius: 0.625rem;
-    --spacing: 0.2rem;
+    --spacing: 0.25rem;
 
     /* ================================================
      * TYPOGRAPHY
@@ -229,9 +228,9 @@
     --text-hero--font-weight: bolder;
     --text-hero--letter-spacing: -4px;
 
-    /* ================================================
-   * BREAKPOINTS
-   * ================================================ */
+   /* ================================================
+    * BREAKPOINTS
+    * ================================================ */
     --breakpoint-2xs: 360px;
     --breakpoint-xs: 480px;
     --breakpoint-sm: 640px;

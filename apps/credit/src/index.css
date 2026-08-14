@@ -1,0 +1,181 @@
+@import "tailwindcss";
+@import "polpo-tailwind-config/styles";
+@import "polpo/components.css";
+
+@theme {
+  --color-active: hsl(147 100% 35%);
+  --color-alert: hsl(359 90% 62%);
+  --color-warning: hsl(38 100% 50%);
+  --color-info: hsl(210 100% 51%);
+  --color-primary: hsl(174 53% 28%);
+  --color-secondary: hsl(79 52% 70%);
+  --color-tertiary: hsl(181 64% 57%);
+  --color-highlight: hsl(205 100% 68%);
+  --color-accent: hsl(285 26% 70%);
+
+  --color-background: var(--color-white);
+  --color-background-paper: hsl(0 0 91%);
+  --color-background-disabled: var(--color-gray-400);
+  --color-foreground: hsl(32 54% 13%);
+  --color-foreground-disabled: var(--color-gray-900);
+  --color-border: hsl(300 18% 79%);
+
+  --font-main: 'Montserrat', 'Segoe UI', sans-serif;
+  --font-title: 'Josefin Sans', var(--font-main);
+  --font-brand: 'Roboto', var(--font-title);
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@layer utilities {
+  body {
+    background-size: 40px 40px;
+    background-position:
+      0 0,
+      20px 20px;
+    background-image: radial-gradient(var(--color-primary-500) 1px, var(--color-background-paper) 1px),
+    radial-gradient(var(--color-primary-500) 1px, var(--color-background-paper) 1px);
+    background-attachment: fixed;
+    min-height: 100dvh;
+  }
+
+  .calculator {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'main' 'second' 'estimations';
+    padding: 10em 2.5em 2.5em;
+    gap: 2em;
+    place-content: center;
+  }
+
+  .main-section {
+    display: grid;
+    background: hsl(from var(--color-background) h s l / 50%);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px var(--color-gray-200);
+    border-radius: 2em;
+    overflow: hidden;
+    grid-area: main;
+
+    .left-card {
+      display: grid;
+      align-content: center;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2em;
+      background: hsl(from var(--color-primary-50) h s l / 80%);
+      padding: 2em;
+    }
+
+    .right-card {
+      display: grid;
+      align-content: center;
+      gap: 1em;
+      padding: 4em 4em 4em 2em;
+    }
+  }
+
+  .second-section {
+    background: hsl(from var(--color-background) h s l / 50%);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px var(--color-gray-200);
+    border-radius: 2em;
+    overflow: hidden;
+    grid-area: second;
+
+    .section-header {
+      padding: 1em 2em;
+      background: hsl(from var(--color-primary-50) h s l / 80%);
+    }
+
+    .section-content {
+      padding: 1em 2em 2em;
+    }
+  }
+
+  .third-section {
+    color: var(--color-primary-500);
+    background: linear-gradient(135deg, hsl(from var(--color-primary-500) h s l / 50%), hsl(from var(--color-secondary-500) h s l / 50%));
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px var(--color-gray-200);
+    border-radius: 2em;
+    overflow: hidden;
+    grid-area: third;
+    padding: 2em;
+    gap: 2em;
+    display: none;
+    align-content: center;
+  }
+
+  .credit-bar {
+    --credit-size: 0;
+    background: var(--color-primary-100);
+    position: relative;
+    height: 10px;
+    border-radius: 1em;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      height: 10px;
+      background: var(--color-primary-500);
+      width: var(--credit-size);
+      transform: translateY(-50%);
+      border-radius: 0 1em 1em 0;
+    }
+  }
+
+  .section-estimations {
+    grid-area: estimations;
+    background: hsl(from var(--color-background) h s l / 50%);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px var(--color-gray-200);
+    border-radius: 2em;
+    padding: 1em 2em;
+    display: grid;
+    gap: 2em;
+  }
+
+  @media all and (min-width: 640px) {
+    .main-section {
+      .left-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+
+  @media all and (min-width: 1024px) {
+    .calculator {
+      grid-template-columns: 1fr 300px;
+      grid-template-areas: 'main third' 'second third' 'estimations estimations';
+    }
+
+    .third-section {
+      display: grid;
+    }
+  }
+
+  @media all and (min-width: 1280px) {
+    .main-section {
+      grid-template-columns: 400px auto;
+
+      .left-card {
+        grid-template-columns: 1fr;
+        padding: 4em 2em 4em 4em;
+      }
+    }
+  }
+
+  @media all and (min-width: 1440px) {
+    .calculator {
+      grid-template-columns: 1000px 300px;
+    }
+  }
+}
