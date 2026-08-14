@@ -28,6 +28,7 @@ export default defineConfig([
       react: 'React',
       'react-dom': 'ReactDOM',
     },
+    injectStyle: false,
     esbuildPlugins: [postcss()],
     esbuildOptions: options => {
       options.packages = 'external';

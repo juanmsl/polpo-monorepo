@@ -1,3 +1,7 @@
-import { postcssConfig } from 'polpo-tailwind-config/postcss';
+export const postcssConfig = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+};
 
 export default postcssConfig;

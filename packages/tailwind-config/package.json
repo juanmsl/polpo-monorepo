@@ -1,17 +1,13 @@
 {
   "name": "polpo-tailwind-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "private": false,
   "exports": {
-    "./styles": "./shared-styles.css",
-    "./postcss": "./postcss.config.js"
+    "./styles": "./styles.css"
   },
   "devDependencies": {
     "polpo-eslint-config": "workspace:*",
-    "polpo-typescript-config": "workspace:*",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.11",
-    "tw-animate-css": "^1.3.5"
+    "tailwindcss": "^4"
   }
 }
