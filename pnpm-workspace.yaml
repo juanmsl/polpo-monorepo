@@ -3,7 +3,6 @@ packages:
   - apps/*
   - packages/*
 
-nodeLinker: hoisted
 ignoreScripts: true
 autoInstallPeers: true
 strictPeerDependencies: false
