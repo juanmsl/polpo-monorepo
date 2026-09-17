@@ -1,0 +1,40 @@
+{
+  "name": "polpo-docs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "check-types": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "polpo": "workspace:*",
+    "polpo-tailwind-config": "workspace:*",
+    "react": "*",
+    "react-dom": "*",
+    "react-icons": "*",
+    "tailwindcss": "*"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-onboarding": "^10.6.0",
+    "@storybook/react-vite": "^10.6.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*",
+    "@vitejs/plugin-react": "^6.1.0",
+    "eslint": "*",
+    "polpo-eslint-config": "workspace:*",
+    "polpo-typescript-config": "workspace:*",
+    "storybook": "^10.6.0",
+    "typescript": "*",
+    "vite": "^8.2.2"
+  }
+}

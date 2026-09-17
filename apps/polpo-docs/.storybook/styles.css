@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "polpo-tailwind-config/styles";
+@import "polpo/components.css";
+
+@theme {
+  --color-primary: #B91345;
+  --color-secondary: #450b7c;
+  --color-tertiary: #012e64;
+
+  --font-main: 'Montserrat', 'Segoe UI', sans-serif;
+  --font-title: 'Josefin Sans', var(--font-main);
+  --font-brand: 'Roboto', var(--font-title);
+}

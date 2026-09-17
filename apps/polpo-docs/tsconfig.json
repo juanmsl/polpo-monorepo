@@ -1,0 +1,14 @@
+{
+  "extends": "polpo-typescript-config/vite",
+  "include": ["**/*.ts", "**/*.tsx", ".storybook/**/*.ts", ".storybook/**/*.tsx"],
+  "exclude": ["dist", "lib", "node_modules"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": "src",
+    "paths": {
+      "@polpo/helpers": ["./helpers"],
+      "@polpo/hooks": ["./hooks"]
+    }
+  },
+}
