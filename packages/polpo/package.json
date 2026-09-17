@@ -95,6 +95,7 @@
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
@@ -113,10 +114,10 @@
     "tailwindcss": "^4.1.11"
   },
   "dependencies": {
-    "polpo-tailwind-config": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "color": "^5.0.3",
+    "polpo-tailwind-config": "workspace:*",
     "react-colorful": "^5.7.0",
     "react-hook-form": "7.75.0",
     "react-icons": "*",
