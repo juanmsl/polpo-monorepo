@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 
+/** Adds an event listener to window (default), document, a media query or an element ref, and removes it on unmount. */
 function useEventListener<EventName extends keyof MediaQueryListEventMap>(
   eventName: EventName,
   callback: (event: MediaQueryListEventMap[EventName]) => void,

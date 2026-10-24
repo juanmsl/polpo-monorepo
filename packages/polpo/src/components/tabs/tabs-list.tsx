@@ -13,6 +13,7 @@ const DefaultRect = {
   height: 0,
 };
 
+/** Visual variants of a tab list. */
 export enum TabListVariant {
   SOLID = 'solid',
   GHOST = 'ghost',
@@ -20,6 +21,7 @@ export enum TabListVariant {
   LINE = 'line',
 }
 
+/** Layout direction of a tab list. */
 export enum TabListDirection {
   HORIZONTAL = 'horizontal',
   VERTICAL = 'vertical',
@@ -45,6 +47,7 @@ export type TabListProps = {
   >;
 };
 
+/** Presentational animated tab bar controlled by `openTab`. Inside `Tabs`, use `Tabs.TabList` instead. */
 export const TabsList = ({
   tabs = [],
   variant = TabListVariant.SOLID,

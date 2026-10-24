@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 
+/** Lifecycle states of a modal transition. */
 export enum ModalState {
   OPENING = 'OPENING',
   OPEN = 'OPEN',
@@ -12,6 +13,7 @@ export type UseModalTransitionParams = {
   isOpen: boolean;
 };
 
+/** Open/close transition state of a modal; locks page scroll while visible. */
 export const useModalTransition = ({ transitionDuration = 0, isOpen }: UseModalTransitionParams) => {
   const [modalState, setModalState] = React.useState<ModalState>(ModalState.CLOSED);
 

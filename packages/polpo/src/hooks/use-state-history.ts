@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+/** useState that also returns the history of values: `[state, setState, history]`. */
 function useStateHistory<T>(initialState: T | (() => T)): [T, Dispatch<SetStateAction<T>>, Array<T>];
 
 function useStateHistory<T = undefined>(): [T | undefined, Dispatch<SetStateAction<T | undefined>>, Array<T>];

@@ -56,6 +56,7 @@ type TabsProps = {
   onChange?: (id: string) => void;
 };
 
+/** Stateful tabs. Compose `Tabs.TabList` with `Tabs.Tab` headers and `Tabs.TabPanel` contents, matched by `id`. */
 export const Tabs = ({ children, defaultOpenTab, onChange }: TabsProps) => {
   const [openTab, setOpenTab] = useState(defaultOpenTab);
   const [tabs, setTabs] = useState<TabsContextState['tabsStatus']>({});

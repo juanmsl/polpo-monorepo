@@ -27,6 +27,7 @@ type GridProps = React.HTMLAttributes<HTMLDivElement> & {
   ref?: React.Ref<HTMLElement>;
 };
 
+/** CSS grid container: grid properties as short props (`gtc`=grid-template-columns, `gtr`, `gta`, `flow`, `gap`, `jc`, `ji`, `ai`, `columnSize`=grid-auto-columns...). Renders a `<section>` unless `tag` is set. */
 export const Grid = ({
   tag = 'section',
   children,

@@ -11,6 +11,7 @@ type OptionProps<T extends SelectItem> = {
   value: T;
 };
 
+/** Selectable option inside a `Select` (also available as `Select.Option`). */
 export const Option = <T extends SelectItem>({ children, value }: OptionProps<T>) => {
   const { multiselect, isEqualComparator, maxOptions, selectedValue, setValue, setIsOpen } = useSelectContext<T>();
 

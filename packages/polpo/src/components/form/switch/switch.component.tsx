@@ -40,6 +40,7 @@ type SwitchProps = {
   width?: `${SizeTypes}`;
 };
 
+/** Boolean toggle switch with optional side labels/icons, theme color and size. Use `Switch.Controller` in forms. */
 export const Switch = ({
   name,
   value,

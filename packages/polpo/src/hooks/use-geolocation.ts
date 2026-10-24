@@ -15,6 +15,7 @@ type UseGeolocationReturn = {
   isLoading: boolean;
 };
 
+/** Watches the browser geolocation: `{ data, error, isLoading }`. */
 export const useGeolocation = (): UseGeolocationReturn => {
   const [data, setData] = useState<GeolocationData | null>(null);
   const [error, setError] = useState<GeolocationError | null>(null);

@@ -43,6 +43,7 @@ const useDynamicHeight = ({
   return { h };
 };
 
+/** Internal list of options rendered by `Select`, with optional search box. */
 export const Options = ({
   children,
   searchQueryValue,

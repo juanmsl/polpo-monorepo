@@ -18,6 +18,7 @@ type MenuProps = ModalProps & {
   menuContentRef?: RefObject<HTMLUListElement>;
 };
 
+/** Dropdown / context menu anchored to an element (`containerRef`), composed with `Menu.Option`, `Menu.Group`, `Menu.GroupLabel` and `Menu.Divider`. */
 export const Menu = ({
   children,
   isOpen,

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useResizeObserver } from './use-resize-observer';
 
+/** Returns the `{ width, height }` of an element, updated with a ResizeObserver. */
 export const useDimensions = (ref: React.RefObject<HTMLElement>) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 

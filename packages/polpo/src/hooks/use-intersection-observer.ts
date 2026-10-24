@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
+/** Observes one or more refs with an IntersectionObserver. */
 export const useIntersectionObserver = <T extends Element>(
   ref: RefObject<T | null> | Array<RefObject<T | null>>,
   callback: IntersectionObserverCallback,

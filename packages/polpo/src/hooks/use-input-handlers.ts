@@ -8,6 +8,7 @@ type UseInputHandlersProps<T extends InputTypes> = {
   onChange?: (e: React.ChangeEvent<T>) => void;
 };
 
+/** Focus/blur/change handlers for inputs that also track `isFocus`. */
 export const useInputHandlers = <T extends InputTypes>({
   onBlur,
   onFocus,

@@ -15,6 +15,7 @@ type TextareaProps = InputFieldProps<{
   rightIcon?: never;
 }>;
 
+/** Multi-line text input inside a `Field`. Use `Textarea.Controller` in forms. */
 export const Textarea = ({
   name,
   value,

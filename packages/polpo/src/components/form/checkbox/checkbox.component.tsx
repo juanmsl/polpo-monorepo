@@ -18,6 +18,7 @@ type CheckboxProps = {
   size?: `${SizeTypes}`;
 };
 
+/** Boolean checkbox with label, theme color and size. Use `Checkbox.Controller` inside a react-hook-form `FormProvider`. */
 export const Checkbox = ({
   name,
   value,

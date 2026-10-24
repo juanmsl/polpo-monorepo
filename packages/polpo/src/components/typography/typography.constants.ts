@@ -1,5 +1,6 @@
 import React from 'react';
 
+/** Theme colors available for `Typography`. */
 export enum TypographyColors {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
@@ -10,6 +11,7 @@ export enum TypographyColors {
   INFO = 'info',
 }
 
+/** Typography variants and the HTML element each one renders by default. */
 export enum TypographyVariant {
   HERO = 'hero',
   HEADER1 = 'header1',
@@ -46,6 +48,7 @@ export const TypographyVariantsClassNames: Record<TypographyVariant, string> = {
   [TypographyVariant.SMALL]: 'small',
 };
 
+/** Font weights available for `Typography`. */
 export enum TypographyWeight {
   LIGHT = 'light',
   REGULAR = 'regular',

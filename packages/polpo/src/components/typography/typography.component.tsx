@@ -27,6 +27,7 @@ export type TypographyProps = React.HTMLAttributes<HTMLElement | HTMLLabelElemen
   style?: React.CSSProperties;
 };
 
+/** Text component for every piece of text: variants `hero`, `header1`-`header4`, `body`, `label`, `label-form`, `small`; weight, color, alignment, line clamping (`nowrap`) and custom element (`as`). */
 export const Typography = ({
   variant = TypographyVariant.BODY,
   nowrap = false,

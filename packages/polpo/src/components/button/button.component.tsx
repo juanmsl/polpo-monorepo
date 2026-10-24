@@ -21,6 +21,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
+/** Action button with variants (solid, flat, outlined, text), theme colors, sizes, radius, loading state and ripple effect. Accepts every native `<button>` attribute. */
 export const Button = ({
   children,
   color = ColorTypes.DEFAULT,

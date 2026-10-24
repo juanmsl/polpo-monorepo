@@ -14,6 +14,7 @@ type SmartTableColumnProps<RowData extends RowDataObject> = ColumnData<RowData> 
   orderField: Order | null;
 };
 
+/** Header cell of a `SmartTable` column (internal building block). */
 export const SmartTableColumn = <RowData extends RowDataObject>({
   header,
   sortBy,

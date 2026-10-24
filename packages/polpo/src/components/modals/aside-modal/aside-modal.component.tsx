@@ -22,6 +22,7 @@ type AsideModalProps = Omit<
   noCloseButton?: boolean;
 };
 
+/** Drawer / side panel attached to the top, left, right or bottom edge of the screen. */
 export const AsideModal = ({
   children,
   isOpen,

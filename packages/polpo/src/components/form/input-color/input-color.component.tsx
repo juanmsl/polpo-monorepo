@@ -16,6 +16,7 @@ type ColorProps = InputFieldProps<{
   showValueText?: boolean;
 }>;
 
+/** Color picker input with eyedropper support. Value is a color string. Use `InputColor.Controller` in forms. */
 export const InputColor = ({
   name,
   value,

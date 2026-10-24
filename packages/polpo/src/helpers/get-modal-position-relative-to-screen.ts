@@ -5,6 +5,7 @@ export type GetModalPositionRelativeToScreenParams = {
   windowOffset: number;
 };
 
+/** Computes the position styles of a modal relative to the screen. */
 export const getModalPositionRelativeToScreen = ({
   position,
   windowOffset,

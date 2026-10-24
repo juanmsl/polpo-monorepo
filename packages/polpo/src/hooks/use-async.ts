@@ -42,6 +42,7 @@ const asyncReducer = <T>(_state: AsyncState<T>, action: AsyncAction<T>): AsyncSt
   }
 };
 
+/** Tracks the state of a promise (`idle` | `pending` | `resolved` | `rejected`) with its data and error. */
 export const useAsync = <T>(
   initialState?: AsyncState<T>,
 ): AsyncState<T> & {

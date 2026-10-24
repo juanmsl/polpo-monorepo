@@ -12,6 +12,7 @@ type IProps = InputFieldProps<{
   max?: number;
 }>;
 
+/** Text input (`text`, `email`, `search`, `url`) inside a `Field`. Use `Input.Controller` in forms. */
 export const Input = ({
   name,
   value,

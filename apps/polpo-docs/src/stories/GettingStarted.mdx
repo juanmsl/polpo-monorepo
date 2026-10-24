@@ -44,6 +44,64 @@ You need to configure tailwind v4 and then in your `.css` file just import
 @import "polpo/components.css";
 ```
 
+## Using Polpo with AI agents
+
+Polpo ships instructions for AI coding agents (Claude Code, Claude.ai, Cursor, Codex, GitHub Copilot...). With them, when you ask an agent to build a React UI it uses Polpo components, layouts, hooks and theme tokens instead of shadcn/ui, MUI or other UI kits, and it asks you before adding another library when Polpo is missing something.
+
+The instructions are generated from the source code on every release: every component, prop, default value, sub-component and example of this Storybook, plus the setup, forms and theming rules.
+
+### Option 1: install them in your project (recommended)
+
+```bash
+npm install polpo polpo-tailwind-config
+npx polpo init-ai
+```
+
+`init-ai` detects the agents you already use in the project and installs the matching files (if it finds none, it installs the Claude Code skill and `AGENTS.md`). You can also pick them:
+
+- `--claude`: Claude Code skill in `.claude/skills/polpo/`
+- `--cursor`: Cursor rule in `.cursor/rules/polpo.mdc`
+- `--codex`: Polpo section in `AGENTS.md`, read by Codex, the Copilot coding agent, Gemini CLI, Cursor and many other agents
+- `--copilot`: Polpo section in `.github/copilot-instructions.md`
+- `--all`: all of the above
+- `--global`: Claude Code skill for every project, in `~/.claude/skills/polpo/`
+
+```bash
+npx polpo init-ai --claude --cursor
+```
+
+Commit the generated files so the whole team gets them. The existing content of `AGENTS.md` and `.github/copilot-instructions.md` is kept: Polpo only manages the block between `<!-- polpo:start -->` and `<!-- polpo:end -->`. Run `npx polpo init-ai` again after upgrading `polpo` to refresh the instructions.
+
+### Option 2: Claude Code plugin
+
+Install the skill once for all your projects from the plugin marketplace of the Polpo repository:
+
+```text
+/plugin marketplace add juanmsl/polpo-monorepo
+/plugin install polpo@polpo
+```
+
+On Claude Code 2.1.275 or later you can do it in one step with `/plugin install polpo --marketplace juanmsl/polpo-monorepo`. Get new versions with `/plugin marketplace update polpo`.
+
+### Option 3: Claude.ai
+
+Download [polpo-skill.zip](https://ui.juanmsl.com/polpo-skill.zip) (also available in `node_modules/polpo/dist/ai/polpo-skill.zip`) and upload it in Claude.ai under **Settings → Capabilities → Skills**.
+
+### Option 4: any agent, with llms.txt
+
+This site also publishes the documentation for agents, following the [llms.txt](https://llmstxt.org) convention:
+
+- [llms.txt](https://ui.juanmsl.com/llms.txt): index with the guide, the theme and one link per component
+- [llms-full.txt](https://ui.juanmsl.com/llms-full.txt): all the documentation in a single file
+- [llms/guide.md](https://ui.juanmsl.com/llms/guide.md): rules for agents, setup, forms, patterns and catalog
+- `llms/components/<name>.md`: reference of one component, e.g. [llms/components/button.md](https://ui.juanmsl.com/llms/components/button.md)
+
+Use it with agents that can browse the web or index docs:
+
+- **In a prompt**: _"Build the settings page with the Polpo UI library (npm `polpo`). Read https://ui.juanmsl.com/llms.txt first and only use Polpo components."_
+- **Cursor**: add `https://ui.juanmsl.com/llms-full.txt` in **Settings → Indexing & Docs → Add Doc**, then mention it with `@Docs`.
+- **Chat assistants without web access**: attach or paste `llms-full.txt`.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.

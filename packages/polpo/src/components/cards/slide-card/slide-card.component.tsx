@@ -7,6 +7,7 @@ type SlideCardProps = {
   style?: React.CSSProperties;
 };
 
+/** Container that expands/collapses its height with an animation, controlled by `isOpen`. */
 export const SlideCard = ({ children, isOpen, className = '', style = {} }: SlideCardProps) => {
   return (
     <section

@@ -17,6 +17,7 @@ type GetIconParams = {
 const getIcon = ({ icon: Icon, className, onClick }: GetIconParams) =>
   Icon ? <Icon className={className} onClick={onClick} /> : <span />;
 
+/** Low-level wrapper that renders the label, left/right icons and error message around a form control. All Polpo inputs use it; use it to build custom form controls with the same look. */
 export const Field = ({
   id,
   label,

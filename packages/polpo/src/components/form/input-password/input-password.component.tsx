@@ -12,6 +12,7 @@ type InputPasswordProps = InputFieldProps<{
   rightIcon?: never;
 }>;
 
+/** Password input with a show/hide toggle. Use `InputPassword.Controller` in forms. */
 export const InputPassword = ({
   name,
   value,

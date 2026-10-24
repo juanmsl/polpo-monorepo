@@ -12,6 +12,7 @@ type FlipCardProps = {
   children: [React.ReactNode, React.ReactNode];
 };
 
+/** Card that flips between exactly two children (front and back) when `isFlipped` changes. */
 export const FlipCard = ({
   cardZIndex = 'auto',
   flipDirection = 'vertical',

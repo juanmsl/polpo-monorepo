@@ -15,6 +15,7 @@ type SliderProps = InputFieldProps<{
   onlySlider?: boolean;
 }>;
 
+/** Range slider for a numeric value with min, max and step. Use `Slider.Controller` in forms. */
 export const Slider = ({
   name,
   value,

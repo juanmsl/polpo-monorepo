@@ -6,6 +6,7 @@ const checkIsOutside = (ref: RefObject<HTMLElement | null>, target: Node) => {
   return ref.current && !ref.current.contains(target);
 };
 
+/** Calls `callback` on mousedown outside the given ref(s) or when Escape is pressed. */
 export const useClickOutside = <T extends HTMLElement>(
   ref: RefObject<T | null> | Array<RefObject<T | null>>,
   callback: () => void,

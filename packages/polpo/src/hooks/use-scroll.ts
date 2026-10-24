@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+/** Returns `{ ref, position }` with the `[scrollLeft, scrollTop]` of the referenced element. */
 export const useScroll = () => {
   const ref = useRef<HTMLElement>(null);
   const [position, setPosition] = useState([0, 0]);

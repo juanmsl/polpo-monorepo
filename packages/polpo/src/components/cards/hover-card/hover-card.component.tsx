@@ -13,6 +13,7 @@ type HoverCardProps = {
   className?: string;
 };
 
+/** Wrapper that tilts its content in 3D following the mouse position. */
 export const HoverCard = ({
   children,
   threshold = 5,

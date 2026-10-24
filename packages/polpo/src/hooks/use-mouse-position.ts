@@ -28,6 +28,7 @@ const getMousePosition = (domRect: DOMRect, e: MouseEvent) => {
   };
 };
 
+/** Tracks the mouse position on the page and relative to an element. */
 export const useMousePosition = (containerRef?: React.RefObject<HTMLElement | SVGElement | null>) => {
   const ref = useRef<HTMLElement>(null);
   const [position, setPosition] = useState<MousePosition>({

@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { cn } from '../../../helpers';
 import { ModalState } from '../../../hooks';
 
+/** Backdrop styles available for modals. */
 export enum ModalBackdrop {
   OPAQUE = 'opaque',
   TRANSPARENT = 'transparent',
@@ -19,6 +20,7 @@ export type BackdropProps = {
   backdropBackground?: string;
 };
 
+/** Backdrop overlay rendered behind a `Modal`. */
 export const Backdrop = ({
   opacity = 0.6,
   backdrop = ModalBackdrop.BLUR,

@@ -15,6 +15,7 @@ interface RippleProps {
   zIndex?: React.CSSProperties['zIndex'];
 }
 
+/** Material-like ripple effect on click. Place it as the last child of the clickable element. */
 export const Ripple = ({
   color,
   disabled,

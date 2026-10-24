@@ -86,6 +86,7 @@ const deleteCookie = (name: string, options: CookieOptions = {}) => {
 type UpdateCookie<T> = (value: T, overrideOptions?: CookieOptions) => void;
 type RemoveCookie = () => void;
 
+/** Reads and writes a browser cookie as React state. */
 export const useCookie = <T = unknown>(
   cookieName: string,
   defaultValue?: T,

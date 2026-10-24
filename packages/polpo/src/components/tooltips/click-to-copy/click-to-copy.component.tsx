@@ -12,6 +12,7 @@ type ClickToCopyProps = {
   copiedTextTimeout?: number;
 };
 
+/** Copies `value` to the clipboard when its children are clicked, showing a tooltip. */
 export const ClickToCopy = ({
   children,
   value,

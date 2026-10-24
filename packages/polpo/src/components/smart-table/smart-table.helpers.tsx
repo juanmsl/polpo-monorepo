@@ -21,12 +21,14 @@ const renderRowColumn = <RowData extends RowDataObject>(
   if (Component) return <Component data={data} rowKey={rowKey} />;
 };
 
+/** Renders the cell content of a `SmartTable` column for a row. */
 export const renderRow = <RowData extends RowDataObject>(
   data: RowData,
   columns: Array<ColumnData<RowData>>,
   rowKey: React.Key,
 ) => columns.map((column, key) => (column.hidden ? null : <td key={key}>{renderRowColumn(data, column, rowKey)}</td>));
 
+/** Returns a copy of `data` sorted by a field and order. */
 export const sortData = <RowData extends RowDataObject>(
   data: Array<RowData>,
   sortBy: ColumnData<RowData>['sortBy'] | null,

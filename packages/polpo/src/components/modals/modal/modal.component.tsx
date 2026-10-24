@@ -29,6 +29,7 @@ export type ModalProps = Omit<BackdropProps, 'modalState'> &
     closeOnClickOutside?: boolean;
   };
 
+/** Base modal primitive rendered in a portal: backdrop, animations, positioning (on screen or relative to `containerRef`), closes on click outside and Escape. Prefer `ActionModal`, `AsideModal`, `ConfirmationModal`, `Menu` or `Tooltip` for common cases. */
 export const Modal = ({
   id,
   children,
