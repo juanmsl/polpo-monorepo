@@ -1,6 +1,11 @@
 {
   "name": "polpo-typescript-config",
   "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "directory": "packages/typescript-config",
+    "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"

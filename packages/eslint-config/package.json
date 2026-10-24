@@ -1,6 +1,11 @@
 {
   "name": "polpo-eslint-config",
   "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "directory": "packages/eslint-config",
+    "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
+  },
   "type": "module",
   "exports": {
     ".": "./base.config.js",

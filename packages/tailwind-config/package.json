@@ -1,6 +1,11 @@
 {
   "name": "polpo-tailwind-config",
   "version": "0.1.3",
+  "repository": {
+    "type": "git",
+    "directory": "packages/tailwind-config",
+    "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
+  },
   "type": "module",
   "private": false,
   "exports": {

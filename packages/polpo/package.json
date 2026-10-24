@@ -97,6 +97,7 @@
     "check-types": "tsc --noEmit",
     "build": "pnpm clean && tsup && pnpm ai:generate",
     "ai:generate": "node ai/generate.ts",
+    "ai:sync-plugin": "node ai/generate.ts --sync-plugin",
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {

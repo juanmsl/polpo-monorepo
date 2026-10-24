@@ -1,0 +1,54 @@
+# Publishes to npm every package of packages/* whose version is not on npm yet (normally the ones bumped
+# by a release PR), in dependency order, with trusted publishing (OIDC) and provenance. Then it creates
+# the git tag `<name>@<version>` and a GitHub Release with generated notes.
+# It is idempotent: re-running it only publishes what is missing.
+#
+# This filename (publish.yml) is the one configured as trusted publisher on npmjs.com.
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/*/package.json'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: Dry run (build and pack, without publishing)
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      # No registry-url / NODE_AUTH_TOKEN: pnpm publish authenticates with trusted publishing (OIDC)
+      - run: pnpm install --frozen-lockfile
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          node scripts/release.mjs publish ${{ inputs.dry-run && '--dry-run' || '' }}

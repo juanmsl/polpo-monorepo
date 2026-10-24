@@ -1,6 +1,11 @@
 {
   "name": "polpo-http-client",
   "version": "1.1.0",
+  "repository": {
+    "type": "git",
+    "directory": "packages/http-client",
+    "url": "git+https://github.com/juanmsl/polpo-monorepo.git"
+  },
   "license": "MIT",
   "type": "module",
   "files": ["dist"],
