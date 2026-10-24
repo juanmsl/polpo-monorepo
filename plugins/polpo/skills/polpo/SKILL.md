@@ -239,7 +239,7 @@ Reference: [layouts.md](references/layouts.md)
 - `useEventListener` - Adds an event listener to window (default), document, a media query or an element ref, and removes it on unmount.
 - `useFileReader` - Reads `File`s as data URLs, returning name, size, formatted size, type and url for each.
 - `useGeolocation` - Watches the browser geolocation: `{ data, error, isLoading }`.
-- `useHover` - Returns whether the pointer is over the element.
+- `useHover` - Returns `{ ref, isHovered }`: whether the pointer is over the element referenced by `ref`. Pass your own `targetRef` to track an element that already has a ref.
 - `useInView` - Returns `{ ref, inView }`: whether the element referenced by `ref` is in the viewport.
 - `useInputHandlers` - Focus/blur/change handlers for inputs that also track `isFocus`.
 - `useIntersectionObserver` - Observes one or more refs with an IntersectionObserver.

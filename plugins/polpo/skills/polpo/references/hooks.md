@@ -151,14 +151,14 @@ useGeolocation: () => UseGeolocationReturn
 
 ## useHover
 
-Returns whether the pointer is over the element.
+Returns `{ ref, isHovered }`: whether the pointer is over the element referenced by `ref`. Pass your own `targetRef` to track an element that already has a ref.
 
 ```ts
 import { useHover } from 'polpo/hooks';
 ```
 
 ```ts
-useHover: () => boolean
+useHover: <T extends HTMLElement = HTMLElement>(targetRef?: RefObject<T | null>) => { ref: RefObject<T | null>; isHovered: boolean; }
 ```
 
 ## useInView
@@ -170,7 +170,7 @@ import { useInView } from 'polpo/hooks';
 ```
 
 ```ts
-useInView: (initOptions?: IntersectionObserverInit) => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/.pnpm/@types+react@19.2.6/node_modules/@types/react/index").RefObject<HTMLElement | null>; inView: boolean; }
+useInView: (initOptions?: IntersectionObserverInit) => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; inView: boolean; }
 ```
 
 ## useInputHandlers
@@ -218,7 +218,7 @@ import { useModal } from 'polpo/hooks';
 ```
 
 ```ts
-useModal: <T extends HTMLElement>() => { containerRef: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/.pnpm/@types+react@19.2.6/node_modules/@types/react/index").RefObject<T | null>; isOpen: boolean; openModal: () => void; closeModal: () => void; }
+useModal: <T extends HTMLElement>() => { containerRef: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<T | null>; isOpen: boolean; openModal: () => void; closeModal: () => void; }
 ```
 
 ## useModalInContainer
@@ -314,7 +314,7 @@ import { useScroll } from 'polpo/hooks';
 ```
 
 ```ts
-useScroll: () => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/.pnpm/@types+react@19.2.6/node_modules/@types/react/index").RefObject<HTMLElement | null>; position: number[]; }
+useScroll: () => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; position: number[]; }
 ```
 
 ## useStateHistory
@@ -339,7 +339,7 @@ import { useToggle } from 'polpo/hooks';
 ```
 
 ```ts
-useToggle: (defaultValue?: boolean) => (boolean | import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/.pnpm/@types+react@19.2.6/node_modules/@types/react/index").Dispatch<import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/.pnpm/@types+react@19.2.6/node_modules/@types/react/index").SetStateAction<boolean>>)[]
+useToggle: (defaultValue?: boolean) => (boolean | import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").Dispatch<import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").SetStateAction<boolean>>)[]
 ```
 
 ## useToggleValues
