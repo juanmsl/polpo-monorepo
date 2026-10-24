@@ -9,7 +9,7 @@
         "$TURBO_ROOT$/apps/polpo-docs/src/stories/**",
         "$TURBO_ROOT$/packages/tailwind-config/*.css"
       ],
-      "outputs": ["dist/**", "$TURBO_ROOT$/plugins/polpo/**"]
+      "outputs": ["dist/**"]
     }
   }
 }

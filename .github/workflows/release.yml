@@ -1,0 +1,94 @@
+# Opens a release PR: bumps the version of the selected packages, builds them and, when polpo is
+# released, regenerates the Claude Code plugin (plugins/polpo). Merging the PR runs publish.yml.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version to increment
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+      polpo:
+        description: polpo
+        type: boolean
+        default: false
+      polpo-tailwind-config:
+        description: polpo-tailwind-config
+        type: boolean
+        default: false
+      polpo-http-client:
+        description: polpo-http-client
+        type: boolean
+        default: false
+      polpo-eslint-config:
+        description: polpo-eslint-config
+        type: boolean
+        default: false
+      polpo-typescript-config:
+        description: polpo-typescript-config
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release-pr:
+    name: Create release PR
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Bump versions
+        id: bump
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: |
+          PACKAGES=$(node -e '
+            const inputs = JSON.parse(process.env.INPUTS);
+            const names = ["polpo", "polpo-tailwind-config", "polpo-http-client", "polpo-eslint-config", "polpo-typescript-config"];
+            console.log(names.filter(name => String(inputs[name]) === "true").join(","));
+          ')
+          node scripts/release.mjs bump --type "${{ inputs.bump }}" --packages "$PACKAGES"
+
+      - name: Lint, type check and build
+        run: pnpm turbo run lint check-types build ${{ steps.bump.outputs.filters }}
+
+      - name: Regenerate the Claude Code plugin
+        if: steps.bump.outputs.polpo == 'true'
+        run: pnpm --filter polpo ai:sync-plugin
+
+      - name: Open the release PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ steps.bump.outputs.branch }}
+          TITLE: ${{ steps.bump.outputs.title }}
+          BODY: ${{ steps.bump.outputs.body }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add packages plugins
+          git commit -m "$TITLE"
+          git push origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "$TITLE" --body "$BODY"
