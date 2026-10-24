@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useDebounce } from './use-debounce';
 
+/** State with a debounced copy: returns `[value, debouncedValue, setValue]`. */
 export const useDebounceState = <T>(
   defaultValue: T,
   delay: number = 500,

@@ -13,6 +13,7 @@ type SmartTableRowProps<RowData extends RowDataObject> = {
   rowKey: React.Key;
 };
 
+/** Row of a `SmartTable` (internal building block). */
 export const SmartTableRow = <RowData extends RowDataObject>({
   data,
   columns,

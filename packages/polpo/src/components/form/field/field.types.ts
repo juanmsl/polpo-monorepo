@@ -1,12 +1,14 @@
 import React from 'react';
 import { IconType } from 'react-icons';
 
+/** Border styles of a form `Field`. */
 export enum FieldVariant {
   FULL_BORDER = 'full-border',
   CONTENT_BORDER = 'content-border',
   CONTENT_LINE = 'line',
 }
 
+/** Label placement of a form `Field`. */
 export enum FieldOrientation {
   HORIZONTAL = 'horizontal',
   VERTICAL = 'vertical',

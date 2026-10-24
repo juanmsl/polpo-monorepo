@@ -4,8 +4,12 @@
   "license": "MIT",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "bin"
   ],
+  "bin": {
+    "polpo": "./bin/polpo.js"
+  },
   "publishConfig": {
     "access": "public",
     "exports": {
@@ -91,7 +95,8 @@
   "scripts": {
     "lint": "eslint src",
     "check-types": "tsc --noEmit",
-    "build": "pnpm clean && tsup",
+    "build": "pnpm clean && tsup && pnpm ai:generate",
+    "ai:generate": "node ai/generate.ts",
     "clean": "rm -rf ./dist"
   },
   "devDependencies": {

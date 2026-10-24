@@ -43,6 +43,7 @@ type IProps = InputFieldProps<{
   decimalSeparator?: string;
 }>;
 
+/** Numeric input with min/max, custom formatting and decimal separator. Use `InputNumber.Controller` in forms. */
 export const InputNumber = ({
   name,
   value,

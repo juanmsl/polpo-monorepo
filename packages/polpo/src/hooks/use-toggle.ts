@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+/** Boolean state: returns `[value, toggle, setValue]`. */
 export const useToggle = (defaultValue: boolean = false) => {
   const [value, setValue] = useState<boolean>(defaultValue);
 

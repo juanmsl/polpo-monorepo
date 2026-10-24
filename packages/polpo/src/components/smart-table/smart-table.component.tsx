@@ -21,6 +21,7 @@ type SmartTableProps<RowData extends RowDataObject> = {
   tableClassName?: string;
 };
 
+/** Data table driven by a `columns` definition: field, render-function or component cells, sortable columns and optional row selection. */
 export const SmartTable = <RowData extends RowDataObject>({
   columns: initialColumns,
   data,

@@ -12,6 +12,7 @@ const createContainer = (containerID: string) => {
   return domContainer;
 };
 
+/** Returns (creating it if needed) a `<div>` with the given id appended to `document.body`. */
 export const useDomContainer = (containerID: string) => {
   const [container, setContainer] = useState<HTMLElement | null>(() => createContainer(containerID));
 

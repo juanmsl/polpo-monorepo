@@ -1,5 +1,6 @@
 const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+/** Formats a date string as `"Mon YYYY"`, e.g. `"Jan 2024"`. */
 export const formatDate = (date: string) => {
   const parsedDate = new Date(date);
 
@@ -10,6 +11,7 @@ export const formatDate = (date: string) => {
   return `${MONTHS_SHORT[parsedDate.getMonth()]} ${parsedDate.getFullYear()}`;
 };
 
+/** Human readable time between two dates, e.g. `"2 years"` (end defaults to now). */
 export const timeBetween = (date_start: string, date_end: string) => {
   const start = new Date(date_start);
 

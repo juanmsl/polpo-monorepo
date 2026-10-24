@@ -23,6 +23,7 @@ type FlexProps = {
   gap?: React.CSSProperties['gap'];
 };
 
+/** Flexbox container: CSS flex properties as short props (`direction`, `wrap`, `gap`, `jc`=justify-content, `ai`=align-items, `pc`=place-content...). Renders a `<section>` unless `tag` is set. */
 export const Flex = ({
   tag = 'section',
   children,

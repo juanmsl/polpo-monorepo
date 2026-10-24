@@ -17,6 +17,7 @@ type RadioProps = {
   size?: `${SizeTypes}`;
 };
 
+/** Radio button; radios sharing the same `name` form a group whose value is the selected `radioValue`. Use `Radio.Controller` in forms. */
 export const Radio = ({
   name,
   value,

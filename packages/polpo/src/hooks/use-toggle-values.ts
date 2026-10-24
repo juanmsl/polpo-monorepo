@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+/** Cycles through `values`: returns `[currentValue, toggle(index?)]`. */
 export const useToggleValues = <T>(values: Array<T>, defaultIndex: number = 0): [T, (index?: number) => void] => {
   const [index, setIndex] = useState(defaultIndex);
 

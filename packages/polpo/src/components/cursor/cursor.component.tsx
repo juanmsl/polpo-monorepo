@@ -4,6 +4,7 @@ import { useEventListener, useMousePosition } from '../../hooks';
 
 import './cursor.styles.css';
 
+/** Animated custom cursor that replaces the native one on non-touch devices. Render it once near the app root. */
 export const Cursor = () => {
   const { x, y, elementX, elementY, ref } = useMousePosition();
   const [isCursorHover, setIsCursorHover] = useState(false);

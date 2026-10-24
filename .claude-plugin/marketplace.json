@@ -1,0 +1,15 @@
+{
+  "name": "polpo",
+  "description": "Polpo UI: React + Tailwind CSS component library",
+  "owner": {
+    "name": "Juan Manuel Sánchez Lozano",
+    "url": "https://juanmsl.com"
+  },
+  "plugins": [
+    {
+      "name": "polpo",
+      "source": "./plugins/polpo",
+      "description": "Build React UIs with the Polpo component library instead of other UI kits."
+    }
+  ]
+}

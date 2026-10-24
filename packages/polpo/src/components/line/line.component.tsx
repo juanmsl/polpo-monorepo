@@ -2,11 +2,13 @@ import { cn } from '../../helpers';
 
 import './line.styles.css';
 
+/** Orientation of a `Line`. */
 export enum LineOrientation {
   VERTICAL = 'vertical',
   HORIZONTAL = 'horizontal',
 }
 
+/** Stroke style of a `Line`. */
 export enum LineStyle {
   SOLID = 'solid',
   DOTTED = 'dotted',
@@ -43,6 +45,7 @@ type LineDashedProps = LineCommonProps & {
 
 type LineProps = LineSolidProps | LineDottedProps | LineDashedProps;
 
+/** Horizontal or vertical divider (solid, dotted or dashed). */
 export const Line = ({
   orientation = LineOrientation.HORIZONTAL,
   className = '',

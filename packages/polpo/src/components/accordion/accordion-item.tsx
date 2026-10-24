@@ -51,6 +51,7 @@ const getContent = (content: ContentType | undefined, isOpen: boolean): React.Re
   return content;
 };
 
+/** Collapsible section of an `Accordion`: a header (`title`/`subtitle`, or fully custom `content`) that toggles its `children`. */
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   title,
   subtitle,

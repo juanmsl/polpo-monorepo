@@ -4,6 +4,7 @@ export type ToCapitalizeOptions = Partial<{
   variant: 'first-word' | 'each-word';
 }>;
 
+/** Capitalizes the first word or each word of a text. */
 export const toCapitalize = (text: string, options: ToCapitalizeOptions = {}) => {
   const { separator = ' ', variant = 'each-word', join = separator } = options;
 

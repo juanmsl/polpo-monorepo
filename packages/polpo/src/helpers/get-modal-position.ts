@@ -1,3 +1,4 @@
+/** Positions for modals, tooltips and menus. */
 export enum PositionContainer {
   CENTER = 'center',
   TOP = 'top',
@@ -183,6 +184,7 @@ type getModalPositionRelativeToContainerParams = GetModalPositionParams & {
   windowOffset: number;
 };
 
+/** Computes the position of a modal relative to a container element. */
 export const getModalPositionRelativeToContainer = ({
   c,
   m,

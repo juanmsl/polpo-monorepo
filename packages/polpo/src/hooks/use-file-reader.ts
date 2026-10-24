@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { formatBytes } from '../helpers';
 
+/** Known MIME types returned by `useFileReader`. */
 export enum FileTypeEnum {
   PNG = 'image/png',
   PDF = 'application/pdf',
@@ -15,6 +16,7 @@ export type FileResolvedT = {
   url: FileReader['result'];
 };
 
+/** Reads `File`s as data URLs, returning name, size, formatted size, type and url for each. */
 export const useFileReader = (inputFiles: Array<File>) => {
   const [files, setFiles] = useState<Array<FileResolvedT>>([]);
 

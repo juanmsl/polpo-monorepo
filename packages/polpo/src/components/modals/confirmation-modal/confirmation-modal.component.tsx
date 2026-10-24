@@ -12,6 +12,7 @@ type ConfirmationModalProps = ActionModalProps & {
   isLoading?: boolean;
 };
 
+/** Ready-made accept/reject dialog built on `ActionModal`. */
 export const ConfirmationModal = ({
   title,
   onAccept,

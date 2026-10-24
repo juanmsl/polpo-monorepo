@@ -12,6 +12,7 @@ type AccordionContextState = {
 
 const AccordionContext = createContext<AccordionContextState | null>(null);
 
+/** Returns `[isOpen, toggle]` for the accordion item with the given id. Must be used inside an `Accordion`. */
 export const useAccordionItem = (id: string): [boolean, () => void] => {
   const context = useContext(AccordionContext);
 
@@ -35,6 +36,7 @@ type AccordionProps = {
   defaultOpened?: Array<string> | string;
 };
 
+/** Container of collapsible `AccordionItem`s, separated by lines. Supports several open items (`multiple`) and initially opened items. */
 export const Accordion = ({
   children,
   className = '',

@@ -41,6 +41,7 @@ export type ActionModalProps = Omit<
   style?: React.CSSProperties;
 };
 
+/** Centered dialog for actions. `ActionModal.ActionButton` runs a (possibly async) action with a loading state and closes the modal when it finishes. With `actionRequired` the user cannot dismiss it. */
 export const ActionModal = ({
   children,
   isOpen,

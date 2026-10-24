@@ -1,5 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
+/** Observes one or more refs with a ResizeObserver. */
 export const useResizeObserver = <T extends Element>(
   ref: RefObject<T | null> | Array<RefObject<T | null>>,
   callback: ResizeObserverCallback,

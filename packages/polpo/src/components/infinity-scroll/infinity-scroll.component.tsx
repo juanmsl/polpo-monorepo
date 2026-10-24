@@ -13,6 +13,7 @@ interface InfinityScrollProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
+/** Renders `children` and calls `loadMore` when the end of the list enters the viewport while `hasNextPage` is true. */
 export const InfinityScroll = ({
   isLoading: isLoadingProp = false,
   hasNextPage = false,

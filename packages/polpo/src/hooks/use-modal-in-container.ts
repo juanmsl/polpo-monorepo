@@ -31,6 +31,7 @@ export type UseModalInContainerParams<
   isOpen: boolean;
 };
 
+/** Positions a modal element on the screen or relative to a container element. */
 export const useModalInContainer = <
   Container extends HTMLElement = HTMLElement,
   Modal extends HTMLElement = Container,

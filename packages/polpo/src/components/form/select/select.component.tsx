@@ -28,6 +28,7 @@ import {
 
 const SelectContext = createContext<SelectContextValue<unknown> | null>(null);
 
+/** Access the state of the closest `Select` (selected value, setter, open state). For custom option components. */
 export const useSelectContext = <T extends SelectItem>(): SelectContextValue<T> => {
   const context = useContext(SelectContext as React.Context<SelectContextValue<T> | null>);
 
@@ -86,6 +87,7 @@ const DefaultValue = <T extends SelectItem>({ value, multiselect }: ValueCompone
   );
 };
 
+/** Single or multi (`multiselect`) select dropdown with search, infinite loading and custom option/value renderers. Use `Select.Controller` in forms. */
 export const Select = <T extends SelectItem>({
   // Select props
   options,

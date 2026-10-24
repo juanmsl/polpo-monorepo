@@ -23,6 +23,7 @@ type InputFileProps = {
 
 type InputFileValue = { [key: string]: File };
 
+/** Drag-and-drop / click-to-upload file input with size limit and `accept` filter. Value is a `{ [fileName]: File }` object. Use `InputFile.Controller` in forms. */
 export const InputFile = ({
   name,
   value = {},

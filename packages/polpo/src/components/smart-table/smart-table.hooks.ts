@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { ColumnData, Order, RowDataObject } from './smart-table.types';
 
+/** Sort state (`sortBy`, `order`, `toggleSortField`) used by `SmartTable`. */
 export const useSort = <RowData extends RowDataObject>() => {
   const [[sortBy, order], setSortField] = useState<[ColumnData<RowData>['sortBy'] | null, Order | null]>([null, null]);
 

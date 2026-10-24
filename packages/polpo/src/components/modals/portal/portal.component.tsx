@@ -8,6 +8,7 @@ type PortalProps = {
   children: ReactNode;
 };
 
+/** Renders `children` into a container `<div id={id}>` appended to `document.body`. */
 export const Portal = ({ children, id }: PortalProps) => {
   const root = useDomContainer(id);
 

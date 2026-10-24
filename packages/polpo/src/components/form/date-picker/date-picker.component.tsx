@@ -9,6 +9,7 @@ type DatePickerProps = InputFieldProps<{
   type?: 'date' | 'datetime-local' | 'month' | 'time' | 'week';
 }>;
 
+/** Native date/time input (`date`, `datetime-local`, `month`, `time`, `week`) inside a `Field`. Value is a string. Use `DatePicker.Controller` in forms. */
 export const DatePicker = ({
   name,
   value,

@@ -13,6 +13,7 @@ type UseViewportData = {
   orientation: ScreenOrientation;
 };
 
+/** Returns the window `{ width, height, orientation }`, updated on resize. */
 export const useViewport = (): UseViewportData => {
   const getData = (): UseViewportData => {
     const { innerWidth, innerHeight } = window;

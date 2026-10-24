@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+/** Returns whether a CSS media query matches, e.g. `useMediaQuery('(max-width: 480px)')`. */
 export const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false);
 

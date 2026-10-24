@@ -20,6 +20,7 @@ export type TooltipProps = {
   content: React.ReactNode;
 };
 
+/** Shows `content` in a floating tooltip while hovering its single child (the child must accept a `ref`). */
 export const Tooltip = ({
   position = PositionContainer.TOP,
   children,

@@ -14,6 +14,7 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   selected?: boolean;
 }
 
+/** Small chip/tag for statuses, labels and counters, with theme colors, sizes, radius and a selected state. */
 export const Badge = ({
   children,
   color = ColorTypes.DEFAULT,
