@@ -1,6 +1,6 @@
 # Typography
 
-Polpo v0.1.32 - generated from the source code, do not edit.
+Polpo v0.1.33 - generated from the source code, do not edit.
 
 ## Typography
 
