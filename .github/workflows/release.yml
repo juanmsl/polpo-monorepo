@@ -69,7 +69,7 @@ jobs:
             const names = ["polpo", "polpo-tailwind-config", "polpo-http-client", "polpo-eslint-config", "polpo-typescript-config"];
             console.log(names.filter(name => String(inputs[name]) === "true").join(","));
           ')
-          node scripts/release.mjs bump --type "${{ inputs.bump }}" --packages "$PACKAGES"
+          node .github/scripts/release.mjs bump --type "${{ inputs.bump }}" --packages "$PACKAGES"
 
       - name: Lint, type check and build
         run: pnpm turbo run lint check-types build ${{ steps.bump.outputs.filters }}
