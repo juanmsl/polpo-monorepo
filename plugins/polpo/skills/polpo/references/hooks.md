@@ -1,6 +1,6 @@
 # Hooks
 
-Polpo v0.1.32 - generated from the source code, do not edit.
+Polpo v0.1.33 - generated from the source code, do not edit.
 
 ## useAsync
 
@@ -170,7 +170,7 @@ import { useInView } from 'polpo/hooks';
 ```
 
 ```ts
-useInView: (initOptions?: IntersectionObserverInit) => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; inView: boolean; }
+useInView: (initOptions?: IntersectionObserverInit) => { ref: import("/home/runner/work/polpo-monorepo/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; inView: boolean; }
 ```
 
 ## useInputHandlers
@@ -218,7 +218,7 @@ import { useModal } from 'polpo/hooks';
 ```
 
 ```ts
-useModal: <T extends HTMLElement>() => { containerRef: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<T | null>; isOpen: boolean; openModal: () => void; closeModal: () => void; }
+useModal: <T extends HTMLElement>() => { containerRef: import("/home/runner/work/polpo-monorepo/polpo-monorepo/node_modules/@types/react/index").RefObject<T | null>; isOpen: boolean; openModal: () => void; closeModal: () => void; }
 ```
 
 ## useModalInContainer
@@ -314,7 +314,7 @@ import { useScroll } from 'polpo/hooks';
 ```
 
 ```ts
-useScroll: () => { ref: import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; position: number[]; }
+useScroll: () => { ref: import("/home/runner/work/polpo-monorepo/polpo-monorepo/node_modules/@types/react/index").RefObject<HTMLElement | null>; position: number[]; }
 ```
 
 ## useStateHistory
@@ -339,7 +339,7 @@ import { useToggle } from 'polpo/hooks';
 ```
 
 ```ts
-useToggle: (defaultValue?: boolean) => (boolean | import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").Dispatch<import("/Users/juanmsl/Code/personal/polpo-monorepo/node_modules/@types/react/index").SetStateAction<boolean>>)[]
+useToggle: (defaultValue?: boolean) => (boolean | import("/home/runner/work/polpo-monorepo/polpo-monorepo/node_modules/@types/react/index").Dispatch<import("/home/runner/work/polpo-monorepo/polpo-monorepo/node_modules/@types/react/index").SetStateAction<boolean>>)[]
 ```
 
 ## useToggleValues

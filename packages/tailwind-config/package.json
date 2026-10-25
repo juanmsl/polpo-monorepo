@@ -1,6 +1,6 @@
 {
   "name": "polpo-tailwind-config",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "repository": {
     "type": "git",
     "directory": "packages/tailwind-config",
