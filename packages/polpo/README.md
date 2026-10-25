@@ -23,18 +23,18 @@ Documentation page under construction...
 
 ## Installation
 
-You need to install also `polpo-tailwind-config`
+Install Polpo with its theme (`polpo-tailwind-config`) and its peer dependencies: `react` and `react-dom` (19), `tailwindcss` (v4), `tailwind-merge` and `react-hook-form` (7.52 or later, used by the form components). Polpo uses the versions installed in your project.
 
 You can install the package using your preferred package manager:
 
 ```bash
-npm install polpo polpo-tailwind-config
+npm install polpo polpo-tailwind-config tailwindcss tailwind-merge react-hook-form
 ```
 ```bash
-yarn add polpo polpo-tailwind-config
+yarn add polpo polpo-tailwind-config tailwindcss tailwind-merge react-hook-form
 ```
 ```bash
-pnpm add polpo polpo-tailwind-config
+pnpm add polpo polpo-tailwind-config tailwindcss tailwind-merge react-hook-form
 ```
 
 ## Usage

@@ -29,6 +29,8 @@ Install Polpo, its theme and peer dependencies:
 npm install polpo polpo-tailwind-config tailwindcss tailwind-merge react-hook-form
 ```
 
+`react-hook-form` is a peer dependency (7.52 or later): Polpo uses the version of the project, so its form inputs share the project's `FormProvider`. Do not install a second copy.
+
 Tailwind CSS v4 must be configured: with Vite, `npm install -D @tailwindcss/vite` and add `tailwindcss()` to `plugins` in `vite.config.ts`; with Next.js, `npm install -D @tailwindcss/postcss` and add `"@tailwindcss/postcss": {}` to `postcss.config.mjs`.
 
 Global CSS entry (keep this order):
