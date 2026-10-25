@@ -51,4 +51,4 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          node scripts/release.mjs publish ${{ inputs.dry-run && '--dry-run' || '' }}
+          node .github/scripts/release.mjs publish ${{ inputs.dry-run && '--dry-run' || '' }}

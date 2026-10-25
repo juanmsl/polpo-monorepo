@@ -12,7 +12,7 @@ The plugin lives in `packages/polpo/plugin/` and is regenerated on every polpo r
 
 ## Releasing
 
-The packages of `packages/` (`polpo`, `polpo-tailwind-config`, `polpo-http-client`, `polpo-eslint-config`, `polpo-typescript-config`) are published to npm by two GitHub Actions workflows. The logic lives in `scripts/release.mjs`.
+The packages of `packages/` (`polpo`, `polpo-tailwind-config`, `polpo-http-client`, `polpo-eslint-config`, `polpo-typescript-config`) are published to npm by two GitHub Actions workflows. The logic lives in `.github/scripts/release.mjs`.
 
 1. **Release** (`.github/workflows/release.yml`, run manually from the **Actions** tab): choose `patch`, `minor` or `major` and tick the packages to release. It runs on `main` and:
    - bumps their versions;
@@ -29,8 +29,8 @@ The packages of `packages/` (`polpo`, `polpo-tailwind-config`, `polpo-http-clien
 Try it locally without publishing anything:
 
 ```sh
-node scripts/release.mjs bump --type patch --packages polpo   # remember to revert the version change
-node scripts/release.mjs publish --dry-run
+node .github/scripts/release.mjs bump --type patch --packages polpo   # remember to revert the version change
+node .github/scripts/release.mjs publish --dry-run
 ```
 
 ### One-time setup

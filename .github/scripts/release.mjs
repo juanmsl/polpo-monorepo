@@ -1,8 +1,8 @@
 /*
  * Release helper used by .github/workflows/release.yml and publish.yml
  *
- *   node scripts/release.mjs bump --type <patch|minor|major> --packages polpo,polpo-tailwind-config
- *   node scripts/release.mjs publish [--dry-run]
+ *   node .github/scripts/release.mjs bump --type <patch|minor|major> --packages polpo,polpo-tailwind-config
+ *   node .github/scripts/release.mjs publish [--dry-run]
  *
  * bump     Increments the version of the selected packages and writes the release PR data
  *          (branch, title, body) to $GITHUB_OUTPUT when it runs in GitHub Actions.
@@ -17,7 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const PACKAGES_DIR = path.join(ROOT, 'packages');
 const BUMPS = ['patch', 'minor', 'major'];
 
@@ -287,4 +287,4 @@ const args = parseArgs(rest);
 
 if (command === 'bump') bump(args);
 else if (command === 'publish') publish(args);
-else fail('usage: node scripts/release.mjs <bump|publish> [options]');
+else fail('usage: node .github/scripts/release.mjs <bump|publish> [options]');
