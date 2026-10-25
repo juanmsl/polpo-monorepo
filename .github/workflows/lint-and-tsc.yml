@@ -13,13 +13,13 @@ jobs:
 
     steps:
       - name: 🛑 Clone Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 📦 Installing PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: ⚙️ Configuring Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: 'pnpm'
