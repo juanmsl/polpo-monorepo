@@ -1,6 +1,6 @@
 # Hooks
 
-Polpo v0.1.33 - generated from the source code, do not edit.
+Polpo v0.2.0 - generated from the source code, do not edit.
 
 ## useAsync
 
