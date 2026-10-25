@@ -1,6 +1,6 @@
 {
   "name": "polpo",
-  "version": "0.1.33",
+  "version": "0.2.0",
   "description": "Build React UIs with the Polpo component library instead of other UI kits.",
   "author": {
     "name": "Juan Manuel Sánchez Lozano",
