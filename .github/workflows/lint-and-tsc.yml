@@ -16,9 +16,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📦 Installing PNPM
-        uses: pnpm/action-setup@v3
-        with:
-          version: 11.10.0
+        # Without `version`, it uses the pnpm version of `packageManager` in the root package.json
+        uses: pnpm/action-setup@v4
 
       - name: ⚙️ Configuring Node.js
         uses: actions/setup-node@v4
