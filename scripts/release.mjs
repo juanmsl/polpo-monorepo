@@ -172,7 +172,7 @@ const bump = args => {
     '',
     'Merging this PR runs the **Publish** workflow: it publishes these versions to npm with provenance, creates the git tags and the GitHub Releases.',
     ...(changes.some(pkg => pkg.name === 'polpo')
-      ? ['', '`plugins/polpo` (Claude Code plugin) is regenerated for the new polpo version.']
+      ? ['', '`packages/polpo/plugin` (Claude Code plugin) is regenerated for the new polpo version.']
       : []),
     ...(dependents.length
       ? [

@@ -5,13 +5,13 @@
  *  dist/ai/polpo-skill.zip        Same skill zipped, ready to upload to Claude.ai
  *  dist/ai/rules.md               Rules + catalog used by `polpo init-ai` for AGENTS.md, Cursor and Copilot
  *  dist/ai/web/                   llms.txt, llms-full.txt, llms/*.md and the skill zip, served by ui.juanmsl.com
- *  <repo>/plugins/polpo/          Claude Code plugin served by the marketplace of this repository (only with --sync-plugin)
+ *  plugin/                        Claude Code plugin served by the marketplace of this repository (only with --sync-plugin)
  *
  * Hand written content lives in ./guide.md, everything else comes from the TypeScript sources,
  * their JSDoc comments, the Storybook stories of apps/polpo-docs and the theme of polpo-tailwind-config.
  *
  * Run with `node ai/generate.ts` (Node >= 24). The Release workflow runs it with `--sync-plugin` to update
- * plugins/polpo for the new version, so the plugin always matches the version published on npm.
+ * plugin/ for the new version, so the plugin always matches the version published on npm.
  */
 /* eslint-disable no-console */
 import fs from 'node:fs';
@@ -29,7 +29,7 @@ const REPO_DIR = path.resolve(PKG_DIR, '../..');
 const SRC_DIR = path.join(PKG_DIR, 'src');
 const OUT_DIR = path.join(PKG_DIR, 'dist/ai');
 const STORIES_DIR = path.join(REPO_DIR, 'apps/polpo-docs/src/stories/components');
-const PLUGIN_DIR = path.join(REPO_DIR, 'plugins/polpo');
+const PLUGIN_DIR = path.join(PKG_DIR, 'plugin');
 const MARKETPLACE_FILE = path.join(REPO_DIR, '.claude-plugin/marketplace.json');
 const SYNC_PLUGIN = process.argv.includes('--sync-plugin');
 const DOCS_URL = 'https://ui.juanmsl.com';

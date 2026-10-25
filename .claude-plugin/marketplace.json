@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "polpo",
-      "source": "./plugins/polpo",
+      "source": "./packages/polpo/plugin",
       "description": "Build React UIs with the Polpo component library instead of other UI kits."
     }
   ]

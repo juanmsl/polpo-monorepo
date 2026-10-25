@@ -8,7 +8,7 @@ This repository is also a [Claude Code plugin marketplace](https://code.claude.c
 /plugin install polpo --marketplace juanmsl/polpo-monorepo
 ```
 
-The plugin lives in `plugins/polpo/` and is regenerated on every polpo release (see [Releasing](#releasing)). See [Using Polpo with AI agents](./packages/polpo/README.md#using-polpo-with-ai-agents) for every option (`npx polpo init-ai`, Claude.ai, Cursor, `llms.txt`).
+The plugin lives in `packages/polpo/plugin/` and is regenerated on every polpo release (see [Releasing](#releasing)). See [Using Polpo with AI agents](./packages/polpo/README.md#using-polpo-with-ai-agents) for every option (`npx polpo init-ai`, Claude.ai, Cursor, `llms.txt`).
 
 ## Releasing
 
@@ -17,7 +17,7 @@ The packages of `packages/` (`polpo`, `polpo-tailwind-config`, `polpo-http-clien
 1. **Release** (`.github/workflows/release.yml`, run manually from the **Actions** tab): choose `patch`, `minor` or `major` and tick the packages to release. It runs on `main` and:
    - bumps their versions;
    - runs lint, type check and build;
-   - when `polpo` is released, regenerates the Claude Code plugin (`plugins/polpo/`);
+   - when `polpo` is released, regenerates the Claude Code plugin (`packages/polpo/plugin/`);
    - opens a **release PR** with those changes.
 2. **Publish** (`.github/workflows/publish.yml`) runs when the release PR is merged into `main`. It publishes to npm every package whose version is not on npm yet:
    - in dependency order (e.g. `polpo-tailwind-config` before `polpo`);
